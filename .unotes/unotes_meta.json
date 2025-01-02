@@ -1,0 +1,76 @@
+{
+  "name": "",
+  "isOrdered": true,
+  "folders": {
+    "blog": {
+      "name": "blog",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "docs": {
+      "name": "docs",
+      "isOrdered": true,
+      "folders": {
+        "00-intro": {
+          "name": "00-intro",
+          "isOrdered": true,
+          "folders": {},
+          "files": {}
+        },
+        "99-others": {
+          "name": "99-others",
+          "isOrdered": true,
+          "folders": {},
+          "files": {}
+        }
+      },
+      "files": {}
+    },
+    "src": {
+      "name": "src",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "static": {
+      "name": "static",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "i18n": {
+      "name": "i18n",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "plugin": {
+      "name": "plugin",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "slides": {
+      "name": "slides",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "templates": {
+      "name": "templates",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "theme": {
+      "name": "theme",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    }
+  },
+  "files": {
+    "README": 0
+  }
+}

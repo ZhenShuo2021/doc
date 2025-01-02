@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "zsl0621@docs",
+    "description": "The title in the navbar"
+  },
+  "item.label.Documents": {
+    "message": "文件庫",
+    "description": "Navbar item with label Documents"
+  },
+  "item.label.Blog": {
+    "message": "Blog",
+    "description": "Navbar item with label Blog"
+  }
+}

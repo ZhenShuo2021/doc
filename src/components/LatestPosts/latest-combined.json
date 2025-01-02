@@ -1,0 +1,157 @@
+[
+  {
+    "title": "Type Hint 教學：從入門到進階的 Python 型別註釋123456789",
+    "permalink": "/memo/python/type-hint-typing-complete-guide/",
+    "description": "Type Hint 教學：從入門到進階的 Python 型別註釋，掌握 Protocol、泛型等進階技巧 | 2024 Python 3.8-3.14 版本更新整理，最新語法特性 + 實戰技巧 | 一篇精通 Type Hints",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/memo/tags/programming"
+      },
+      {
+        "inline": true,
+        "label": "Python",
+        "permalink": "/memo/tags/python"
+      },
+      {
+        "inline": true,
+        "label": "typing",
+        "permalink": "/memo/tags/typing"
+      },
+      {
+        "inline": true,
+        "label": "type hint",
+        "permalink": "/memo/tags/type-hint"
+      }
+    ],
+    "date": 1732913073000,
+    "yearMonth": "2024 年 11 月",
+    "day": "30"
+  },
+  {
+    "title": "Type Hint 教學：從入門到進階的 Python 型別註釋",
+    "permalink": "/docs/python/type-hint-typing-complete-guide/",
+    "description": "Type Hint 教學：從入門到進階的 Python 型別註釋，掌握 Protocol、泛型等進階技巧 | 2024 Python 3.8-3.14 版本更新整理，最新語法特性 + 實戰技巧 | 一篇精通 Type Hints",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      },
+      {
+        "inline": true,
+        "label": "Python",
+        "permalink": "/docs/tags/python"
+      },
+      {
+        "inline": true,
+        "label": "typing",
+        "permalink": "/docs/tags/typing"
+      },
+      {
+        "inline": true,
+        "label": "type hint",
+        "permalink": "/docs/tags/type-hint"
+      }
+    ],
+    "date": 1730234673000,
+    "yearMonth": "2024 年 10 月",
+    "day": "30"
+  },
+  {
+    "title": "初嘗策略模式",
+    "permalink": "/docs/python/strategy-pattern-first-attempt/",
+    "description": "第一次撰寫策略模式的紀錄",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      },
+      {
+        "inline": true,
+        "label": "Python",
+        "permalink": "/docs/tags/python"
+      }
+    ],
+    "date": 1730190573000,
+    "yearMonth": "2024 年 10 月",
+    "day": "29"
+  },
+  {
+    "title": "慣例式提交",
+    "permalink": "/docs/git/conventional-commits/",
+    "description": "寫好慣例式提交，讓提交訊息一目了然",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1730141052000,
+    "yearMonth": "2024 年 10 月",
+    "day": "29"
+  },
+  {
+    "title": "解決 GPG 無法提交的錯誤",
+    "permalink": "/docs/git/miscs/gpg-failed-to-sign-the-data/",
+    "description": "解決 GPG 無法提交的錯誤",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1729367767000,
+    "yearMonth": "2024 年 10 月",
+    "day": "20"
+  },
+  {
+    "title": "幫 Git 上標籤",
+    "permalink": "/docs/git/tags/",
+    "description": "幫 Git 上標籤",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1729362093000,
+    "yearMonth": "2024 年 10 月",
+    "day": "20"
+  },
+  {
+    "title": "關於這個網站",
+    "permalink": "/memo/intro/",
+    "description": "這裡是 zsl0621 的個人文檔庫。",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Docusaurus",
+        "permalink": "/memo/tags/docusaurus"
+      }
+    ],
+    "date": 1725724800000,
+    "yearMonth": "2024 年 09 月",
+    "day": "08"
+  }
+]

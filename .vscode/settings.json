@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/.docusaurus": false,
+        "**/build": false,
+        "**/node_modules": false
+    }
+}
