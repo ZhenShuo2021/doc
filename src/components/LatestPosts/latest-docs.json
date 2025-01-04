@@ -1,5 +1,20 @@
 [
   {
+    "title": "Homebrew (Linuxbrew) 介紹和名詞解析",
+    "permalink": "/docs/linux/homebrew/",
+    "description": "Homebrew (Linuxbrew) 介紹和名詞解析",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Linux",
+        "permalink": "/docs/tags/linux"
+      }
+    ],
+    "date": 1735987230000,
+    "yearMonth": "2025 年 01 月",
+    "day": "04"
+  },
+  {
     "title": "一鍵搞定！自動化你的 macOS 開發環境配置 | dotfiles 設定分享",
     "permalink": "/docs/linux/macos-dotfiles-auto-setup/",
     "description": "一鍵搞定！自動化你的 macOS 開發環境配置 | dotfiles 設定分享",
@@ -188,30 +203,5 @@
     "date": 1734079330000,
     "yearMonth": "2024 年 12 月",
     "day": "13"
-  },
-  {
-    "title": "Python 虛擬環境管理和依賴解析套件完整比較",
-    "permalink": "/docs/python/virtual-environment-management-comparison/",
-    "description": "Python 虛擬環境管理和依賴解析套件完整比較",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      },
-      {
-        "inline": true,
-        "label": "Python",
-        "permalink": "/docs/tags/python"
-      },
-      {
-        "inline": true,
-        "label": "虛擬環境",
-        "permalink": "/docs/tags/虛擬環境"
-      }
-    ],
-    "date": 1733943060000,
-    "yearMonth": "2024 年 12 月",
-    "day": "12"
   }
 ]
