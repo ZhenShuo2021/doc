@@ -1,5 +1,30 @@
 [
   {
+    "title": "在本地執行 Github Actions",
+    "permalink": "/docs/git/github/run-github-actions-locally/",
+    "description": "在本地執行 Github Actions",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Github",
+        "permalink": "/docs/tags/github"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1736016660000,
+    "yearMonth": "2025 年 01 月",
+    "day": "05"
+  },
+  {
     "title": "Homebrew (Linuxbrew) 介紹和名詞解析",
     "permalink": "/docs/linux/homebrew/",
     "description": "Homebrew (Linuxbrew) 介紹和名詞解析",
@@ -183,25 +208,5 @@
     "date": 1735048410000,
     "yearMonth": "2024 年 12 月",
     "day": "24"
-  },
-  {
-    "title": "Python 遍歷資料夾方式",
-    "permalink": "/memo/python/traversal-dir/",
-    "description": "Python 遍歷資料夾方式",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/memo/tags/programming"
-      },
-      {
-        "inline": true,
-        "label": "Python",
-        "permalink": "/memo/tags/python"
-      }
-    ],
-    "date": 1734079330000,
-    "yearMonth": "2024 年 12 月",
-    "day": "13"
   }
 ]
