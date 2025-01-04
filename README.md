@@ -1,7 +1,5 @@
 由 [ouch1978.github.io](https://github.com/Ouch1978/ouch1978.github.io) 修改而成，基礎使用方式請見[作者網站](https://ouch1978.github.io/)。
 
-# 額外說明
-
 ## 使用
 
 Clone 後把所有和個人訊息改成你自己的，在原作者的網站有說設定了哪些東西，例如 git repo name, baseurl, Giscus, algolia...
@@ -19,10 +17,10 @@ Clone 後把所有和個人訊息改成你自己的，在原作者的網站有�
    4. 選擇 Pages
 2. 設定部署網站
    1. 選擇儲存庫
-   2. Framework 無預設
+   2. Framework Docusaurus
    3. 組建命令 `yarn install && yarn build`
    4. 組建輸出目錄 `build`
-   5. 環境變數 `YARN_VERSION=1.22.22` 選擇和你系統一樣的版本
+   5. 環境變數 `YARN_VERSION=1.22.22` 選擇和本地一樣的版本
 3. （可選）設定 custom domain，正常設定約兩分鐘內完成部屬
 
 ## 插入影片
