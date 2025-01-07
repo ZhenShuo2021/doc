@@ -18,7 +18,7 @@ Clone 後把所有和個人訊息改成你自己的，在原作者的網站有�
 2. 設定部署網站
    1. 選擇儲存庫
    2. Framework Docusaurus
-   3. 組建命令 `yarn install && yarn build`
+   3. 組建命令 `yarn build`
    4. 組建輸出目錄 `build`
    5. 環境變數 `YARN_VERSION=1.22.22` 選擇和本地一樣的版本
 3. （可選）設定 custom domain，正常設定約兩分鐘內完成部屬
