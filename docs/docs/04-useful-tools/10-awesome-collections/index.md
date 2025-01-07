@@ -7,7 +7,7 @@ tags:
 keywords:
   - 實用工具
 last_update:
-  date: 2024-12-28T15:36:00+08:00
+  date: 2025-01-07T16:21:00+08:00
   author: zsl0621
 first_publish:
   date: 2024-12-17T14:22:30+08:00
@@ -21,6 +21,8 @@ first_publish:
 
 - pathvalidate: 處理檔案路徑的套件
 - python-fsutil: 懶人路徑套件，包含將近一百種函式選擇[^fsutil]
+- msgspec: 高效能的 JSON 序列化套件，[介紹文章](https://blog.ferstar.org/post/issue-62/)
+- memray: 記憶體 profiler，[介紹文章](https://blog.ferstar.org/post/issue-63/)
 - DownloadKit: 封裝 requests 的下載工具，內建自動副檔名偵測，自動重新命名  
 設定範例
 
@@ -37,7 +39,6 @@ dk.set.split(True)
 dk.set.block_size("1m")
 ```
 
-- python-fire: 自動生成 CLI 介面
 - [HTTP 客戶端套件集合](https://blog.zsl0621.cc/posts/scrappers/)
 - [HTML 解析套件套件集合](https://blog.zsl0621.cc/posts/scrappers/)
 - [網頁自動化套件集合](https://blog.zsl0621.cc/posts/scrappers/)
@@ -45,6 +46,7 @@ dk.set.block_size("1m")
 - setup-xvfb: 設定圖形化介面的 Github Action
 - Ruff: 用 Rust 寫的開源 Python linter + formatter
 - uv: 用 Rust 寫的開源 Python 虛擬環境+套件+Python 版本管理
+- python-fire: 自動生成 CLI 介面
 
 ## CLI 工具
 
