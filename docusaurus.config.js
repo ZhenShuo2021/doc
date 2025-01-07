@@ -15,8 +15,8 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: "Docs",
-  tagline: "個人用文檔庫",
+  title: "不講廢話的筆記庫",
+  // tagline: "個人用文檔庫",
   url: "https://docs.zsl0621.cc", //process.env.URL,
   baseUrl: "/", //process.env.BASE_URL,
   onBrokenLinks: "warn",

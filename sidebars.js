@@ -22,7 +22,7 @@ module.exports = {
         'memo/python/how-to-write-clean-code/index',
         {
           type: 'link',
-          label: '別寫優雅程式',
+          label: '別寫優雅程式！？',
           href: 'https://www.zsl0621.cc/posts/python-refactoring-journey/',
         },
         'memo/python/first-attempt-strategy-pattern/index',
