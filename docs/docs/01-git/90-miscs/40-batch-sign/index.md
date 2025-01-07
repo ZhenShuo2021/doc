@@ -10,6 +10,8 @@ keywords:
 last_update:
   date: 2024-08-22T05:31:07+08:00
   author: zsl0621
+first_publish:
+  date: 2024-08-22T05:31:07+08:00
 ---
 
 # 幫所有過往 commit 加上 GPG 簽名

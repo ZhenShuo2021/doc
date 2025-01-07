@@ -10,6 +10,8 @@ keywords:
 last_update:
   date: 2024-10-20T03:56:07+08:00
   author: zsl0621
+first_publish:
+  date: 2024-10-20T03:56:07+08:00
 ---
 
 # 解決使用 GPG 無法提交的錯誤

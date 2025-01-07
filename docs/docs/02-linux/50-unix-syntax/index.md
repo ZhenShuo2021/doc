@@ -7,8 +7,10 @@ tags:
 keywords:
   - Linux
 last_update:
-  date: 2024-05-31 GMT+8
+  date: 2024-05-31T00:00:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-05-31T00:00:00+08:00
 ---
 
 # Unix 語法筆記

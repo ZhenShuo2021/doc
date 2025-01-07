@@ -8,6 +8,8 @@ keywords:
 last_update:
   date: 2024-07-19T07:07:30+08:00
   author: zsl0621
+first_publish:
+  date: 2024-07-19T07:07:30+08:00
 ---
 
 # 清除 Linux 系統安裝軟體時殘留的設定

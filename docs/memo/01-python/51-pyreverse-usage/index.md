@@ -12,6 +12,8 @@ keywords:
 last_update:
   date: 2024-11-20T01:49:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-11-20T01:49:00+08:00
 ---
 
 # Pyreverse 指令小抄和測試範例

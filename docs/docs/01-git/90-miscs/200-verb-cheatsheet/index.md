@@ -10,6 +10,8 @@ keywords:
 last_update:
   date: 2024-09-13T10:55:07+08:00
   author: zsl0621
+first_publish:
+  date: 2024-09-13T10:55:07+08:00
 ---
 
 # 有關修改的動詞

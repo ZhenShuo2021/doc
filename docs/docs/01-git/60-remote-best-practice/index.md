@@ -9,8 +9,10 @@ keywords:
   - Git
   - Programming
 last_update:
-  date: 2024-06-02 GMT+8
+  date: 2024-06-02T00:00:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-06-02T00:00:00+08:00
 ---
 
 # Git 在團隊中操作分支的最佳實踐

@@ -10,6 +10,8 @@ keywords:
 last_update:
   date: 2024-11-03T18:08:33+08:00
   author: zsl0621
+first_publish:
+  date: 2024-11-03T18:08:33+08:00
 ---
 
 import Tabs from '@theme/Tabs';

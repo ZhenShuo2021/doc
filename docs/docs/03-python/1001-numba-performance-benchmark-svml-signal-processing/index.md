@@ -17,8 +17,10 @@ keywords:
   - Accelerate
   - Performance
 last_update:
-  date: 2024-10-12 GMT+8
+  date: 2024-10-12T00:00:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-10-12T00:00:00+08:00
 ---
 
 import Tabs from '@theme/Tabs';

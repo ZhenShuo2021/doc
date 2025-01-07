@@ -8,8 +8,10 @@ keywords:
   - Programming
   - Python
 last_update:
-  date: 2024-10-01 GMT+8
+  date: 2024-10-01T00:00:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-10-01T00:00:00+08:00
 ---
 
 # How to Write Clean Code

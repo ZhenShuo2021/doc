@@ -10,6 +10,8 @@ keywords:
 last_update:
   date: 2024-09-10T17:51:07+08:00
   author: zsl0621
+first_publish:
+  date: 2024-09-10T17:51:07+08:00
 ---
 
 ### Git 中的關鍵字與符號

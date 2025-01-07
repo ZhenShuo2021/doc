@@ -10,6 +10,8 @@ keywords:
 last_update:
   date: 2024-08-25T22:24:42+08:00
   author: zsl0621
+first_publish:
+  date: 2024-08-25T22:24:42+08:00
 ---
 
 # Git 遠端指令

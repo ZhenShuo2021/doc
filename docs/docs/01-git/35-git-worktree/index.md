@@ -11,6 +11,8 @@ keywords:
 last_update:
   date: 2024-09-10T16:15:33+08:00
   author: zsl0621
+first_publish:
+  date: 2024-09-10T16:15:33+08:00
 ---
 
 # Git Worktree：有效管理多個分支和工作目錄的秘訣

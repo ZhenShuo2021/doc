@@ -9,8 +9,10 @@ keywords:
   - Linux
   - Ubuntu
 last_update:
-  date: 2024-09-23 GMT+8
+  date: 2024-09-23T00:00:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-09-23T00:00:00+08:00
 ---
 
 import Tabs from '@theme/Tabs';

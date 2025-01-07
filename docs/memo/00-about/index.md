@@ -2,8 +2,10 @@
 title: 關於這個區域
 id: memo
 last_update:
-  date: 2024/10/30
+  date: 2024-10-30T00:00:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-10-30T00:00:00+08:00
 tags:
   - Docusaurus
 keywords:

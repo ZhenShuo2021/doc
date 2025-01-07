@@ -13,6 +13,8 @@ keywords:
 last_update:
   date: 2024-11-23T09:27:30+08:00
   author: zsl0621
+first_publish:
+  date: 2024-11-23T09:27:30+08:00
 ---
 
 # 在獨立子線程中執行非同步操作

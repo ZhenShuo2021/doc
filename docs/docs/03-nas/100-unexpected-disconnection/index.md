@@ -7,8 +7,10 @@ tags:
 keywords:
   - Linux
 last_update:
-  date: 2024-09-19 GMT+8
+  date: 2024-09-19T00:00:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-09-19T00:00:00+08:00
 ---
 
 # TrueNAS 無預警斷線（原因排查中）

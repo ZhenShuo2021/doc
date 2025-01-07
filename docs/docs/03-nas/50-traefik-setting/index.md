@@ -13,8 +13,10 @@ keywords:
   - Reverse-Proxy
   - 反向代理
 last_update:
-  date: 2024-09-21 GMT+8
+  date: 2024-09-21T00:00:00+08:00
   author: zsl0621
+first_publish:
+  date: 2024-09-21T00:00:00+08:00
 ---
 
 import Tabs from '@theme/Tabs';

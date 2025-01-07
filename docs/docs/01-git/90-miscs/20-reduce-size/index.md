@@ -10,6 +10,8 @@ keywords:
 last_update:
   date: 2024-08-22T21:03:25+08:00
   author: zsl0621
+first_publish:
+  date: 2024-08-22T21:03:25+08:00
 ---
 
 # Git clone 時如何減少 repo 容量
