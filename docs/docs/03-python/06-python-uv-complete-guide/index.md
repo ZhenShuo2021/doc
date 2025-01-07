@@ -11,7 +11,7 @@ keywords:
   - Python
   - 虛擬環境
 last_update:
-  date: 2024-12-24T21:53:30+08:00
+  date: 2025-01-05T09:00:00+08:00
   author: zsl0621
 first_publish:
   date: 2024-11-19T14:22:30+08:00
@@ -325,7 +325,7 @@ default-groups = ["dev", "foo"]
 
 ## 🔥 pyproject.toml 範例 🔥
 
-既然 uv 的一站式體驗這麼好，那本文也提供一站式體驗，連 `pyproject.toml` 基礎範例都放上來提供參考，複製貼上後只需要使用 `uv sync` 就完成了，超級快。
+既然 uv 的一站式體驗這麼好，那本文也提供一站式體驗，連 `pyproject.toml` 基礎範例都放上來提供參考，貼上後只需要使用 `uv sync` 就完成了，超級快。
 
 ```toml
 # 假如拿到一個使用 uv 設定的專案架構如下
@@ -477,31 +477,35 @@ jobs:
 https://docs.astral.sh/uv/concepts/projects/sync/#exporting-the-lockfile  
 
 ```sh
-uv export --no-emit-project --locked -q -o requirements.txt --no-hashes
+uv export --no-emit-project --locked --no-hashes -o requirements.txt -q
 ```
 
-每次都要手動打太麻煩，使用 pre-commit 一勞永逸，自動檢查和匯出套件解析結果，pre-commit 的使用範例可以參考筆者寫的[文章](/memo/python/first-attempt-python-workflow-automation#pre-commit-configyaml)。
+每次都要手動打太麻煩，使用 pre-commit 一勞永逸，自動檢查 lock 檔案是否變動並且匯出。pre-commit 的使用範例可以參考筆者寫的[文章](/memo/python/first-attempt-python-workflow-automation#pre-commit-configyaml)。
 
 ```yaml
 # .pre-commit-config.yaml
 
 repos:
+  # 使用官方 pre-commit
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.5.14
+    hooks:
+    - id: uv-export
+      args: ["--no-emit-project", "--locked", "--no-hashes", "-o=requirements.txt", "-q"]
+      # 當 uv.lock 變化時才觸發 (當你升級或增減套件)
+      files: ^uv\.lock$
+
+  # 另一個範例：改用本地 uv，改用 pip compile
   - repo: local
     hooks:
     - id: run-pip-compile
       name: Run pip compile
-      # 前三個參數分別是不使用editable，不輸出套件雜湊值，檢查lockfile是否最新，這些參數可以根據需求自行修改
-      entry: bash -c 'uv export --no-emit-project --locked --no-hashes -q -o requirements.txt'
+      entry: bash -c 'rm -f requirements.txt && uv pip compile pyproject.toml -o requirements.txt --annotation-style line -q'
       language: system
-      # lockfile有變化才執行
-      files: ^uv.lock$
+      files: ^uv\.lock$
 ```
 
-如果不是複雜工程，只是想要簡單的把目前環境套件匯出可以使用這個命令。除此之外[文檔](https://docs.astral.sh/uv/pip/compile/)也提供各種不同文件的編譯方式，基本上兼容所有想得到的依賴文件。
-
-```sh
-uv pip compile pyproject.toml -o requirements.txt
-```
+`uv export` 和 `uv pip compile` 某種程度上有些相似又不完全相同，前者用於處理 lockfile，後者用於編譯模糊的主要依賴文件 `requirements.in`，由於還在開發階段就不深入討論。uv 提供各種不同文件的編譯方式，基本上兼容所有想得到的依賴文件。
 
 ### 構建套件
 

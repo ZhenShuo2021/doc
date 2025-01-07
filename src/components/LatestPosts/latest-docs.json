@@ -1,7 +1,32 @@
 [
   {
+    "title": "UV Python 教學，最佳虛擬環境管理工具",
+    "permalink": "/docs/docs/python/python-uv-complete-guide/",
+    "description": "UV Python 教學，最佳虛擬環境管理工具",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      },
+      {
+        "inline": true,
+        "label": "Python",
+        "permalink": "/docs/tags/python"
+      },
+      {
+        "inline": true,
+        "label": "虛擬環境",
+        "permalink": "/docs/tags/虛擬環境"
+      }
+    ],
+    "date": 1736038800000,
+    "yearMonth": "2025 年 01 月",
+    "day": "05"
+  },
+  {
     "title": "在本地執行 Github Actions",
-    "permalink": "/docs/git/github/run-github-actions-locally/",
+    "permalink": "/docs/docs/git/github/run-github-actions-locally/",
     "description": "在本地執行 Github Actions",
     "tags": [
       {
@@ -26,7 +51,7 @@
   },
   {
     "title": "Homebrew (Linuxbrew) 介紹和名詞解析",
-    "permalink": "/docs/linux/homebrew/",
+    "permalink": "/docs/docs/linux/homebrew/",
     "description": "Homebrew (Linuxbrew) 介紹和名詞解析",
     "tags": [
       {
@@ -41,7 +66,7 @@
   },
   {
     "title": "一鍵搞定！自動化你的 macOS 開發環境配置 | dotfiles 設定分享",
-    "permalink": "/docs/linux/macos-dotfiles-auto-setup/",
+    "permalink": "/docs/docs/linux/macos-dotfiles-auto-setup/",
     "description": "一鍵搞定！自動化你的 macOS 開發環境配置 | dotfiles 設定分享",
     "tags": [
       {
@@ -56,7 +81,7 @@
   },
   {
     "title": "Shell 和他的設定檔，以及 Dotfiles",
-    "permalink": "/docs/linux/bashrc-zshrc-zshenv/",
+    "permalink": "/docs/docs/linux/bashrc-zshrc-zshenv/",
     "description": "Shell 和他的設定檔，以及 Dotfiles",
     "tags": [
       {
@@ -76,7 +101,7 @@
   },
   {
     "title": "實用工具選輯",
-    "permalink": "/docs/useful-tools/awesome-collections/",
+    "permalink": "/docs/docs/useful-tools/awesome-collections/",
     "description": "選輯",
     "tags": [
       {
@@ -91,7 +116,7 @@
   },
   {
     "title": "在 Github README 中嵌入影片",
-    "permalink": "/docs/git/github/github-readme-video/",
+    "permalink": "/docs/docs/git/github/github-readme-video/",
     "description": "在 README 中嵌入影片",
     "tags": [
       {
@@ -116,7 +141,7 @@
   },
   {
     "title": "Github 搜尋技巧",
-    "permalink": "/docs/git/github/github-search/",
+    "permalink": "/docs/docs/git/github/github-search/",
     "description": "Github 搜尋技巧",
     "tags": [
       {
@@ -141,7 +166,7 @@
   },
   {
     "title": "Github Actions 自動化 CI/CD",
-    "permalink": "/docs/git/github/github-actions/",
+    "permalink": "/docs/docs/git/github/github-actions/",
     "description": "Github Actions 自動化 CI/CD",
     "tags": [
       {
@@ -166,7 +191,7 @@
   },
   {
     "title": "Comparing BeautifulSoup4, LXML, and Selectolax: A Simple HTML Parser Performance Test",
-    "permalink": "/docs/python/html-parser-performance-test/",
+    "permalink": "/docs/docs/python/html-parser-performance-test/",
     "description": "This evaluation compares the performance of popular HTML parser libraries in Python. The test involves extracting product names, ratings, prices, and monthly sales from a Shopee page. To simulate the handling of very large HTML files, the duplicatedivmain function duplicates the `` section 100 times, creating a significantly larger document.",
     "tags": [
       {
@@ -183,30 +208,5 @@
     "date": 1735098570000,
     "yearMonth": "2024 年 12 月",
     "day": "25"
-  },
-  {
-    "title": "UV 快速手冊",
-    "permalink": "/docs/python/uv-quick-guide/",
-    "description": "UV 快速手冊",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      },
-      {
-        "inline": true,
-        "label": "Python",
-        "permalink": "/docs/tags/python"
-      },
-      {
-        "inline": true,
-        "label": "虛擬環境",
-        "permalink": "/docs/tags/虛擬環境"
-      }
-    ],
-    "date": 1735048410000,
-    "yearMonth": "2024 年 12 月",
-    "day": "24"
   }
 ]
