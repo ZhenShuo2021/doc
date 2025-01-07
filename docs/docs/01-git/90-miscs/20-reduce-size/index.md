@@ -15,6 +15,7 @@ first_publish:
 ---
 
 # Git clone 時如何減少 repo 容量
+
 使用 git clone 遠端儲存庫，當儲存庫過大而你不需要全部資料的時候可以使用以下指令
 
 ```sh
@@ -35,6 +36,7 @@ git clone --filter=blob:limit=1m <repository-url>
 ```
 
 ## Sparse Checkout
+
 加上 `--no-checkout` 會告訴 Git 不切換到任何分支，所以工作目錄會是空的，下一步就是取出需要的檔案，這裡我們結合 sparse checkout 功能使用，此功能可指定只下載和檢出儲存庫中的特定檔案或資料夾。下方是完整使用範例，只取出 `data` `src` 資料夾內容
 
 ```sh
@@ -70,6 +72,7 @@ git checkout
 :::
 
 ## 同場加映：清理 git 儲存庫
+
 `git clean -f` 刪除未追蹤文件：
 
 ```sh
@@ -78,16 +81,19 @@ git checkout
 ```
 
 `git gc --prune=now --aggressive` 清理快取：
+
 ```sh
 --prune=now    # 立刻刪除所有無用的物件。
 --aggressive   # 更積極優化，花費更多時間。
 ```
 
 ## 待續
+
 使用 [git-filter-repo](https://github.com/newren/git-filter-repo) 套件有更多功能。
 
 ## 參考資料
-https://docs.gitlab.com/ee/topics/git/clone.html   
-https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html   
-https://ryanagibson.com/posts/shrink-git-repo   
-https://blog.miniasp.com/post/2022/05/17/Down-size-your-Monorepo-with-Git-Sparse-checkouts   
+
+https://docs.gitlab.com/ee/topics/git/clone.html
+https://docs.gitlab.com/ee/user/project/repository/reducing_the_repo_size_using_git.html
+https://ryanagibson.com/posts/shrink-git-repo
+https://blog.miniasp.com/post/2022/05/17/Down-size-your-Monorepo-with-Git-Sparse-checkouts

@@ -14,12 +14,15 @@ first_publish:
 ---
 
 # Unix 語法筆記
+
 常常網路上複製貼上就不管為甚麼能動了，稍微紀錄一下常見的語法，這篇文章會慢慢增加並且滾動式修正。
 
 ## 符號列表
+
 請 GPT 生成的，可能有錯誤，請斟酌觀看
 
 ### 1. 管道與重定向
+
 - `|`：將前一命令的輸出作為下一命令的輸入。
 - `>`：將標準輸出覆蓋重定向到文件。
 - `>>`：將標準輸出追加重定向到文件。
@@ -32,6 +35,7 @@ first_publish:
 - `<<<`：用字串作為標準輸入的 Here String。
 
 ### 2. 條件運算符
+
 - `&&`：當前命令成功時執行後續命令。
 - `||`：當前命令失敗時執行後續命令。
 - `!`：否定命令的退出狀態。
@@ -39,6 +43,7 @@ first_publish:
 - `;;`：結束 `case` 分支的標記。
 
 ### 3. 括號與組合操作
+
 - `()`：在子 Shell 中執行括號內命令。
 - `{}`：在當前 Shell 中執行命令組。
 - `[]`：條件測試（等同於 `test`）。
@@ -48,6 +53,7 @@ first_publish:
 - `>()`：進程替換，將文件描述符作為命令輸入。
 
 ### 4. 變量與替換
+
 - `$`：變量展開或命令替換。
 - `${}`：變量的高級操作。
 - `$(...)`：命令替換。
@@ -62,6 +68,7 @@ first_publish:
 - `$0`：腳本名稱。
 
 ### 5. 通配符與模式匹配
+
 - `*`：匹配零個或多個字符。
 - `?`：匹配單個字符。
 - `[]`：匹配字符集合。
@@ -70,6 +77,7 @@ first_publish:
 - `~`：用戶主目錄。
 
 ### 6. 引用與轉義
+
 - `'`：單引號，視內容為字面量。
 - `"`：雙引號，保留部分特殊符號功能。
 - `` ` ``：舊式命令替換。
@@ -77,6 +85,7 @@ first_publish:
 - `#`：注釋符。
 
 ### 7. 其他符號
+
 - `&`：後台執行命令。
 - `:`：空操作，永遠返回成功。
 - `.`：當前目錄或執行腳本。
@@ -86,9 +95,10 @@ first_publish:
 - `%`：作業控制的作業 ID。
 - `=`：賦值符號。
 
-
 ## 基礎語法
+
 ### 設定系統可執行文件搜尋路徑
+
 ```sh
 export PATH="$PATH:/User/name/hugo"
 ```
@@ -97,13 +107,16 @@ export PATH="$PATH:/User/name/hugo"
 2. export: 把PATH變數設定成環境變數
 
 ### 縮寫指令
+
 ```sh
 echo "alias hnc='hugo new content'" >> ~/.bashrc
 ```
+
 1. 印出這段文字
 2. 使用重定向符號加到 ~/.bashrc 的最後一行
 
 ### 尋找並且刪除
+
 ```sh
 find . -type d -name "__pycache__" -exec rm -r {} +
 ```
@@ -115,6 +128,7 @@ find . -type d -name "__pycache__" -exec rm -r {} +
 5. 也可以把 `+` 改成 `\;`，每搜尋到一個就會刪除一次，反斜線用於逃脫特殊字符
 
 ### 清除所有 pip 套件
+
 ```sh
 pip freeze > unins && pip uninstall -y -r unins && rm unins
 ```
@@ -122,6 +136,7 @@ pip freeze > unins && pip uninstall -y -r unins && rm unins
 這就簡單了，所有套件寫入 unins 檔案，運行移除指令最後刪除 unins
 
 ### Here Document 寫入多行文字到文件中
+
 ```sh
 cat > output.txt << EOF
 ```
@@ -129,16 +144,13 @@ cat > output.txt << EOF
 把 cat 的文字轉向到文件，設定遇到 EOF 結束，EOF 可以換成其他文字。
 
 ### Here String 將字串傳遞給命令作為輸入
+
 ```sh
 cat <<< "Hello, ${USER}"
 ```
 
-### 
+###
 
 ### Parameter Expansion
+
 https://myapollo.com.tw/blog/bash-parameter-expansion/
-
-
-
-
-

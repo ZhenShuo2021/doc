@@ -23,15 +23,19 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # 在 NAS 中設定 Traefik 反向代理 Docker 服務
+
 本文記錄使用 NAS 中如何使用 Traefik 反向代理，在把各種 docker 服務反向代理使用，此方法可以自動簽署 TLS 證書。
 
 沒有很複雜但是再度被 Google 搜尋搞，前三篇文章放了三個不同的設定方式然後我就炸了，其實只有一種最常使用。本文專注介紹 NAS 如何設定，作為用戶我們只關心設定是否成功，外網連接是否安全，所以本文不會有任何原理，沒有由淺入深教學，就是複製貼上結束，快點設定完成服務上線才是最重要的。
 
 ## 寫在前面
+
 對於預設讀者的一般 NAS 用戶來說，我認為絕大多數場景都不需要自行配置反向代理，直接使用 Cloudflare Tunnel 就完事了，會有這篇文章是我一開始不知道 filebrowser 有[區塊傳輸功能](https://github.com/filebrowser/filebrowser/discussions/1182)可規避 Tunnel 的檔案大小上限，這篇文章就給有其他用途的人做參考。
 
 ## 為何選擇 Traefik
+
 常見的反向代理供具有 Nginx、Apache、Caddy 和 Cloudflare Tunnel，一樣先說明為何選擇 Traefik。
+
 - Cloudflare Tunnel: 最好的反向代理，還不需開 port，唯一缺點是單一檔案大小上限 100MB。
 - Nginx: 設定複雜，沒有自動證書更新，需要複雜設定才使用他。
 - Apache: 因為使用他代理 Docker 服務的文章很少所以沒試過[^1]。
@@ -43,6 +47,7 @@ import TabItem from '@theme/TabItem';
 [^1]: 身為老牌反向代理工具，Nginx 和 Apache 整合的資安防護工具更完善，Traefik 則是只有看到 [modsecurity](https://plugins.traefik.io/plugins/628c9eadffc0cd18356a9799/modsecurity-plugin) 有官方插件，其他如 [GeoBlock](https://plugins.traefik.io/plugins/62d6ce04832ba9805374d62c/geo-block) 則是社群用愛發電。
 
 ## 安全性
+
 先上人權照，依照文中設定 MDN 安全評分來到 115 已經是前 2% 安全的網站，也用 [OWASP ZAP](https://www.zaproxy.org/)/[nikto](https://github.com/sullo/nikto) 掃描過基本沒有問題：
 
 ![mdnobserve.webp](mdnobserve.webp)
@@ -52,6 +57,7 @@ import TabItem from '@theme/TabItem';
 除了 Traefik 直連伺服器以外，我們還可以開啟 Cloudflare proxy （預設開啟除非特地取消），這樣可隱藏主機 IP 地址避免主機被攻擊；開啟 Cloudflare proxy 後還可以設定 WAF，如最基本的國籍封鎖，或者是開啟 Bot fight mode/DDoS protection 等 Cloudflare 的免費服務；或者接上 Cloudflare Zero Trust 設定 Access 保護，如使用 OAuth 認證。
 
 我知道中英混雜看了眼睛很痛，這裡總結：
+
 - WAF/DDoS protection (requires Cloudflare proxy)
 - Zero Trust Access with OAuth
 - Cloudflare proxy to hide IP
@@ -61,6 +67,7 @@ import TabItem from '@theme/TabItem';
 [^2]: 但是對於每天掃 IP 的無聊人，他們可以直接碰到 Traefik 反向代理層，也就是說只要 Traefik 被攻破就可以透過 Docker network 和其他容器進行通訊，雖然這樣還是要繞過第二個容器的安全漏洞，但總沒有 Cloudflare 連 port 都不開來的安全。
 
 ## 版本資訊
+
 - Ubuntu server 22
 - traefik v2.9 v3.1 都可正常運行。
 - 以 [filebrowser](https://github.com/filebrowser/filebrowser) v2.31 示範被代理的服務
@@ -68,6 +75,7 @@ import TabItem from '@theme/TabItem';
 如何設定 DDNS 請見先前文章。
 
 ## 方法一：合併其他容器部署 (BAD)
+
 此設定基本和[官方教學](https://doc.traefik.io/traefik/user-guides/docker-compose/acme-tls/)一致，但是要部署多個容器時就有問題，可以當作一個基本範例練習。
 
 ```yaml
@@ -124,6 +132,7 @@ networks:
 這個方法和官方教學的差異在於多了一個 `proxy` docker network，並且加入 security headers。這是符合大多數教學的範例。使用時先啟用網路 `docker network create proxy` 後即可 `docker compose up -d` 啟動容器。
 
 ## 方法二：獨立部署 (Good)
+
 這個方法獨立 traefik 和其他應用部署，方便調整。
 
 在 `docker/traefik` 中建立 `docker-compose.yml` 和 `letsencrypt` 資料夾：
@@ -134,7 +143,6 @@ vim docker-compose.yml
 ```
 
 然後兩個 yaml 檔案分別是：
-
 
 <Tabs
     values={[
@@ -241,6 +249,7 @@ vim docker-compose.yml
 啟用方法一樣是先啟用網路 `docker network create proxy`，之後分別在兩個資料夾 `docker compose up -d` 啟動容器。與本文方式最相近的文章應該是 [Docker 下的 Traefik 上手教程](https://blog.bling.moe/post/14/) 和 [Traefik v3.0 Docker 全面使用指南：基础篇](https://soulteary.com/2023/07/18/traefik-v3-docker-comprehensive-user-guide-basics.html) ，可作為遇到問題時的參考。
 
 ## 下一步
+
 如果使用 Cloudflare 的工具，從域名來的攻擊應該是非常安全了，但是對於直接攻擊伺服器 IP 的保護還沒有設定，可以參考[這篇文章](https://www.reddit.com/r/Traefik/comments/17ed6nr/question_about_security/)：
 
 > - Hardening the SSH service. Use pubkey auth, disable root login, install fail2ban and/or crowdsec and configure strong ciphers and algorithms. Search for ssh-audit on GitHub to evaluate your config.
@@ -251,6 +260,7 @@ vim docker-compose.yml
 > - Backups and disaster recovery
 
 這邊整理成一個列表
+
 - 強化 Traefik:
   - 啟用 HTTP 日誌
   - 配置速率限制或 IP 白名單 middleware
@@ -287,4 +297,5 @@ vim docker-compose.yml
 [^4]: [錯誤永遠會有](https://www.youtube.com/watch?v=d9KcUziiF60)，但是竟然沒有分段推送，也沒有寫測試，滿神奇的。
 
 ## 結語
+
 整理完結果很簡單，但是從測試到成功不知道打了幾百次 vim docker-compose.yml。

@@ -46,6 +46,7 @@ dot -Tpdf classes_gallery-dl.dot -o classes_gallery-dl.pdf
 ```
 
 ## 測試範例 - 我自己的爬蟲程式
+
 以我自己寫的[爬蟲程式](https://github.com/ZhenShuo2021/V2PH-Downloader/)來說，分析後可以看到原本檔案之間的 import 關係有點混亂，下面兩張圖是分別是修改前和修改後的，可以看到載入關係解耦很多：
 
 ![v2dl1](packages_v2dl_1.webp "pkg_v2dl_1")
@@ -54,7 +55,6 @@ dot -Tpdf classes_gallery-dl.dot -o classes_gallery-dl.pdf
 然而 class 就沒辦法了，我暫時也想不到有什麼方法讓他看起來乾淨一點，錯綜複雜主因是 config 變數會在各個類別之間傳遞
 
 ![v2dl13](classes_v2dl.webp "uml_v2dl_1")
-
 
 ## 測試範例 - gallery-dl
 

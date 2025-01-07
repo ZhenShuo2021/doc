@@ -15,6 +15,7 @@ first_publish:
 ---
 
 # Useful Built-in Functions in Python
+
 I always forget how to use them, so this is my memo for quick reference. Including
 
 ## Basic usage
@@ -35,12 +36,12 @@ I always forget how to use them, so this is my memo for quick reference. Includi
 | deque          | `deque(iterable[, maxlen])`                          |
 | Counter        | `Counter(iterable)`                                  |
 
-
-
 ## Equivalents
+
 This is for better understanding the function using the hand-craft equivalent code.
 
 ### List comprehension/Generator expression/zip
+
 ```python
 # List Comprehension Example: Get squares of even numbers
 # With list comprehension
@@ -93,6 +94,7 @@ for long_word, long_words_list in zip(long_words, long_words_list):
 ```
 
 ### any/all
+
 ```py
 # Any example: Check if any student has failed the exam
 # With any
@@ -127,6 +129,7 @@ for with_all, without_all in zip([all_positive], [all_positive_manual]):
 ```
 
 ### map/filter/join/reduce
+
 ```py
 # map example: converting Celsius temperatures to Fahrenheit
 # With map
@@ -197,6 +200,7 @@ print(product, product_list)
 ```
 
 ### set
+
 ```py
 # set Example: finding unique URLs
 # With set
@@ -217,6 +221,7 @@ for unique_url, unique_urls_list in zip(unique_urls, unique_urls_list):
 ```
 
 ### deque
+
 ```py
 # Deque Example: Maintaining a fixed-size queue
 # With deque
@@ -255,6 +260,7 @@ for deque_item, fixed_queue_item in zip(list(queue), fixed_queue.queue):
 ```
 
 ### Counter
+
 ```py
 # Counter Example: Counting occurrences of items
 # With Counter

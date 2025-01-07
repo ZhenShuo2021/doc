@@ -27,7 +27,7 @@ import ResponsivePlayer from '@site/src/components/ResponsivePlayer';
 
 所有設定都基於 keep it simple 理念，外觀盡量遵照 vscode 預設主題，一律使用 powerlevel10k 推薦的 MesloLGS NF 字體：
 
-- [終端機](/docs/useful-tools/cross-platform-terminal#簡易結論)
+- [終端機](/docs/docs/04-useful-tools/05-cross-platform-terminal/index.md#簡易結論)
   1. 全部使用 oh-my-zsh + powerlevel10k，使用最少樣式，使用官方推薦的 MesloLGS NF 字體
   2. wezterm: [KevinSilvester/wezterm-config](https://github.com/KevinSilvester/wezterm-config)
   3. warp: [warpdotdev/themes](https://github.com/warpdotdev/themes)

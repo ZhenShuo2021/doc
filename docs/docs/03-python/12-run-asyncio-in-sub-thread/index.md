@@ -23,7 +23,8 @@ first_publish:
 
 由於用了 viztracer 分析好像有點厲害所以把他搬到文檔庫，不然這篇原本放在備忘錄。
 
-## 程式碼說明
+## 程式說明
+
 設計思路是把函式和參數打包後丟給事件迴圈運行，用一個單獨的線程用於執行事件迴圈，再把任務註冊到這個事件迴圈。
 
 首先先建立一個 dataclass 用於把要執行函式的以及函式輸入打包
@@ -120,7 +121,6 @@ async def _schedule_tasks(self) -> None:
 ```
 
 現在完成了事件註冊和運行事件，為了把非同步操作放在獨立線程中執行，還缺少運行事件迴圈以及把事件迴圈放到線程中執行這兩件事情，使用 `_start_event_loop` 還有 `_ensure_thread_active` 完成，完整程式碼如下，也可以在[我的 Github 中找到](https://github.com/ZhenShuo2021/blog-script/tree/main/asyncio)：
-
 
 ```py
 import asyncio
@@ -300,6 +300,7 @@ if __name__ == "__main__":
 `test` 函式是一個簡單的使用範例，實際運行是 11 秒，讀者可以自行計算秒數驗證是否和理論相符。
 
 ## 自我檢討和心得
+
 搜尋資料時看到有人建議撰寫主程式是非同步，然後把同步語法放到子線程中執行會比較好，寫的時候不太認同，真的用函式的時候就認同了，因為即使已經包裝成只要呼叫 `add_task` 和輸入 `Task`，實際使用時還是不太方便。
 
 第二個是層層包裹的語句造成理解不易，使用 `add_task` 加入任務後會經過 `_ensure_thread_active` 確認線程是否存活並且建立線程，線程裡面要使用 `_start_event_loop` 建立事件迴圈，再使用 `_schedule_tasks` 把事件註冊到迴圈中，最後用 `_run_task` 把 `Task` dataclass 解包並且執行。這呼應第一個問題：如果去掉在子線程執行事件迴圈這件事，就可以刪掉前兩個方法，簡化為只需要註冊和運行而已。會這樣寫的原因除了自己想練習以外，也是因為前陣子寫了一個「把任務丟到子線程中執行」，所以用同樣想法寫了事件迴圈版本，結果比想像中的麻煩多了。不過都是試了才知道，畢竟網路上又沒這種文章。
@@ -310,8 +311,8 @@ if __name__ == "__main__":
 
 最後補充，這個腳本跑 mypy --strict 可以過的唷。
 
-
 ## 更新：移除佇列版本
+
 關於檢討中說到的疊床架屋問題，寫了一個不需要 `task_queue` 和 `current_tasks` 的版本，並且根據[這篇文章](https://medium.com/chris-place/python-asyncio-1c2f7903a193)使用 `run_coroutine_threadsafe` 和 `call_soon_threadsafe` 在主線程要求子線程運行任務，並且加上 threading.Event 確保事件迴圈正常啟動避免死鎖。
 
 ```py
@@ -410,6 +411,7 @@ class AsyncService:
 ```
 
 ### 討論：死鎖問題
+
 藉此機會練習多線程的問題，剛改成這個版本時沒有使用 `threading.Event` 會產生死鎖，以下分析死鎖產生原因：
 
 1. 在 `add_task` 時馬上呼叫 `_ensure_thread_active`，得到鎖，建立並且啟動線程，釋放鎖，return，同一時間子線程正在執行 `_start_event_loop`
@@ -437,8 +439,8 @@ def _ensure_thread_active(self) -> None:
             # self._loop_ready.wait()  # 不使用Event
 ```
 
-
 ### 討論：效能問題
+
 新的版本不只要處理死鎖，效能也比原版的差，這裡我以放入三百個睡眠時間 0 的 `io_task` 作為範例，單純測試事件迴圈對於事件註冊的吞吐量，並且幫新版作弊把所有 `self._lock` 刪除降低影響因素。實驗結果很意外，舊版只需要 0.063 秒，新版卻耗時高達 2.88 秒，表示 `run_coroutine_threadsafe` 這個方法開銷很大。
 
 更進一步研究問題發生的原因，使用 [viztracer](https://www.youtube.com/watch?v=xFtEg_e54as) 作 profiler 檢查效能瓶頸，左右分別是新舊版。用黑框框起來的靛藍色方塊是 asyncio 執行輸入的任務時，被呼叫的內部函式 `_run`，可以看到 `run_forever` 會調用多次內部的 `_run_once`，但是新版每次 `_run_once` 不一定都會執行 `_run` 而是調用了很多次紫色的 `select` 函式，舊版就沒有這個問題。
@@ -506,9 +508,10 @@ def select(self, timeout=None):
     return ready
 ```
 
-
 ### 更新的心得
+
 用非同步就是要快，結果為了省 queue 和 list 變這麼慢的話那還是乖乖用好了，看起來這些久經考驗的資料結構在 Python 中的實現比較不會出問題，asyncio 相對之下還是新東西，直接用他內建的方法進行跨線程溝通會導致非預期的慢，當然也有可能是筆者使用錯誤，如果有錯請告知我再修正，謝謝。
 
 ## 總結
+
 本文提供了一個網路上少見的嘗試：在子線程中執行事件迴圈，並且不使用 `run_coroutine_threadsafe`（一開始根本不知道有他），並且補充了沒有用 queue 的版本，也提供效能分析，使用一般的 `create_task` 比 `run_coroutine_threadsafe` 更高效。

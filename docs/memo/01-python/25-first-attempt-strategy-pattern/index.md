@@ -34,6 +34,7 @@ import TabItem from '@theme/TabItem';
 永遠記得說明和使用情境，網路上的文章廢話太多模糊了焦點。
 
 ## 問題描述
+
 一開始很簡單的實現，這個 class，在 `scrape_link` 中基於 `is_album_list` 決定要調用 `_process_album_list_links` 還是 `_process_album_image_links`，每次調用會把該輸入的 URL 翻頁翻到底並擷取每頁結果：如果在相簿列表，獲取所有相簿網址才開始爬取相簿，`scrape_link` 回傳網址列表 `list[str]`；否則回傳圖片網址和檔名列表 `list[tuple[str, str]]`。會這樣寫的原因是該網站只有兩種類型頁面，相簿列表和相簿本身，使用相同翻頁方式，所以覺得沒必要分成兩個 class method 來寫。
 
 ```py
@@ -121,12 +122,12 @@ error: Argument 2 to "_process_album_image_links" of "LinkScraper" has incompati
 同時也想到，如果該網站擴充新的頁面類型，以上方法基本只剩掩耳盜鈴法有用，現在的 scrape_link 結構也會造成維護困難，於是需要更好的解決方式。
 
 ## 解決方式
-決定使用策略模式解決，策略模式就只是把「需要根據情況選擇的方法」封裝在獨立類別或函式中，再看你使用哪種方式選擇，使用組合而非繼承，這裡使用簡單的字典鍵值選擇。
 
+決定使用策略模式解決，策略模式就只是把「需要根據情況選擇的方法」封裝在獨立類別或函式中，再看你使用哪種方式選擇，使用組合而非繼承，這裡使用簡單的字典鍵值選擇。
 
 <Tabs>
   <TabItem value="LinkScraper" label="策略模式">
- 
+
 ```py
 
 class LinkScraper:
@@ -166,8 +167,6 @@ class LinkScraper:
             strategy.process_page_links(page_links, page_result, tree, page)
 
 ```
-
-
 
   </TabItem>
 
@@ -244,7 +243,6 @@ class AlbumImageStrategy(ScrapingStrategy[ImageLink]):
 
 </Tabs>
 
-
 新版程式碼在每次呼叫 `_scrape_link` 時都根據輸入字串選擇要使用的解析方式，省略了 if-else 條件判斷，也減輕 `LinkScraper` 負擔，把工作侷限程式碼的上下文接口，調用策略，每個策略各自處理該如何解析 html 檔案，可以輕易新增或移除策略。除此之外策略模式的好處還有如果遇到複雜的頁面，需要更多子函式來處理，也不用把分散的 function 全部都匯集到一個 function 中，可以都在各自的 xxxStratedy 類別自行管理。
 
 > 註：純粹的策略模式不包含實例化部分，這個範例包含實例化，實作時區分這些不是很重要，但是既然寫成文章就要清楚說明。
@@ -289,7 +287,6 @@ class ScrapeHandler:
 
 ```
 
-
 <details>
 <summary>原版的超醜解法</summary>
 
@@ -314,8 +311,8 @@ def buffer_album_images(
     """Entry and buffer method for Album images scraping."""
     return self._scrape_link(url, start_page, self.SCRAPE_TYPE["ALBUM_IMAGE"], **kwargs)
 ```
-</details>
 
+</details>
 
 ## 心得感想
 

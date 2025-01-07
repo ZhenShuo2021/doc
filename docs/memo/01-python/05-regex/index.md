@@ -20,13 +20,17 @@ first_publish:
 ```py
 pattern = re.compile(r"^(.*?)\s*\((\d+)\)(\..+)?$")
 ```
+
 第一次看到正則表達式的感想只有「？？？」，不過簡單來說就是一套可以描述字符匹配的表達方式。
 
 ## 入門函式
+
 不造輪子，直接看使用[正規表達式 re](https://steam.oxxostudio.tw/category/python/library/re.html#a01)。
 
 ## 入門匹配方式
+
 匹配非保留字符時直接用中括號 `[]` 表示要匹配的字符，例如
+
 ```py
 text = "ABC 123"
 A = re.search("[a-zA-Z]", text).group()   # 'A'
@@ -34,6 +38,7 @@ B = re.search("[a-zA-Z]+", text).group()   # 'ABC'
 ```
 
 也可以加上 `^` 排除字符：
+
 ```py
 text = "ABC 123"
 C = re.search("[^a-zA-Z]", text).group()   # ' '
@@ -43,6 +48,7 @@ D = re.search("[^a-zA-Z]+", text).group()   # ' 123'
 接著介紹如何匹配任意字符，進入滿臉問號的開始。
   
 ### 字符類型匹配
+
 - `.`：任意字符（不包括換行符）。
 - `\d`：任意數字（0-9）。
 - `\D`：任意非數字。
@@ -52,6 +58,7 @@ D = re.search("[^a-zA-Z]+", text).group()   # ' 123'
 - `\S`：任意非空白字符。
 
 使用範例，依序匹配整個字串這樣比較好理解
+
 ```py
 text = "ABC 123"
 # 只匹配單字符
@@ -69,6 +76,7 @@ print(re.search(r"\w+\W\w+", text).group())   # 'ABC 123'
 這就是基本使用方法了。
 
 ### 量詞 Quantifier
+
 - `*`：匹配前面的元素 0 次或多次。
 - `+`：匹配前面的元素 1 次或多次。
 - `?`：匹配前面的元素 0 次或 1 次。
@@ -76,6 +84,7 @@ print(re.search(r"\w+\W\w+", text).group())   # 'ABC 123'
 - `{n,m}`：匹配前面的元素至少 n 次，至多 m 次。
 
 ### 邊界設定
+
 - `^`：匹配字符串的開始。
 - `$`：匹配字符串的結尾。
 - `\b`：匹配單詞邊界（例如單詞前後的空格或標點）。
@@ -98,6 +107,7 @@ print(result)   # 1234567890
 ## 高階匹配方式
 
 ### 捕獲
+
 - 小括號 `( )`：捕獲一個匹配，以便後續引用
   - EX: `(\d{3})` 匹配並捕獲三位數字
   
@@ -171,10 +181,13 @@ validate_email("example@test.sss")   # True
 - `$`：表示字串結束。
 
 ## 結語
+
 這誰記得起來，所以接下來是我的個人筆記，我才不要每次寫個小腳本還要重看文章。
 
 #### 範例：檔案重新命名一
+
 如果檔名符合規則 `"{digits} <xxx>.<extension>"`，把花括弧前加上空格移到最後，例如：  
+
 - `{123} example.txt` 變成 `example {123}.txt`
 - `{456} folder` 變成 `folder {456}`
 
@@ -200,8 +213,7 @@ def rename_item0(directory, item):
 - `(.+?)` 非貪婪地匹配任何字符（除了換行符），這是文件名主體
 - `(\..+)?` （可選）匹配副檔名
 
-
 ## 參考資料
+
 [使用正規表達式 re](https://steam.oxxostudio.tw/category/python/library/re.html)
 [正規表示式（Regular Expression）](https://hackmd.io/@aaronlife/regular-expression)
-

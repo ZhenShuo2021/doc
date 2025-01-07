@@ -15,20 +15,25 @@ first_publish:
 ---
 
 # tmux 使用教學
+
 使用 tmux 能讓你
+
 - 管理多個任務：將一個終端分割成多個視窗或面板
 - 保持會話持久性：即使斷線，會話依然可重連繼續工作
 
 最有用就是不佔用終端視窗，也不怕斷線。
 
 ## 第一次嘗試 tmux
+
 安裝
+
 ```shell
 sudo apt install tmux   # Linux
 brew install tmux       # MacOS
 ```
 
 最小實現指令
+
 ```shell
 tmux                    # 進入會話
 ctrl+b d                # 離開會話
@@ -44,9 +49,11 @@ tmux 有多種管理模式，會話包含多個視窗，視窗內又可分成多
 指令整理章節整理會話視窗窗格的管理指令。
 
 ## 指令整理
+
 tmux 指令都是 `prefix + "操作"`，預設 prefix 是 `ctrl+b`。
 
 ### 會話管理
+
 ```shell
 創建：tmux new -s [會話名稱]
 列出：tmux ls
@@ -56,7 +63,6 @@ tmux 指令都是 `prefix + "操作"`，預設 prefix 是 `ctrl+b`。
 ```
 
 ### 視窗管理
-
 
 ```shell
 創建：ctrl+b c
@@ -69,6 +75,7 @@ tmux 指令都是 `prefix + "操作"`，預設 prefix 是 `ctrl+b`。
 ```
 
 ### 窗格管理
+
 ```shell
 創建垂直窗格：ctrl+b %
 創建水平窗格：ctrl+b "
@@ -79,10 +86,13 @@ tmux 指令都是 `prefix + "操作"`，預設 prefix 是 `ctrl+b`。
 ```
 
 ### 彩蛋
+
 顯示時鐘
+
 ```shell
 ctrl+b t
 ```
 
 ## 結語
+
 這麼簡單的東西為甚麼網路教學要寫的這麼長呢。

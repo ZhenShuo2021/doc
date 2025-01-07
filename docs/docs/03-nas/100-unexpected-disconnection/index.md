@@ -14,10 +14,13 @@ first_publish:
 ---
 
 # TrueNAS 無預警斷線（原因排查中）
+
 自組的 NAS 最近啟動時間久了之後會無預警斷線，ping 主機 IP 也無回應，這是初步的記錄，以後確定原因再寫成完整的文章。
 
 ## 排查
+
 系統資訊
+
 ```sh
 CPU: Intel(R) Core(TM) i5-7400 CPU @ 3.00GHz
 Mem: 16GiB
@@ -26,6 +29,7 @@ TrueNAS Version: Dragonfish-24.04.0
 ```
 
 ## Kernel Messages
+
 使用 dmesg 查看開機資訊，沒什麼有用的資訊，或者下次斷線我要直接把螢幕鍵盤抱去 NAS 旁邊接著，好重好懶。
 
 ```sh
@@ -44,6 +48,7 @@ admin@leonas[~]$ sudo dmesg | tail
 ```
 
 ## 系統日誌
+
 查看 /var/log/messages 的系統日誌，這裡的資訊稍微有用一點
 
 ```sh {3}

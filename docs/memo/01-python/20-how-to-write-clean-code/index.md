@@ -15,13 +15,15 @@ first_publish:
 ---
 
 # How to Write Clean Code
+
 Collections of useful infos on the internet for writing clean, readable code.  
-码农高天: Core dev of CPython, works in Microsoft kernel security team.   
+码农高天: Core dev of CPython, works in Microsoft kernel security team.
 
 ## Principle
+
 These guides are not absolute rules, you should remember that the final purpose is writing a maintainable, extendable, readable and high-performance code.
 
-> This list is organized by myself, the Chinese text is summarized by GPT. 
+> This list is organized by myself, the Chinese text is summarized by GPT.
 
 1. 可讀性
     - KISS (Keep It Simple, Stupid)
@@ -41,7 +43,7 @@ These guides are not absolute rules, you should remember that the final purpose 
     - 顯式優於隱式
       - 程式碼的意圖應該明確，避免隱式表達
       - 隱示代表程式語言本身任何的隱示表達方式，例如
-        - `from package import *` 
+        - `from package import *`
         - [`語法約束好於邏輯約束`](https://youtu.be/7EQsUOT3NKY?si=_0m5QidZkAGhSYM2&t=180)
         - [`字典取鍵值`](https://youtu.be/er9MKp7foEQ?si=JZbsHST4aBu2_pis&t=827)
         - [`顯式的寫出 if-else`](https://youtu.be/vbF5M1L2SnU?si=Zao09Wxk0rHwfFmi&t=236) 就算只是補上 else 都比懶惰不寫好
@@ -96,8 +98,8 @@ These guides are not absolute rules, you should remember that the final purpose 
     - 單元測試
     - 自動化測試 (Github Actions CI)
 
-
 ## Basic Knowledge (Essential)
+
 You should never skip this part.
 
 [Clean Code 實戰之 PHP 良好實踐](https://kylinyu.win/php_best_practice) A clean code guide from beginner to advanced  
@@ -112,10 +114,11 @@ Introduces methods for reducing code nesting, including table methods, early ret
 Introduces useful built-in functions in Python and compares their performance to hand-crafted for loops.
 
 ## Clean code
+
 Every article is carefully curated and informative.
 
 [我与微软的代码规范之争——局部变量竟然不让初始化？](https://www.youtube.com/watch?v=cAvAbyadts4)  
-Discusses whether to initialize local variables in C and explains the tradeoffs related to code errors.   
+Discusses whether to initialize local variables in C and explains the tradeoffs related to code errors.
 
 [【Code Review】传参的时候有这么多细节要考虑？冗余循环变量你也写过么？](https://youtube.com/watch?v=er9MKp7foEQ)  
 SELECTED code review

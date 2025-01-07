@@ -22,7 +22,7 @@ import TabItem from '@theme/TabItem';
 
 # UV 教學，最佳 Python 虛擬環境管理工具
 
-本篇文章介紹 **[uv](https://github.com/astral-sh/uv)** 的日常操作指令，從安裝到發布套件都包含在內，還有抄作業環節，直接複製貼上就能用，適合沒寫過 pyproject.toml 的人快速上手。如果不清楚自己是否該選擇 uv 請看[上一篇文章](/docs/python/virtual-environment-management-comparison)。
+本篇文章介紹 **[uv](https://github.com/astral-sh/uv)** 的日常操作指令，從安裝到發布套件都包含在內，還有抄作業環節，直接複製貼上就能用，適合沒寫過 pyproject.toml 的人快速上手。如果不清楚自己是否該選擇 uv 請看[上一篇文章](./virtual-environment-management-comparison)。
 
 ## 簡介
 
@@ -480,7 +480,7 @@ https://docs.astral.sh/uv/concepts/projects/sync/#exporting-the-lockfile
 uv export --no-emit-project --locked --no-hashes -o requirements.txt -q
 ```
 
-每次都要手動打太麻煩，使用 pre-commit 一勞永逸，自動檢查 lock 檔案是否變動並且匯出。pre-commit 的使用範例可以參考筆者寫的[文章](/memo/python/first-attempt-python-workflow-automation#pre-commit-configyaml)。
+每次都要手動打太麻煩，使用 pre-commit 一勞永逸，自動檢查 lock 檔案是否變動並且匯出。pre-commit 的使用範例可以參考筆者寫的[文章](/docs/memo/01-python/26-first-attempt-python-workflow-automation/index.md#pre-commit-configyaml)。
 
 ```yaml
 # .pre-commit-config.yaml

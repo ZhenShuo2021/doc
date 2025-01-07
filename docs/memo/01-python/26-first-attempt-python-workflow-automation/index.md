@@ -50,12 +50,13 @@ import TabItem from '@theme/TabItem';
 選擇 mypy 的原因是 pyright 整天在跟我說檢查不到套件，用 mypy 一行 disable import-not-found 就好了；ruff 功能強大且高效，pytest 則是從內建的 unittest 轉過來，語法確實比較簡潔，也整合 pdb 偵錯，coverage 我就只是玩過而已了。
 
 > ruff 官網介紹自己核心理念不是創造新功能，而是在現有功能下達到更快的執行速度，這點非常好，一堆套件都不寫和競爭者差在哪，浪費大家時間，要自己研究或踩坑才知道。
-> 
+>
 > 實際在 format 時，以我的爛 code 為例一個一千行的檔案使用 black formatter 都會卡一下了，大型專案還得了。yapf 沒有試過，PEP8 則是修改太少，沒有按下去修正一堆的那種愉悅感。
 
 說在前面，這只是自己一個人找東西玩的紀錄，別問我不同設定差在哪，窩不知道。
 
 ## pyproject.toml
+
 參考[官方文檔](https://python-poetry.org/docs/pyproject/)。
 
 ### 設定建構系統 build-system
@@ -80,7 +81,7 @@ build-backend = "hatchling.build"
 
 從這裡開始每個專案都不太一樣，由於我自己使用 poetry，所以只介紹 poetry，首先是必填項目。
 
-> 文章更新：如果想要使用 uv，請觀看筆者的 [uv 教學文章](/docs/python/python-uv-complete-guide)。
+> 文章更新：如果想要使用 uv，請觀看筆者的 [uv 教學文章](/docs/docs/03-python/06-python-uv-complete-guide/index.md)。
 
 ```toml
 [tool.poetry]
@@ -91,6 +92,7 @@ authors = ["Your Name <your.email@example.com>"]
 ```
 
 這些選填基本上都會附上
+
 ```toml
 maintainers = ["Maintainer Name <maintainer@example.com>"]
 repository = "儲存庫網址"
@@ -100,6 +102,7 @@ readme = "README.md"
 ```
 
 classifiers 和 keywords 是 PyPI 的標籤，方便搜尋和分類使用
+
 ```toml
 classifiers = [
     "Topic :: Multimedia :: Video",
@@ -113,6 +116,7 @@ keywords = ["python", "cli", "scraper"]
 ```
 
 ### 依賴
+
 在這裡可以設定專案依賴的套件：
 
 ```toml
@@ -137,6 +141,7 @@ pre-commit = "^4.0.0"
 ```
 
 ### 入口點
+
 如果是 cli 工具可以設定套件入口點，在 your_package 資料夾中的 cli.py，裡面的 main 函式。
 
 ```toml
@@ -145,6 +150,7 @@ mycli = "your_package.cli:main"
 ```
 
 ### 開發工具設定
+
 此處開始才是 pyproject.toml 的核心優勢，可以設定完整的工具設定保持專案開發的一致性。以 ruff 為例：
 
 ```toml
@@ -187,6 +193,7 @@ relative-imports-order = "closest-to-furthest"
 ```
 
 ### 完整的設定結果
+
 ruff.lint 和 ignore 都是從大專案抄來的，例如 yt-dlp/pytorch/numpy/matplotlib 等等，如果想要自行設定可以[在 ruff 官網中查看所有規則](https://docs.astral.sh/ruff/rules/)，相信我看完之後你就會想直接抄作業了。在工作區根目錄設定完成後 VSCode 似乎能自動偵測，我沒有任何 IDE 就自動顯示檢查結果了。
 
 ```toml
@@ -345,8 +352,8 @@ relative-imports-order = "closest-to-furthest"
 ```
 
 ## .pre-commit-config.yaml
-自動化幫你在 commit 前進行檢查，我只能說他是個神器，相見恨晚，從此再也不需要 `mypy ...` `ruff ...` `pytest ...` `isort ...`，所有檢查一行指令完成。
 
+自動化幫你在 commit 前進行檢查，我只能說他是個神器，相見恨晚，從此再也不需要 `mypy ...` `ruff ...` `pytest ...` `isort ...`，所有檢查一行指令完成。
 
 ```sh
 # 原本有超多指令
@@ -361,6 +368,7 @@ pre-commit run -a
 ```
 
 ### 安裝
+
 ```sh
 # 安裝 pre-commit 套件
 pip install pre-commit
@@ -438,8 +446,8 @@ repos:
 ```
 
 ## Github workflow 自動發布套件
-這雖然和本文目的不同不過也算是 Python 自動化的一部分，從此之後不需要再使用 poetry build/publish 指令，只要在提交時加上 tag 就會自動發布。
 
+這雖然和本文目的不同不過也算是 Python 自動化的一部分，從此之後不需要再使用 poetry build/publish 指令，只要在提交時加上 tag 就會自動發布。
 
 ```yaml
 name: PyPI Publish
@@ -496,8 +504,8 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
 ```
 
-
 ## 使用範例
+
 這既是我第一次設定這些文件，也是我第一次使用程式碼品質工具，第一次使用的錯誤多到炸裂：
 
 > 第一次檢查 ruff 的警告數量高達 113 個
@@ -520,8 +528,8 @@ jobs:
 
 不得不說這有點像是玩遊戲的通關獎勵，送你一堆綠色 pass。
 
-
 ## 心得
+
 潮～爽～DER～ pre-commit 一行指令完成所有工作。
 
 好啦正經一點，基本的 pre-commit-hooks 可以檢查是否提交大檔案，也真的讓我發現有一兩次不小心提交圖片檔案了。
@@ -530,7 +538,7 @@ jobs:
 
 isort 會自動幫我們排列所有 import 語句，這方面見仁見智，至少避免了強迫症每次都想手動排列浪費的時間。
 
-mypy 的話則是地獄，為了改他多學了泛型，直接多寫了一篇文章（[Type Hint 教學：從入門到進階的 Python 型別註釋](/docs/python/type-hint-typing-complete-guide)），不過這就是初期成本，無法避免。
+mypy 的話則是地獄，為了改他多學了泛型，直接多寫了一篇文章（[Type Hint 教學：從入門到進階的 Python 型別註釋](/docs/docs/03-python/26-type-hint-typing-complete-guide/index.md)），不過這就是初期成本，無法避免。
 
 pytest 則可以在每次提交時自動執行，讓你想懶也不行，大家都知道打字會死，我相信沒有任何人想在提交時多打 --no-verify，寧願不打讓他自己跑測試假裝自己有在做事。
 

@@ -32,4 +32,3 @@ first_publish:
 - PEP 585: 更新 type hint，用於 Python 3.9/3.10 之後
 - PEP 621/631/639: 專案 metadata，[Poetry 要 2.0 之後才會支援 621](https://github.com/orgs/python-poetry/discussions/5833)
 - PEP 744: JIT 編譯
-

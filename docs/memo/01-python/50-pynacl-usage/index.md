@@ -39,11 +39,12 @@ import ReactPlayer from "react-player";
 
 內心戲結束，這篇應該是全網唯一一篇使用 [PyNaCl](https://github.com/pyca/pynacl) 還寫成文章的中文文章，是筆者失業太閒隨便拿來玩的紀錄。
 
-
 ## 加密
+
 這裡沒有什麼 Alice Bob，因為上課教的快忘光了，只介紹實際使用時的各種元件組成。
 
 ### 對稱加密
+
 本段落涵蓋官方文檔的 [Secret Key Encryption](https://pynacl.readthedocs.io/en/latest/secret/) 全部內容。
 
 對稱加密的概念很簡單，拿哪把鑰匙加密就用哪把鑰匙解密，用戶必須保管好自己的鑰匙，鑰匙洩漏等同於訊息洩漏。在 PyNaCl 中，我們使用 `SecretBox` 類別完成
@@ -57,14 +58,16 @@ encrypted = box.encrypt(message)
 plaintext = box.decrypt(encrypted)   # 使用相同的箱子解密
 ```
 
-
 #### Nonce
+
 每次生成密文時可以使用 nonce 避免重放攻擊，此選項可以讓同樣的訊息透過隨機的 nonce 生成不同的密文。
 
 #### AEAD
+
 額外傳輸一個 AAD 驗證資訊用以保護真正的密文不被竄改。AAD 可以為明文傳遞，接收傳遞雙方都知道同樣的 AAD，只要密文或 AAD 被竄改都會導致解密失敗。
 
 ### 非對稱加密
+
 此部分包含官方文檔的 [Public Key Encryption](https://pynacl.readthedocs.io/en/latest/public/) 全部內容。
 
 在非對稱加密中，首先伺服器和客戶端都各自生成一對兩隻公私鑰，公鑰是任何人都能知道的，私鑰則需要安全保管。這兩把金鑰的特色是「公鑰加密的訊息只有私鑰能解密」，透過這個特性可以衍生出兩種用途：
@@ -122,18 +125,19 @@ print(plaintext.decode('utf-8'))
 
 `Box` 加密也可以使用 nonce 參數，而 `SealedBox` 不支援。 `SealedBox` 被設計成傳完馬上棄用的場景，發送者也無法使用自己解密自己發送的訊息（因為他沒私鑰）。
 
-
 ### 數位簽章
+
 數位簽章用途如前述，用以確認密文傳送者身分。我沒有用，所以沒寫這段。官方文檔寫的非常清楚了請自行觀看。
 
 https://pynacl.readthedocs.io/en/latest/signing/
 
 ### 雜湊
+
 雜湊用於確認訊息完整性，良好的雜湊函式對於任意兩種不同的輸入其輸出永遠不會相同。雜湊是不可逆的，用於驗證而不是保存資料。
 
 PyNaCl 套件也包含雜湊函式，除了常見的 sha 還有進階的 blake2b 都支援。Hash 可以用於四種情況：
 
-1. 檢查數據是否被篡改，使用 HASHER 生成摘要 `digest` 後提供接收者比對   
+1. 檢查數據是否被篡改，使用 HASHER 生成摘要 `digest` 後提供接收者比對
 2. 檢查數據完整性，使用 `sodium_memcmp`
 3. `blake2b` 作為訊息鑑別碼 (MAC) 檢查完整性
 4. `blake2b` 作為金鑰衍生函數
@@ -159,16 +163,17 @@ PyNaCl 套件也包含雜湊函式，除了常見的 sha 還有進階的 blake2b
 
 為何不直接使用原始金鑰？
 使用金鑰衍生的目的是為了提高系統的靈活性、安全性和可管理性。直接使用原始金鑰的風險如下：
-   - **密鑰重用**：在多個加密操作中重複使用相同的金鑰，會使得金鑰的暴露風險增加。這也可能使得攻擊者更容易從已知的密文中推測出密鑰。
-   - **缺乏變化性**：如果一個金鑰長期使用，那麼當這個金鑰暴露時，所有依賴它的資料都會面臨安全風險。金鑰衍生可以每次生成新的密鑰，降低風險。
-   - **密鑰管理問題**：使用一個長期金鑰進行所有操作會使得密鑰的管理變得困難。特別是當系統規模變大時，衍生金鑰可以讓每個用戶和每個操作有不同的密鑰，簡化管理。
+
+- **密鑰重用**：在多個加密操作中重複使用相同的金鑰，會使得金鑰的暴露風險增加。這也可能使得攻擊者更容易從已知的密文中推測出密鑰。
+- **缺乏變化性**：如果一個金鑰長期使用，那麼當這個金鑰暴露時，所有依賴它的資料都會面臨安全風險。金鑰衍生可以每次生成新的密鑰，降低風險。
+- **密鑰管理問題**：使用一個長期金鑰進行所有操作會使得密鑰的管理變得困難。特別是當系統規模變大時，衍生金鑰可以讓每個用戶和每個操作有不同的密鑰，簡化管理。
 
 <h2>**結論**</h2>
 使用衍生金鑰而不是直接使用原始金鑰，可以顯著提升系統的安全性和靈活性。這樣的設計使得每次加密操作都能使用唯一的密鑰，有效減少了密鑰重用的風險，也能防止密鑰洩露造成的長期影響。
 :::
 
-
 ### 密碼雜湊
+
 使用強力的雜湊函式可以讓我們安全的加密和驗證密碼，比如說儲存密碼時使用雜湊，即使密碼庫被破解也只是無法還原的哈希值。密碼雜湊函式是比一般雜湊更強力的雜湊函式，專門用於抵抗各種破解方式，一般雜湊則適用於快速查詢驗證。
 
 截至目前為止[最強大的密碼雜湊函數](https://github.com/EasonWang01/Introduction-to-cryptography/blob/master/1.1%20Bcrypt%E3%80%81PBKDF2%E3%80%81Scrypt%E3%80%81Argon2.md)是 argon2id，其前身 argon2 是 2015 密碼哈希競賽冠軍，並且集結衍生版本 argon2i 抗旁路攻擊以及 argon2d 對抗 GPU 硬體加速攻擊的高級版本。如果 argon2 不可用（實際上他真的很吃效能），可以使用低一階的 scrypt，[最低階的雜湊函式](https://www.liuvv.com/p/4fe35076.html)的 PBKDF2 PyNaCl 一樣也有實現。
@@ -178,6 +183,7 @@ PyNaCl 套件也包含雜湊函式，除了常見的 sha 還有進階的 blake2b
 至於鹽 (salt) 則是類似於 nonce 的角色，也是隨機數據，用於保證兩個相同密碼雜湊結果不同，需要和密碼雜湊的結果一起儲存才可以正確驗證解密。
 
 ### base64 編碼
+
 [Encoders](https://pynacl.readthedocs.io/en/latest/encoding/)
 
 PyNaCl 也整合 Python 中內建的一些編碼函式作為工具整合使用，如 base64 編碼。
@@ -206,6 +212,7 @@ print(f"Decoded: {decoded_bytes}")
 ```
 
 ## 實作
+
 以下是根據 PyNaCl 實現的密碼保護架構，採用三層金鑰架構完成縱深防禦：
 
 第一層使用作業系統的安全亂數源 os.urandom 生成 32 位元的 encryption_key 和 salt 用以衍生金鑰，衍生金鑰函式 (KDF) 採用最先進的 argon2id 演算法，此演算法結合最先進的 Argon2i 和 Argon2d，能有效防禦 side-channel resistant 和對抗 GPU 暴力破解。
@@ -336,7 +343,6 @@ def cleanup(sensitive_data: list[bytes]) -> None:
         ctypes.memset(ctypes.addressof(buffer), 0, length)
         del buffer
 ```
-
 
 我們還可以使用 [keyring](https://github.com/jaraco/keyring) 套件將主金鑰交給作業系統保管，這樣就有四重保障：作業系統防護主金鑰存取，兩個加密材料保護主金鑰解密，主金鑰保護私鑰解密，私鑰保護密碼解密。加密材料也可以分散儲存避免洩漏。
 
@@ -546,9 +552,9 @@ class KeyManager:
 
 </details>
 
-
 ## 結語
-才寫了一篇[套件管理工具比較](/docs/python/virtual-environment-management-packages-comparison)在講選多人用的就對了，但這裡我偏偏選少人用的，因為比較酷。
+
+才寫了一篇[套件管理工具比較](/docs/docs/03-python/05-virtual-environment-management-comparison/index.md)在講選多人用的就對了，但這裡我偏偏選少人用的，因為比較酷。
 
 而且最常見的 [cryptography](https://pypi.org/project/cryptography/) 太多人講檔案又太大 (23MB) 還不支援 ED25519，另外一個也很多人用的 [pycryptodome](https://pypi.org/project/pycryptodome/) 也要 12.6MB，PyNaCl 才 4.9MB 又提供包含 Curve25519, XSalsa20-Poly1305, argon2id 等先進演算法，再加上 keyring 也僅有 1.1MB，兩個加起來還不到這些套件的一半加密演算法又強大，不選他選誰（其實只是又想特立獨行了對吧！）
 

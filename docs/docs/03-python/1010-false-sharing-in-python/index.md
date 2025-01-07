@@ -26,13 +26,14 @@ import TabItem from '@theme/TabItem';
 
 # Python 中的 False-Sharing
 
-前一篇文章提到了 false-sharing，但是 Python 中好像沒看到有人在談這個問題，畢竟會討論效能的人本身就不會用 Python 寫程式，又看到[暗黑執行緒的文章](https://blog.darkthread.net/blog/false-sharing-demo-with-jquery-animation/)說 
+前一篇文章提到了 false-sharing，但是 Python 中好像沒看到有人在談這個問題，畢竟會討論效能的人本身就不會用 Python 寫程式，又看到[暗黑執行緒的文章](https://blog.darkthread.net/blog/false-sharing-demo-with-jquery-animation/)說
 
 > 是台積電才要關心的事，如果你是 Samsung、hTC、Nokia，暫時可以不用煩惱怎麼對付它.
 
 嗯嗯那我肯定是要來試試看的吧（棒讀），所以依樣畫葫蘆寫了一個簡易測試的腳本，順便作為自己強化 false sharing 記憶的筆記。
 
 ## False-Sharing 成因
+
 其原因來自於 CPU 快取特性是一次讀取一整行，當兩個核心訪問不同的快取時，如果它們在同一行 cacheline 中，即使他們並不共用 CPU 仍然會強制同步不同核心的快取，在同步過程中造成的效能損失就是 false-sharing。
 
 ## 解決方式
@@ -234,7 +235,7 @@ if __name__ == "__main__":
     plt.show()
 ```
 
-接下來是測試結果，三章圖依序是 `PADDING_SIZE = [4, 8, 16]` 的計算時間，使用長條圖的原因是折線圖變化太小看不出來差距。可以看到當 `PADDING_SIZE` 從 4 -> 8 的時候，使用 padding 的方式對比 false-sharing 的效能從原本的基本相同變成快了 ~15%，這個效能差距在把 `PADDING_SIZE` 設定成 8 -> 16 後又沒有進一步優化了，足以顯示 false-sharing 的存在以及使用的正確性。isolated 代表每個執行緒使用獨立的 Array，Numba 則是使用 [Numba 套件加速](/docs/python/numba-tutorial-accelerate-python-computing)，看了這個速度差異就知道為啥沒人在 Python 中討論 false-sharing 了，在 Python 中效能是個假議題，false-sharing 雖存在但不需要用 Python 解決他，簡單加一行裝飾器都比想破頭還有用。
+接下來是測試結果，三章圖依序是 `PADDING_SIZE = [4, 8, 16]` 的計算時間，使用長條圖的原因是折線圖變化太小看不出來差距。可以看到當 `PADDING_SIZE` 從 4 -> 8 的時候，使用 padding 的方式對比 false-sharing 的效能從原本的基本相同變成快了 ~15%，這個效能差距在把 `PADDING_SIZE` 設定成 8 -> 16 後又沒有進一步優化了，足以顯示 false-sharing 的存在以及使用的正確性。isolated 代表每個執行緒使用獨立的 Array，Numba 則是使用 [Numba 套件加速](./numba-tutorial-accelerate-python-computing)，看了這個速度差異就知道為啥沒人在 Python 中討論 false-sharing 了，在 Python 中效能是個假議題，false-sharing 雖存在但不需要用 Python 解決他，簡單加一行裝飾器都比想破頭還有用。
 
 > use padding=4, still incurs false-sharing
 
@@ -248,11 +249,10 @@ if __name__ == "__main__":
 
 ![pad4 100](pad16_100.webp "pad16 100")
 
-
 另外，Numba 在 4 -> 8 之間沒有如預期加速的原因可能是編譯器，在 [Speed up C++ — false sharing](https://medium.com/@techhara/speed-up-c-false-sharing-44b56fffe02b) 這篇文章中提到他使用 clang -O3 才有看到差異，gcc 自己把這個問題優化掉了。Numba 沒有提到他使用哪種編譯器，不過他預設使用 -O3 給 LLVM 優化。
 
-https://numba.readthedocs.io/en/stable/reference/envvars.html#envvar-NUMBA_OPT   
-https://numba.readthedocs.io/en/stable/user/troubleshoot.html#debugging-jit-compiled-code-with-gdb   
+https://numba.readthedocs.io/en/stable/reference/envvars.html#envvar-NUMBA_OPT
+https://numba.readthedocs.io/en/stable/user/troubleshoot.html#debugging-jit-compiled-code-with-gdb
 
 ## 計算方式也有差
 
@@ -261,6 +261,7 @@ https://numba.readthedocs.io/en/stable/user/troubleshoot.html#debugging-jit-comp
 ![pad8 sin](pad8_sin.webp "pad8 sin")
 
 ## 結語
+
 其實開頭有點記者，暗黑執行緒的文章前面有講到「與 DB、網路呼叫延遲相比，這個效能差距只是奈米等級」這句話我沒有放進去，不過寫這篇的時候確實也對這句話沒印象，回頭看才發現有這句話。
 
 寫完整篇發現閱讀筆記比我寫的爛測試更有內容，所以把閱讀筆記移到上面。

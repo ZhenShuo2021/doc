@@ -21,7 +21,7 @@ first_publish:
 
 本篇接近隨筆紀錄，未來有更複雜用法再慢慢補充，中文 act 資源趨近於零所以趁熱先發一篇。
 
-根據 [Github Actions 自動化 CI/CD](/docs/git/github/github-actions)，我們可以在本地執行 Github Actions 用於在本地先偵錯 Workflow 語法設定/節省 Actions 使用流量。首先需要安裝 [act](https://nektosact.com/installation/index.html) 套件以及 docker，並且手動打開 docker 才能執行。
+根據 [Github Actions 自動化 CI/CD](./github-actions)，我們可以在本地執行 Github Actions 用於在本地先偵錯 Workflow 語法設定/節省 Actions 使用流量。首先需要安裝 [act](https://nektosact.com/installation/index.html) 套件以及 docker，並且手動打開 docker 才能執行。
 
 ## 用法
 

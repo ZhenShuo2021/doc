@@ -20,14 +20,15 @@ first_publish:
 
 用標籤標示重要版本，分為兩種lightweight 和 annotated，官方建議使用 annotated。
 
-
 ## 快速清單
+
 非常直觀，直接上指令。
 
 ### 常用
+
 | 功能 | 本地指令 | 遠端指令 |
 |---|---|---|
-| 列出 | `git tag` | `git ls-remote --tags origin` | 
+| 列出 | `git tag` | `git ls-remote --tags origin` |
 | 建立 | `git tag -a v1.0.0 -m "messages"` | `git push origin v1.0.0` |  
 | 刪除 | `git tag -d v1.0.0` | `git push origin --delete v1.0.0` |  
 | 推送 | `git push origin v1.0.0` |  |  
@@ -49,8 +50,8 @@ git tag -l --format='%(contents)' <tag name>
 git tag <tag name> <tag name>^{} -f -m "<new message>"
 ```
 
-
 ### 第二常用
+
 | 功能 | 本地指令 | 遠端指令 |
 |---|---|---|
 | 推送所有標籤 | `git push origin --tags` |  |  

@@ -17,6 +17,7 @@ first_publish:
 # 有關修改的動詞
 
 ## 起因
+
 寫 commit message 發現自己永遠只會 edit/change/adjust/tune，這邊請 GPT 補一下英文，而且有些單字會腦袋抽風突然想不起來，這篇當作 cheatsheet 使用。
 
 下面的表格都依據修改的嚴重程度依序排列。
@@ -45,7 +46,6 @@ first_publish:
 | Redesign    | 重新設計功能或界面                 | redesign: overhauled dashboard layout     |
 | Upgrade     | 升級至更新版本或依賴關係           | upgrade: bumped node.js to version 14     |
 | Overhaul    | 全面改造或大規模修改               | overhaul: reworked authentication system  |
-
 
 ## 修正類型動詞
 
@@ -103,6 +103,6 @@ Certainly, let's clarify the distinctions between "amend" and "edit" within the 
 * **Amending** is a focused action, rectifying specific flaws within an existing article.
 * **Editing** is a more holistic process, encompassing various improvements to enhance the overall quality and effectiveness of an article.
 
-Let me know if you have any further questions about specific aspects of article writing or language usage! 
+Let me know if you have any further questions about specific aspects of article writing or language usage!
 
 </details>

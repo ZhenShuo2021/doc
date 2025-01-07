@@ -30,14 +30,15 @@ import TabItem from '@theme/TabItem';
 筆者當年是在沒有先備知識的情況下直接搜尋多線程 (multithreading)/多進程 (multiprocessing) 導致浪費很多時間，所以這裡將前置知識一併附上。
 
 ### 全域直譯器鎖
+
 在講多工之前一定要知道的 Python 基礎之一：全域直譯器鎖 (GIL, Global Interpreter Lock)，我們一個一個名詞解釋。Global 指的就是整個 Python 程式運行時的全局環境，Interpreter 是 Python 的直譯器，目的是將程式碼轉換成字節碼在 Python 虛擬機上運行，Lock 則是將所有線程鎖定，三者組合在一起指的就是<u>**同一直譯器下，任一時間只有一個線程能執行字節碼**</u>。
 
 原理可以在三十秒內講完，但是相信這樣還是一知半解，所以我們簡單介紹他的前世今生。雖然多工處理在學術中早已被探討，但是電腦早期發展根本沒有什麼多核心 CPU，而多工處理需要考量的問題很多（共享資源和記憶體安全），所以 Python 乾脆就用 GIL 將多線程鎖定了。但是在三十年後的今天處理器隨便就是 10 核心 20 核心，這顯然會造成效能浪費，所以 no GIL 的討論度又逐漸上升，該功能[在 Python 3.13t 中被初步實現](https://www.youtube.com/watch?v=GFWs3G1W7BE)。
 
 值得一提的是直譯器，由於我們可以選擇不同的直譯器 (CPython, PyPy 等等)，其中只有 CPython 有 GIL，但是後者不在我們討論範圍內，絕大多數使用還是 CPython。
 
-
 ### 進程和線程
+
 作業系統執行程式碼的單位分為進程 (process) 和線程 (thread)，是撰寫多工程式時必須知道的基礎知識，這個段落簡單介紹進程與線程。
 
 每個程式執行時，至少都會包含一個進程，在作業系統中，我們可以使用以下方式看到進程 ID（PID, process ID）：
@@ -57,7 +58,7 @@ import TabItem from '@theme/TabItem';
   <TabItem value="linux" label="Linux">
 ```sh
 使用 `htop` 。
-```   
+```
   </TabItem>
 </Tabs>
 
@@ -90,6 +91,7 @@ import TabItem from '@theme/TabItem';
 :::
 
 ### 延伸閱讀
+
 背景知識的延伸閱讀，此處請按照下方順序觀看，feel free to skip this section。
 
 - [【python】天使还是魔鬼？GIL的前世今生。一期视频全面了解GIL！](https://www.youtube.com/watch?v=XjBsk8JGHhQ)
@@ -99,14 +101,17 @@ import TabItem from '@theme/TabItem';
 （這人不是隨便哪個阿貓阿狗出來亂拍影片的，是微軟工程師）
 
 ## 多工處理方式
+
 有了上面的前置知識後，我們可以很清楚的知道要選擇哪種多工方式，這個章節將列出常見的多工方式。
 
 ### 多線程
+
 Python 中的多線程有 `threading` 和 `threadPoolExecutor` 模組，兩者基本相同，threading 模組是比較低階的方式，threadPoolExecutor 則是呼叫 threading 的高階模組。
 
 對於 I/O 瓶頸任務，可以輕鬆的選擇多線程方式。
 
 ### 多進程
+
 由於進程之間沒有 GIL，進程更適合於 CPU 密集型的任務，使 Python 充分利用多核處理器的優勢。注意進程內部還是有屬於自己的 GIL。
 
 Python 中的多進程主要是 `multiprocessing` 和 `ProcessPoolExecutor` 模組，兩者關係同上。
@@ -152,21 +157,25 @@ Python 中的多進程主要是 `multiprocessing` 和 `ProcessPoolExecutor` 模�
 [^note]: 此處專指 Python，Golang 的協程確實是輕量級線程。線程的定義是操作系統中最小的執行單位，每個線程有自己的 stack、register 和 program counter，所以透過事件迴圈就**絕對不是輕量級線程**，因為事件迴圈調度的協程並非真正的並行執行，而僅是靠協作式切換模擬出並發執行，[不具備獨立的 stack 和 register](https://stackoverflow.com/questions/70339355/are-python-coroutines-stackless-or-stackful)。
 
 > 文章閱讀：這幾篇真的寫的很好，建議大家點進去看
+
 - [異步技術：徹底理解Async、Await與Event Loop](https://medium.com/@ackerley19/%E7%95%B0%E6%AD%A5%E6%8A%80%E8%A1%93-%E5%BE%B9%E5%BA%95%E7%90%86%E8%A7%A3async-await%E8%88%87event-loop-3943a4ec9814)
 - [【python】asyncio的理解与入门，搞不明白协程？看这个视频就够了。](https://www.youtube.com/watch?v=brYsDi-JajI)
 - [【python】await机制详解。再来个硬核内容，把并行和依赖背后的原理全给你讲明白](https://www.youtube.com/watch?v=K0BjgYZbgfE)
 
 ### 分佈式計算
+
 分佈式計算是將問題劃分成較小的子任務在多台電腦上分散處理來加速計算過程，並解決單台電腦無法處理的龐大數據或任務，例如數據大到記憶體放不下。
 
 常見的分佈式計算套件有 Ray/Dask/PySpark。
 
 ## 硬體加速
+
 會找多工處理都是想要加速程式速度，於是本文也把硬體加速放上來。
 
-軟體很慢，硬體很快，正確使用硬體可以顯著提高計算速度，再怎麼多工都沒有正確使用硬體資源來的高效，就算只是使用 Numpy，他在底層的 C 實現中也都有調用硬體加速。筆者有專門一篇文章介紹 Python 的硬體加速，請見 [Numba 教學：加速 Python 科學計算](/docs/python/numba-tutorial-accelerate-python-computing)。
+軟體很慢，硬體很快，正確使用硬體可以顯著提高計算速度，再怎麼多工都沒有正確使用硬體資源來的高效，就算只是使用 Numpy，他在底層的 C 實現中也都有調用硬體加速。筆者有專門一篇文章介紹 Python 的硬體加速，請見 [Numba 教學：加速 Python 科學計算](./numba-tutorial-accelerate-python-computing)。
 
 ## 名詞介紹
+
 搜尋這些資訊時常常會看到以下名詞：阻塞、非阻塞、同步、異步、並行、並發，筆者認為考這些名詞非常沒用，浪費時間，只要清楚知道自己在做什麼本身就能對應到上面這些名詞，但是既然會有疑問就還是放上解釋。
 
 - 阻塞 (Blocking)：需要等待某個條件才能繼續時，該操作被稱為阻塞，這會使執行流程暫停。
@@ -190,6 +199,7 @@ Python 中的多進程主要是 `multiprocessing` 和 `ProcessPoolExecutor` 模�
 - 文章閱讀：[Python异步编程和事件驱动](https://www.escapelife.site/posts/ab1905ae.html)
 
 ## 總結
+
 本文主要是想澄清 Python 多工處理的基本知識，以及常見錯誤和被忽略的知識，這些問題在 SEO 很前面的文章隻字不提，導致初學者理解困難。本文總共澄清了以下幾點誤會：
 
 1. Python 中的 multiprocessing 和 multithreading 差異，多進程之間沒有鎖，多線程有鎖，多進程內部的線程有鎖（這麼核心且基本的觀念為何沒人講我不理解，每篇文章都只說多進程適合 CPU 瓶頸任務，導致知其然而不知其所以然）。

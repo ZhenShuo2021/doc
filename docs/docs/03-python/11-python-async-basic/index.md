@@ -40,7 +40,6 @@ import TabItem from '@theme/TabItem';
 
 [^diff]: 註：Python 中的線程被 GIL 鎖住雖然有很多人但是一次只有一人工作。
 
-
 - 控制方式差異  
 對比多線程，協程是<u>**完全不同概念，無法類比**</u>，協程由「程式本身」管理，是一種允許在單一線程內實現異步執行的程式「物件」，後兩者是由作業系統管理的「執行單元」，由「作業系統」[控制](https://discuss.python.org/t/python-context-switching-how-is-it-done/8635)。
 
@@ -52,7 +51,6 @@ import TabItem from '@theme/TabItem';
 協程透過 <u>**事件迴圈 (event loop)**</u> 調度。當程式執行到 await 語句（<u>等待某項工作</u>）時，事件迴圈會切換（<u>切換去處理其他工作</u>）到下一個可執行的任務，藉此利用等待時間執行其他任務，因此特別適合 I/O bound 的任務，例如網路請求、檔案操作等任務。
 
 這樣我們就很清楚了解，使用事件迴圈調度多個任務，程式碼必須在需要等待的地方使用 await 關鍵字主動讓出控制權，以此完成協作式多工。
-
 
 <br/>
 
@@ -142,6 +140,7 @@ asyncio.run(my_coroutine())
 ```
 
 ## 使用方式
+
 本章節給出幾種基本使用方式，asyncio.sleep 代表每次 IO 任務中的等待，等待時就會切換到下一個任務執行。
 
 ### 基本語法 asyncio.run
@@ -185,6 +184,7 @@ def run(main, *, debug=None):
 ```
 
 ### 非阻塞示範 asyncio.gather
+
 上面的程式只是執行了一個協程函式，完全沒有顯示出協程的優勢，這裡我們建立三個協程物件，註冊到事件迴圈中執行。
 
 在這裡我們不能使用三次 `asyncio.run(my_coroutine())`，因為 `asyncio.run` 每次執行會建立一個事件迴圈執行裡面的任務，所以如果使用三次會變成三個事件迴圈，沒有起到任務交換的作用。
@@ -238,6 +238,7 @@ print(f"processing time: {(time.time() - t):.2f}")
 ```
 
 ### 最大同時並行數量範例
+
 一堆 1 滿無聊的對吧，這裡使用 Semaphore 鎖住最大任務數量，並且輸入變動的睡眠（I/O等待）時間，由此範例說明執行時間，以輸入時間 [1, 2, 3, 2, 3] 為例
 
 1. 時間 0 沒有任務結束，提交三個任務，任務中最長等待時間 3 秒
@@ -287,6 +288,7 @@ print(f"processing time: {(time.time() - t):.2f}")
 ```
 
 ### Future 範例
+
 比較少用到 Future，這裡放上最小範例，和 ThreadPoolExecutor 的 future 一樣道理，先註冊任務，再使用 `as_complete` 獲取結果。
 
 ```py
@@ -309,6 +311,7 @@ asyncio.run(main())
 ```
 
 ## 相關語法和函式
+
 本章節列出常用的語法和函式。學習協程的障礙在於不清楚有哪些物件以及不知如何正確執行，前面的文章已經說明相關物件，接下來列出相關函式讓你快速知道如何調用，有個基礎印象不用找文檔找到懷疑人生。
 
 ### 高階 API 函式
@@ -321,6 +324,7 @@ asyncio.run(main())
 - asyncio.shield(): 同 run，保護 Task 不被 `Task.cancel()` 取消。
 
 ### Event-Loop 函式
+
 第一次看可跳過，[官方文檔建議直接使用高階 API](https://docs.python.org/3/library/asyncio-eventloop.html)。event-loop 函式主要有以下幾種：
 
 - loop.create_task(): 在指定事件迴圈中創建並啟動一個新的任務，此指令使用頻率最高。
@@ -336,8 +340,8 @@ asyncio.run(main())
 - loop.stop()
 - loop.close()
 
-
 ### 線程處理函式
+
 這些函式都不是異步，而是放進獨立線程執行，用於函式阻塞又無法修改成異步（例如 import 別人的套件）時。
 
 - asyncio.to_thread()
@@ -356,14 +360,13 @@ asyncio.run(main())
 每個想取代 asyncio 的套件都會先說他的效能多爛，筆者沒親自測試過，但是放上找到的一些套件：
 
 - [uvloop](https://github.com/MagicStack/uvloop) 套件聲稱可以將執行速度提升 2-4x
-- [gevent](https://github.com/gevent/gevent) 
+- [gevent](https://github.com/gevent/gevent)
 - [Winloop](https://github.com/Vizonex/Winloop) uvloop 在萬惡 Windows 上效能很差
 - [trio](https://github.com/python-trio/trio) 看起來很有想法的套件
 - [Python Asyncio Alternatives](https://superfastpython.com/asyncio-alternatives/)
 
-
-
 ## 闢謠
+
 1. [关于Asyncio，别再使用run_until_complete了原创](https://blog.csdn.net/xjian32123/article/details/131520922)
 
 搜尋 `asyncio.run() vs loop.run_until_complete()` 時的結果第一項，當我們需要使用 loop 控制時用後者，沒特別情事當然用前者，標題黨亂下標。
@@ -378,12 +381,13 @@ asyncio.run(main())
 
 補充不太冷的冷知識，讓大家知道為何每種語言的協程不太一樣：協程的英文 Coroutine 全名是 [cooperative routine](https://functional.works-hub.com/learn/coroutines-in-kotlin-f293e)，只要可以在運行中暫停和恢復執行函式全都算協程，所以每種語言實現方式各有不同，至於 Golang 的 goroutine 為何跟此概念完全無關我就不知道了。
 
-- [《asyncio 系列》2. 詳解asyncio 的協程、任務、future，以及事件循環 ](https://www.cnblogs.com/traditional/p/17363960.html)
+- [《asyncio 系列》2. 詳解asyncio 的協程、任務、future，以及事件循環](https://www.cnblogs.com/traditional/p/17363960.html)
 - [【python】asyncio的理解与入门，搞不明白协程？看这个视频就够了。](https://www.youtube.com/watch?v=brYsDi-JajI)，由微軟工程師介紹協程
 - [【python】await机制详解。再来个硬核内容，把并行和依赖背后的原理全给你讲明白](https://www.youtube.com/watch?v=K0BjgYZbgfE)，由微軟工程師介紹協程
 - [Using asyncio.Queue for producer-consumer flow](https://stackoverflow.com/questions/52582685/using-asyncio-queue-for-producer-consumer-flow) 在異步中使用生產者-消費者模型
 
 ## 結尾
+
 承認自己是 0.2 桶水響叮噹，但網路上的文章可以說是 0.1 桶就開始響了。
 
 查協程會看到一張圖，多個方塊代表任務，協程從水平連接變成折線連接，這張圖爛到連路上隨便一個大學生來做都不如，放了還沒有任何說明，我不相信初學者看得懂，橫軸縱軸都沒標誰知道你在講什麼？圖本身就不放上來了指名道姓怕被扁。

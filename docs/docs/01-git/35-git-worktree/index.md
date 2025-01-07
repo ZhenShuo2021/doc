@@ -16,11 +16,13 @@ first_publish:
 ---
 
 # Git Worktree：有效管理多個分支和工作目錄的秘訣
+
 https://notes.boshkuo.com/docs/DevTools/Git/git-worktree
 
 已經有很好的文章了，所以直接看他的。
 
 > 解決什麼問題？  
+
 1. 使用 git stash 在分支之間切換步驟太多
 2. 工作時間拉長也記不起來 stash 了什麼
 3. 而且如果需要觀看 stash 暫存的內容也不方便

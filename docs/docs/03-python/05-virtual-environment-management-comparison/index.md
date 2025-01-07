@@ -52,7 +52,7 @@ first_publish:
 :::
 
 :::tip 直接選最好
-筆者個人推薦 uv，懶得看文章可以直接看我寫的 [uv 使用教學](/docs/python/python-uv-complete-guide)。
+筆者個人推薦 uv，懶得看文章可以直接看我寫的 [uv 使用教學](./python-uv-complete-guide)。
 :::
 
 ## 比較
@@ -144,8 +144,8 @@ uv 是 2024/2 才首發的新工具，簡單摘要幾個特點：
 
 :::tip 開始使用 uv
 
-- 可以參考筆者寫的 [uv 使用教學](/docs/python/python-uv-complete-guide)。  
-- 非常優秀的開發便利性？請見 uv 使用教學的[這個段落](/docs/python/python-uv-complete-guide/#uv-run)。  
+- 可以參考筆者寫的 [uv 使用教學](./python-uv-complete-guide)。  
+- 非常優秀的開發便利性？請見 uv 使用教學的[這個段落](./python-uv-complete-guide/#uv-run)。  
 
 :::
 

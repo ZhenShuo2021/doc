@@ -19,16 +19,17 @@ first_publish:
 
 這篇會介紹 Git 的基礎指令，會先介紹最簡單可操作的指令。
 
-
 ## 基礎操作指令
+
 以下指令就是最基本的操作方式：
+
 ```sh
 git init                    # 初始化
 git add <file-name>         # 放到預存區，使用 git add . 預存所有檔案
 git commit -m <messages>    # 提交到儲存庫
 ```
 
-這些指令完成了上一篇中描述的[檔案標記狀態](/docs/git/preliminary#git-是什麼)。接下來可以用這些指令查看檔案狀態和歷史：
+這些指令完成了上一篇中描述的[檔案標記狀態](../git/preliminaries/basic-knowledge#概念)。接下來可以用這些指令查看檔案狀態和歷史：
 
 ```sh
 git status                  # 檔案狀態（新增A、修改M、刪除D、未追蹤U）
@@ -50,17 +51,13 @@ git log                     # 提交歷史
 
 :::
 
-
 <br /><br />
-
 
 接下來是兩個簡單的範例，首先是 git status，分成三種狀態，從上到下分別是已預存、已修改、未追蹤。
 
 ![git status](git-status.webp "git status")
 <br />
 
-再來是 git log 範例，黃色字體是 `commit <hash> (目前位置 -> 所在分支)`   
+再來是 git log 範例，黃色字體是 `commit <hash> (目前位置 -> 所在分支)`
 
 ![git log](git-log.webp "git log")
-
-

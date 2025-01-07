@@ -33,7 +33,6 @@ import TabItem from '@theme/TabItem';
 
 如果喜歡文字版本，請看 [用代码打点酱油的chaofa - Python 类型体操训练](https://bruceyuan.com/post/python-type-challenge-basic.html) ，該文章包含完整的語法範例，建議看這三個就好，截至截稿當下其他中文文章品質對比這幾項資源都有很大的落差，不建議閱讀。
 
-
 ## 基礎關鍵字
 
 本章節紀錄基礎關鍵字，方便讀者快速查找
@@ -47,19 +46,19 @@ import TabItem from '@theme/TabItem';
 - Final: 最終結果，不應該被覆寫
 
 > 偵錯方式
-> 
+>
 > mypy 提供 `reveal_type` 和 `reveal_locals` 兩種方法偵錯，使用時不需 import 直接用然後 mypy example.py 即可，詳情請見[這篇文章](https://adamj.eu/tech/2021/05/14/python-type-hints-how-to-debug-types-with-reveal-type/)。
 
 ## 中階關鍵字
 
 ### TypedDict
+
 用於限制字典的 key-value pair 的變數類型，就是軟限制版本的 dataclass。  
 
 [Python 类型体操训练（二）-- 中级篇](https://bruceyuan.com/post/python-type-challenge-intermediate.html#typeddict-%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 
-
-
 ### NoReturn/Literal/NewType
+
 - NoReturn: 告訴程式碼這裡出錯，連預設的 None 都不會返回。  
 - Literal: 限制只能使用指定輸入
 - NewType: 新增一個型別，如新增 `UserId = NewType('UserId', int)` 此類別會和 `int` 型別不同。  
@@ -68,6 +67,7 @@ NoReturn: [【python】Type Hint入门与初探，好好的python写什么类型
 Literal/NewType: [【python】Type Hint入门与初探，好好的python写什么类型标注？@418s](https://youtu.be/6rgBwA7TRfE?si=ae1xcBlXEydsYknj&t=418)
 
 ### TypeAlias
+
 TypeAlias 和 NewType 的差異是前者用於建立別名，後者用於新建一個「不同的」類型。建立別名的目的僅是方便記憶和開發管理。
 
 ```py
@@ -94,22 +94,23 @@ print(get_user_age(user_id_wrong, age_wrong))  # 錯誤：int 和 UserId 是不�
 ```
 
 ### overload/override
+
 用於提示 mypy 輸入輸出型別的多載的裝飾器，和 C++ 真正意義上的多載不同，只用於提示 mypy/IDE 而已。overload 用於函式或方法之間，override 用於繼承之間。
 
 寫一寫有時候會忘記這些終究只是提示，[就像這篇文章一樣](https://stackoverflow.com/questions/57222412/cannot-guess-why-overloaded-function-implementation-does-not-accept-all-possible)，請記得 type hint 完全不影響 Python 實際運作。
 
-
 ### 不常用關鍵字
+
 - Annotated: 用於[附註變數](https://stackoverflow.com/questions/71898644/how-to-use-python-typing-annotated)。
 - Self: 回傳類別本身。
 - typeguard: 用於 [type narrowing](https://rednafi.com/python/typeguard_vs_typeis/)。
 
-
 ## 高級關鍵字
+
 本章節開始是本篇重點。
 
-
 ### Protocol
+
 檢查該類別是否都實作相同的方法，軟性限制需要實作相同方法，和抽象方法 (abstractmethod) 的差異是抽象方法是硬性限制，前者還是可以執行（畢竟只是 hint，後者無法執行）。
 
 > 符合 Python 鴨子型別的 typing，長得像就好，其他隨便你
@@ -195,10 +196,8 @@ b.URL_MAPPINGS = {"new album": "value"}  # 錯誤
 :::
 
 #### TypeVar
+
 Python 中的泛型，用於標示尚未決定的型別，實例化該「函式」後就可以限制 `T` 只能使用相同的型別。
-
-
-
 
 ```py
 from typing import List, TypeVar
@@ -223,12 +222,14 @@ print(result)   # [1, 2, 3, 'hello']
 TypeVar 也有參數，使用方式為
 
 ##### bound
+
 ```py
 T = TypeVar("T", int, str)  # 限制只能使用 int/str
 T = TypeVar("T", int, str, bound=MyClass)  # 限制只能使用 int/str 和 MyClass 的子類別
 ```
 
 ##### covariant
+
 設定使否使用協變，協變代表允許子類型替代父類型
 
 ```py
@@ -236,7 +237,9 @@ T_co = TypeVar('T_co', covariant=True)
 ```
 
 ##### contravariant
+
 設定使否使用逆變，逆變代表允許父類型替代子類型
+
 ```py
 T_co = TypeVar('T_co', contravariant=True)
 ```
@@ -319,8 +322,8 @@ print(trainer.train(Dog()))  # 輸出 "Training Woof"
 此範例展示了協變和逆變在泛型類型設計中對型別約束的控制：協變允許子類的替代，而逆變允許父類的替代。
 </details>
 
-
 #### Generic
+
 Python 中的泛型，用於標示尚未決定的型別，實例化該「類別」後就可以限制只能使用相同的型別。
 
 ```py
@@ -344,8 +347,8 @@ box.add("string")  # 錯誤
 print(box.items)
 ```
 
-
 ## **實戰泛型：複寫抽象方法**
+
 前面都是使用「設定型別 -> 實例化變數」作為範例方便快速理解，這裡我們考慮一個實際情況：當我們使用 <u>**父類別設定模版**</u>，但是 <u>**子類別的實作輸出卻不同型別**</u>。
 
 以下程式碼中，我們想要限制 `LinkType` 是某幾種特定的型別，使用抽象方法並且讓子類別繼承父類別，子類別可以選擇父類別中的任何一種 Link 作為變數型別。第一次嘗試時沒想這麼多，直接宣告
@@ -479,9 +482,11 @@ Success: no issues found in 1 source file
 結論：
 
 **Override 的問題：**
+
 1. AI 直接沒寫這段所以我自己寫，缺點就是上面寫的不符合直覺，邏輯上 abstractmethod 的子類應該遵守父類定義，可是子類的實現卻又 override 父類。
 
 **Overload 的問題：**
+
 1. Code Organization：
    - 需要為每種可能的型別組合寫一個 overload
    - 維護成本高，且容易出錯
@@ -491,6 +496,7 @@ Success: no issues found in 1 source file
    - 不適合用於表達 class hierarchy 中的型別關係
 
 **Generic 是此案例的最佳解決方案**
+
   1. Type Safety：提供完整的型別安全性
   2. Design Clarity：清楚表達設計意圖
   3. Maintainability：容易維護和擴展
@@ -498,7 +504,6 @@ Success: no issues found in 1 source file
 
 使用 Generic 能最好地表達：「這是一個可以處理不同型別的策略，但每個具體策略實現都需要指定並遵守其處理的特定型別」。
 :::
-
 
 ## 名詞解析
 
@@ -509,16 +514,16 @@ Success: no issues found in 1 source file
 >
 > Concrete and Abstract Data Types  
 > A concrete data type is a data type whose representation is known and relied upon by the programmers who use the data type.
-> 
+>
 > If you know the representation of a data type and are allowed to rely upon that knowledge, then the data type is concrete.
-> 
+>
 > If you do not know the representation of a data type and are not allowed to rely upon its representation, then the data type is abstract.
 
 ## 相關工具
 
 雖然只有兩行但是很重要，所以獨立一個段落。
 
-如果要最大化發揮 type hint 功效則需要結合 [mypy/pylint 等套件](https://www.trackawesomelist.com/typeddjango/awesome-python-typing/readme/#static-type-checkers) 使用，建議直接整合 pre-commit hooks 使用，請參考文章 [初嘗 Python 工作流自動化](/memo/python/first-attempt-python-workflow-automation)。
+如果要最大化發揮 type hint 功效則需要結合 [mypy/pylint 等套件](https://www.trackawesomelist.com/typeddjango/awesome-python-typing/readme/#static-type-checkers) 使用，建議直接整合 pre-commit hooks 使用，請參考文章 [初嘗 Python 工作流自動化](/docs/memo/01-python/26-first-attempt-python-workflow-automation/index.md)。
 
 ## 版本紀錄
 
@@ -534,12 +539,11 @@ Success: no issues found in 1 source file
 - 3.12: 新增 `Override`
 - 3.14: typing 中的 `List/Set/Tuple/Dict` 將被標記為 deprecated
 
-
 ## 結語
+
 其實原本只想寫 Generic，但是想想還是稍微整理一下資訊，結果就是最想寫的反而變成最後一段了。本文除了整理真正有用的資訊，也解釋了沒什麼人講過的 Generic。使用 type hint 時需要自行衡量標注的完整程度和程式開發的方便程度，寫的太完整會導致開發中需要不斷處理各種型別，失去 Python 快速開發的意義。
 
 ## 參考資料
 
 - [用代码打点酱油的chaofa - Python 类型体操训练](https://bruceyuan.com/post/python-type-challenge-basic.html)  
 - [the maintainer of pyright closes valid issues for no reason and lashes out at users](https://docs.basedpyright.com/latest/) 超好笑，我從來沒在 Github 上看過[兩百個倒讚](https://github.com/microsoft/pyright/issues/8065#issuecomment-2146352290)  
-
