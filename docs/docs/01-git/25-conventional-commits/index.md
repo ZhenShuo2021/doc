@@ -80,7 +80,7 @@ drission_bot.py
 
 ## 自動化
 
-Git 工具除了慣例式的提交訊息，也可以整合自動化工具在每次提交前檢查提交內容，非常好用。完整文章請見 [初嘗 Python 工作流自動化](/docs/memo/01-python/26-first-attempt-python-workflow-automation/index.md)。
+Git 工具除了慣例式的提交訊息，也可以整合自動化工具在每次提交前檢查提交內容，非常好用。完整文章請見 [初嘗 Python 工作流自動化](/memo/python/first-attempt-python-workflow-automation)。
 
 ## 玩具
 

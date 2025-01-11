@@ -554,7 +554,7 @@ class KeyManager:
 
 ## 結語
 
-才寫了一篇[套件管理工具比較](/docs/docs/03-python/05-virtual-environment-management-comparison/index.md)在講選多人用的就對了，但這裡我偏偏選少人用的，因為比較酷。
+才寫了一篇[套件管理工具比較](/docs/python/virtual-environment-management-comparison)在講選多人用的就對了，但這裡我偏偏選少人用的，因為比較酷。
 
 而且最常見的 [cryptography](https://pypi.org/project/cryptography/) 太多人講檔案又太大 (23MB) 還不支援 ED25519，另外一個也很多人用的 [pycryptodome](https://pypi.org/project/pycryptodome/) 也要 12.6MB，PyNaCl 才 4.9MB 又提供包含 Curve25519, XSalsa20-Poly1305, argon2id 等先進演算法，再加上 keyring 也僅有 1.1MB，兩個加起來還不到這些套件的一半加密演算法又強大，不選他選誰（其實只是又想特立獨行了對吧！）
 

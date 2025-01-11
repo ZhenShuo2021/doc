@@ -480,7 +480,7 @@ https://docs.astral.sh/uv/concepts/projects/sync/#exporting-the-lockfile
 uv export --no-emit-project --locked --no-hashes -o requirements.txt -q
 ```
 
-每次都要手動打太麻煩，使用 pre-commit 一勞永逸，自動檢查 lock 檔案是否變動並且匯出。pre-commit 的使用範例可以參考筆者寫的[文章](/docs/memo/01-python/26-first-attempt-python-workflow-automation/index.md#pre-commit-configyaml)。
+每次都要手動打太麻煩，使用 pre-commit 一勞永逸，自動檢查 lock 檔案是否變動並且匯出。pre-commit 的使用範例可以參考筆者寫的[文章](/memo/python/first-attempt-python-workflow-automation#pre-commit-configyaml)。
 
 ```yaml
 # .pre-commit-config.yaml

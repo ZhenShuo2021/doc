@@ -81,7 +81,7 @@ build-backend = "hatchling.build"
 
 從這裡開始每個專案都不太一樣，由於我自己使用 poetry，所以只介紹 poetry，首先是必填項目。
 
-> 文章更新：如果想要使用 uv，請觀看筆者的 [uv 教學文章](/docs/docs/03-python/06-python-uv-complete-guide/index.md)。
+> 文章更新：如果想要使用 uv，請觀看筆者的 [uv 教學文章](/docs/python/python-uv-complete-guide)。
 
 ```toml
 [tool.poetry]
@@ -538,7 +538,7 @@ jobs:
 
 isort 會自動幫我們排列所有 import 語句，這方面見仁見智，至少避免了強迫症每次都想手動排列浪費的時間。
 
-mypy 的話則是地獄，為了改他多學了泛型，直接多寫了一篇文章（[Type Hint 教學：從入門到進階的 Python 型別註釋](/docs/docs/03-python/26-type-hint-typing-complete-guide/index.md)），不過這就是初期成本，無法避免。
+mypy 的話則是地獄，為了改他多學了泛型，直接多寫了一篇文章（[Type Hint 教學：從入門到進階的 Python 型別註釋](/docs/python/type-hint-typing-complete-guide)），不過這就是初期成本，無法避免。
 
 pytest 則可以在每次提交時自動執行，讓你想懶也不行，大家都知道打字會死，我相信沒有任何人想在提交時多打 --no-verify，寧願不打讓他自己跑測試假裝自己有在做事。
 

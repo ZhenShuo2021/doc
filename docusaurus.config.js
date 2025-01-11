@@ -15,7 +15,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: "不講廢話的筆記庫",
+  title: "不廢話的文檔庫",
   // tagline: "個人用文檔庫",
   url: "https://docs.zsl0621.cc", //process.env.URL,
   baseUrl: "/", //process.env.BASE_URL,
@@ -26,7 +26,18 @@ module.exports = {
   organizationName: "ZhenShuo2021", // Usually your GitHub org/user name.
   projectName: "zsl0621@Docs", // Usually your repo name.
   i18n: { defaultLocale: 'zh-TW', locales: ['zh-TW'] },
-  plugins: [require.resolve("docusaurus-plugin-image-zoom")],
+  plugins: [
+    require.resolve("docusaurus-plugin-image-zoom"),
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'pluginForMemo',                    // 用於識別這個文檔空間
+        path: 'docs/memo',            // 實際文件位置
+        routeBasePath: 'memo',        // URL 路徑
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+  ],
   markdown: { mermaid: true },
   presets: [
     [
@@ -39,7 +50,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: "https://github.com/ZhenShuo2021/docs/edit/main",
-          path: 'docs',
+          path: 'docs/docs',
           routeBasePath: 'docs',
           remarkPlugins: [math],
           rehypePlugins: [
@@ -83,8 +94,10 @@ module.exports = {
           label: "文件庫📚",
         },
         {
-          type: 'docSidebar',
+          type: 'doc',
           position: 'left',
+          docsPluginId: 'pluginForMemo',
+          docId: 'about/memo',
           sidebarId: 'memoSidebar',
           label: "備忘錄📝",
         },

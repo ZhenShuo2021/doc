@@ -523,7 +523,7 @@ Success: no issues found in 1 source file
 
 雖然只有兩行但是很重要，所以獨立一個段落。
 
-如果要最大化發揮 type hint 功效則需要結合 [mypy/pylint 等套件](https://www.trackawesomelist.com/typeddjango/awesome-python-typing/readme/#static-type-checkers) 使用，建議直接整合 pre-commit hooks 使用，請參考文章 [初嘗 Python 工作流自動化](/docs/memo/01-python/26-first-attempt-python-workflow-automation/index.md)。
+如果要最大化發揮 type hint 功效則需要結合 [mypy/pylint 等套件](https://www.trackawesomelist.com/typeddjango/awesome-python-typing/readme/#static-type-checkers) 使用，建議直接整合 pre-commit hooks 使用，請參考文章 [初嘗 Python 工作流自動化](/memo/python/first-attempt-python-workflow-automation)。
 
 ## 版本紀錄
 
