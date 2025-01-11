@@ -11,7 +11,7 @@ keywords:
   - Github
   - Programming
 last_update:
-  date: 2024-12-26T18:43:30+08:00
+  date: 2025-01-11T19:39:30+08:00
   author: zsl0621
 first_publish:
   date: 2024-12-26T18:43:30+08:00
@@ -29,30 +29,50 @@ Github Actions 是用於自動化操作的 CI/CD 平台，可以在上面自動�
 
 ```yaml
 name: workflow名稱，顯示於 repo 的 `Action` 標籤
-on:  # 設定觸發條件
-  <label>:  # 只在標籤時觸發
-    types:  # 每種事件有不同類型 (types)，可以設定只在特定類型觸發，例如編輯標籤
+
+on:  
+  <label>:  # <-- 如 issues/push/tag/release
+    types:  
       - edited
+  workflow_dispatch:  # <-- 可以手動執行
+    inputs:
+      perform_deploy:
+        description: "是否執行部署"
+        required: false
+        default: "false"
+
 jobs:
-  my_first_job:  # <-- 這是 job_id
+  <my_first_job>:  # <-- 這是 job_id
     name: <job名稱>
     runs-on: <執行環境>
+    environment: <環境名稱>
     strategy:
       matrix: <測試組合>
       fail-fast: <布林值>
       max-parallel: <數量>
+
+    # 設定執行的步驟，uses 代表使用現成 actions，run 是 shell 指令
     steps:
       - name: <step名稱>
         uses: <action名稱>@<版本>
-        # run: <指令>  # 或者使用 run 設定指令
-        with: <參數>
         env: <環境變數>
+        with: <參數>
+
+      - name: 執行 Shell 指令範例
+        env: <環境變數>
+        run: |  # <-- 使用管道符號分隔多個指令
+          echo "Runs on OS: ${{ runner.os }}"
+          echo "Runs with workflow_dispatch inputs: ${{ inputs.perform_deploy }}"
 ```
 
-[Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)可以查看所有的 Workflow 語法，[Triggering a workflow](https://docs.github.com/zh/actions/writing-workflows/choosing-when-your-workflow-runs/triggering-a-workflow)則列出所有觸發方式，包含條件觸發[^cond1][^cond2]。
+:::tip "重要文檔位置"
 
-[^cond1]: [Using conditions to control job execution. Prevent a job from running unless your conditions are met.](https://docs.github.com/zh/actions/writing-workflows/choosing-when-your-workflow-runs/using-conditions-to-control-job-execution)
-[^cond2]: [Accessing contextual information about workflow runs](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#about-contexts)
+- [查看所有的 Workflow 語法](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
+- [觸發方式列表](https://docs.github.com/zh/actions/writing-workflows/choosing-when-your-workflow-runs/triggering-a-workflow)
+  - [條件觸發](https://docs.github.com/zh/actions/writing-workflows/choosing-when-your-workflow-runs/using-conditions-to-control-job-execution)
+  - 條件觸發可以搭配[上下文](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#about-contexts)使用
+
+:::
 
 <details>
 
@@ -88,6 +108,7 @@ Github Actions 由以下幾個項目組成：
 :::
 
 - [runs-on](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories) 設定在哪些平台上執行
+- [environment](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/using-environments-for-deployment) 設定現在執行的環境，只能設定於 jobs 層級。使用此設定後必須在 settings/environment 建立對應環境名稱
 - [strategy](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/running-variations-of-jobs-in-a-workflow) 主要用於設定矩陣組合
   - matrix: 定義測試組合，如 `{os: [ubuntu, windows], node: [14, 16]}`。  
   - fail-fast: bool，使用 `false` 可避免失敗就馬上退出的問題。
@@ -157,23 +178,18 @@ on:
 
 jobs:
   access-env-and-secrets:
+    # Optional: 如果使用 environment 必須在 settings 設定環境相同的環境名稱 production 才能調用
+    # environment: "production"
     runs-on: ubuntu-latest
     steps:
-      # 存取 Repository variables
       - name: Access Environment Variable
-        # 如果使用 Environment variables 必須指定環境名稱才能調用
-        # environment: ENV_NAME
         env:
-          MY_ENV_VAR: ${{ var.MY_ENV_VAR }}
-        run: echo "MY_ENV_VAR: $MY_ENV_VAR"
-
-      # 存取 Repository Secrets
-      - name: Access Secrets
-        # 如果使用 environment secrets 必須指定環境名稱才能調用
-        # environment: ENV_NAME
-        env:
+          # 存取 Repository variables/Secrets
+          MY_ENV_VAR: ${{ vars.MY_ENV_VAR }}
           MY_SECRET: ${{ secrets.MY_SECRET }}
-        run: echo "Secret: $MY_SECRET"
+        run: |
+          echo "MY_ENV_VAR: $MY_ENV_VAR"
+          echo "MY_SECRET: $MY_SECRET"
 
       # 也可以設定環境變數
       - name: Set Environment Variable
@@ -205,6 +221,12 @@ fi
 ```
 
 --porcelain 是用於自動化流程的參數，使用 $(...) 取出變數後交由 -n 判斷是否有文字輸出再把結果丟給 if-else。
+
+### 上下文
+
+用於取得一個 action 的執行階段，例如取得字串確認前一步驟的執行結果。
+
+詳見[官網](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#matrix-context)，文檔很長。
 
 ### 輔助工具
 
