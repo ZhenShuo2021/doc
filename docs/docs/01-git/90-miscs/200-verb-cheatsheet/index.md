@@ -8,7 +8,7 @@ keywords:
   - Git
   - Programming
 last_update:
-  date: 2024-09-13T10:55:07+08:00
+  date: 2025-01-11T19:50:07+08:00
   author: zsl0621
 first_publish:
   date: 2024-09-13T10:55:07+08:00
@@ -63,9 +63,18 @@ first_publish:
 
 ## 文章類型動詞
 
+除了依照嚴重程度排序以外也把中文翻譯很像的幾個挑出來講，下面這幾個的翻譯都是修改：
+
+- Edit 最廣泛的用法，沒有特定說明哪種修改
+- Modify 小幅度修改如句子或用字
+- Amend 法律常見用語，更正式，通常指微幅修改用字遣詞
+- Revise 對全文進行翻新，如版本更新，通常是大幅度修正
+- Alter 對整個文章進行風格、結構等根本性改變
+
 | 動詞      | 簡短解釋     | 範例                                                       |
 |-----------|--------------|----------------------------------------------------------|
 | Proofread | 校對         | Proofread: Fix typos and punctuation                     |
+| Amend     | 修正、修訂   | Amend: Correct outdated information and add new findings |
 | Format    | 格式         | Format: Adjust heading styles                            |
 | Correct   | 修正         | Correct: Fix incorrect date                              |
 | Clarify   | 闡明         | Clarify: Reword paragraph for clarity                    |
@@ -77,32 +86,3 @@ first_publish:
 | Improve   | 改善         | Improve: Strengthen arguments and provide more evidence  |
 | Condense  | 濃縮、精簡   | Condense: Remove repetitive or irrelevant paragraphs     |
 | Revise    | 修訂、修改   | Revise: Adjust the main argument of the article          |
-| Amend     | 修正、修訂   | Amend: Correct outdated information and add new findings |
-
-> Q: Explain the differences between the following verbs used for article writing: Amend vs edit
-
-<details>
-  <summary>A</summary>
-
-Certainly, let's clarify the distinctions between "amend" and "edit" within the context of article writing:
-
-**Amend**
-
-* **Connotation:** Suggests a formal and substantial alteration, often to correct errors, inaccuracies, or outdated information.
-* **Scope:** Typically implies changes to specific sections or clauses of an article, rather than a comprehensive revision.
-* **Usage:** Frequently employed in legal, academic, or official documents where precision and adherence to standards are crucial.
-
-**Edit**
-
-* **Connotation:** Encompasses a broader range of modifications, from minor corrections to comprehensive revisions of style, tone, and content.
-* **Scope:** Can involve refining language, improving clarity, restructuring sentences, enhancing flow, or even rewriting substantial portions.
-* **Usage:** Applies to various stages of article writing, from initial drafts to final polishing, and is common in all forms of written communication.
-
-**In Summary**
-
-* **Amending** is a focused action, rectifying specific flaws within an existing article.
-* **Editing** is a more holistic process, encompassing various improvements to enhance the overall quality and effectiveness of an article.
-
-Let me know if you have any further questions about specific aspects of article writing or language usage!
-
-</details>
