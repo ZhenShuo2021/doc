@@ -1,5 +1,45 @@
 [
   {
+    "title": "[進階] 看懂 git 文檔和 rebase onto",
+    "permalink": "/docs/git/rebase-onto/",
+    "description": "不要再亂教 rebase onto 了",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1736750400000,
+    "yearMonth": "2025 年 01 月",
+    "day": "13"
+  },
+  {
+    "title": "[微進階] 使用 Rebase 重構提交",
+    "permalink": "/docs/git/rebase/",
+    "description": "最快最清楚的搞懂 git rebase。",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1736696400000,
+    "yearMonth": "2025 年 01 月",
+    "day": "12"
+  },
+  {
     "title": "關於修改的動詞小抄",
     "permalink": "/docs/git/miscs/verb-cheatsheet/",
     "description": "這是一堂英文課",
@@ -158,55 +198,5 @@
     "date": 1735472970000,
     "yearMonth": "2024 年 12 月",
     "day": "29"
-  },
-  {
-    "title": "在 Github README 中嵌入影片",
-    "permalink": "/docs/git/github/github-readme-video/",
-    "description": "在 README 中嵌入影片",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Github",
-        "permalink": "/docs/tags/github"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1735315410000,
-    "yearMonth": "2024 年 12 月",
-    "day": "28"
-  },
-  {
-    "title": "Github 搜尋技巧",
-    "permalink": "/docs/git/github/github-search/",
-    "description": "Github 搜尋技巧",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Github",
-        "permalink": "/docs/tags/github"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1735291110000,
-    "yearMonth": "2024 年 12 月",
-    "day": "27"
   }
 ]
