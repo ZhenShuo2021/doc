@@ -1,5 +1,25 @@
 [
   {
+    "title": "[進階] 比 stash 更方便的 worktree",
+    "permalink": "/docs/git/git-worktree/",
+    "description": "Git Worktree",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1736858493000,
+    "yearMonth": "2025 年 01 月",
+    "day": "14"
+  },
+  {
     "title": "[進階] 看懂 git 文檔和 rebase onto",
     "permalink": "/docs/git/rebase-onto/",
     "description": "不要再亂教 rebase onto 了",
@@ -178,25 +198,5 @@
     "date": 1735756560000,
     "yearMonth": "2025 年 01 月",
     "day": "02"
-  },
-  {
-    "title": "Shell 和他的設定檔，以及 Dotfiles",
-    "permalink": "/docs/linux/bashrc-zshrc-zshenv/",
-    "description": "Shell 和他的設定檔，以及 Dotfiles",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Linux",
-        "permalink": "/docs/tags/linux"
-      },
-      {
-        "inline": true,
-        "label": "Terminal",
-        "permalink": "/docs/tags/terminal"
-      }
-    ],
-    "date": 1735472970000,
-    "yearMonth": "2024 年 12 月",
-    "day": "29"
   }
 ]
