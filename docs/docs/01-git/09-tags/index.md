@@ -1,7 +1,7 @@
 ---
-title: 標籤
+title: 幫提交上標籤
 author: zsl0621
-description: 幫 Git 上標籤
+description: 幫提交上標籤
 tags:
   - Git
   - Programming
@@ -15,10 +15,7 @@ first_publish:
   date: 2024-10-20T02:21:33+08:00
 ---
 
-
-# 幫 Git 上標籤
-
-用標籤標示重要版本，分為兩種lightweight 和 annotated，官方建議使用 annotated。
+用標籤標示重要版本，分為 lightweight 和 annotated 兩種，官方建議使用 annotated。
 
 ## 快速清單
 
@@ -34,11 +31,14 @@ first_publish:
 | 推送 | `git push origin v1.0.0` |  |  
 
 ```bash
-# 為先前 commit 加標籤
-git tag -a 1.0.0 3b7de7f
+# 懶人複製：上標籤並且簽名、加上訊息、指定 hash
+git tag -s -a v1.0.0 -m "msg" <hash>
 
-# 列出標籤
-git tag -n
+# 懶人複製：推送標籤
+git push origin v1.0.0
+
+# 列出標籤，使用 `-n9` 可以同時印出訊息
+git tag -n<num>
 
 # 列出特定標籤
 git tag -l "v1.8.5*"

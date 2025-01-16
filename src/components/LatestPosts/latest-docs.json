@@ -1,6 +1,46 @@
 [
   {
-    "title": "[進階] 比 stash 更方便的 worktree",
+    "title": "看懂 Git 文檔",
+    "permalink": "/docs/git/preliminaries/read-git-docs/",
+    "description": "教你看懂 Git 文檔",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1737012600000,
+    "yearMonth": "2025 年 01 月",
+    "day": "16"
+  },
+  {
+    "title": "分支操作",
+    "permalink": "/docs/git/branch/",
+    "description": "基礎分支操作，讓你用最快速度上手 Git。",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1737009513000,
+    "yearMonth": "2025 年 01 月",
+    "day": "16"
+  },
+  {
+    "title": "[微進階] 比 stash 更方便的 worktree",
     "permalink": "/docs/git/git-worktree/",
     "description": "Git Worktree",
     "tags": [
@@ -20,7 +60,7 @@
     "day": "14"
   },
   {
-    "title": "[進階] 看懂 git 文檔和 rebase onto",
+    "title": "[進階] 搞懂 git rebase onto",
     "permalink": "/docs/git/rebase-onto/",
     "description": "不要再亂教 rebase onto 了",
     "tags": [
@@ -168,35 +208,5 @@
     "date": 1736016660000,
     "yearMonth": "2025 年 01 月",
     "day": "05"
-  },
-  {
-    "title": "Homebrew (Linuxbrew) 介紹和名詞解析",
-    "permalink": "/docs/linux/homebrew/",
-    "description": "Homebrew (Linuxbrew) 介紹和名詞解析",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Linux",
-        "permalink": "/docs/tags/linux"
-      }
-    ],
-    "date": 1735987230000,
-    "yearMonth": "2025 年 01 月",
-    "day": "04"
-  },
-  {
-    "title": "一鍵搞定！自動化你的 macOS 開發環境配置 | dotfiles 設定分享",
-    "permalink": "/docs/linux/macos-dotfiles-auto-setup/",
-    "description": "一鍵搞定！自動化你的 macOS 開發環境配置 | dotfiles 設定分享",
-    "tags": [
-      {
-        "inline": true,
-        "label": "實用工具",
-        "permalink": "/docs/tags/實用工具"
-      }
-    ],
-    "date": 1735756560000,
-    "yearMonth": "2025 年 01 月",
-    "day": "02"
   }
 ]

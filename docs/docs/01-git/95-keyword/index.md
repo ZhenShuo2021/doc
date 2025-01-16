@@ -19,12 +19,12 @@ first_publish:
 ## 基本
 
 1. HEAD：目前工作的 commit 位置
-2. "^"：前一個提交，
-3. "~n"：前 n 個提交
+2. `^`：前一個提交，
+3. `~n`：前 n 個提交
 4. `--`：檔案與其他選項的分界線
 5. blob, tree, refs, tag：Git 的基本單位[^1]
 
-[^1]: Git 的基本結構單位，**不重要**。每個檔案在 Git 中都是由 blob 物件，blob 物件僅包含檔案的內容，不包含檔案名稱或任何其他元數據；tree 紀錄檔案和目錄結構，紀錄 blob 和其他子 tree；refs 用來指向特定 hash 的人類可讀名稱，如 `refs/heads/main` 指向 main 分支的最新提交，或者標籤，或者遠端分支；tag 物件用於標記特定的 commit。把所有單位串連起來，commit 指向 tree，tree 指向 sub-tree 和 blob。上面幾行已經是外面教學的一整篇文章了，到底為啥要寫那麼長，我看了很久才理解，理解完感受到這個知識一點也不重要。
+[^1]: Git 的基本結構單位，<u>**不重要**</u>。每個檔案在 Git 中都是由 blob 物件，blob 物件僅包含檔案的內容，不包含檔案名稱或任何其他元數據；tree 紀錄檔案和目錄結構，紀錄 blob 和其他子 tree；refs 用來指向特定 hash 的人類可讀名稱，如 `refs/heads/main` 指向 main 分支的最新提交，或者標籤，或者遠端分支；tag 物件用於標記特定的 commit。把所有單位串連起來，commit 指向 tree，tree 指向 sub-tree 和 blob。這樣短短幾行已經是網路上的一整篇文章了，到底為啥要寫那麼長，我看了很久才理解，理解完感受到這個知識一點也不重要。
 
 範例：
 
@@ -90,4 +90,4 @@ index 58e6b10..4fab7e0 100644
 >>>>> hash
 ```
 
-在 git rebase 中可能會有點反直覺，在 main 中使用 `git rebase feature` 的衝突中，上面是 feature，下面才是 main。原因是 rebase 的 feature 是放進來的 base，main 才是要被放進來的文件，所以才會違反直覺，但邏輯是正確的。
+在 git rebase 中可能會有點反直覺，在 main 中使用 `git rebase main` 的衝突中，上面是 main，下面才是 feature。原因是 rebase 的 main 是新的 base，feature 才是要被放進來的提交，所以才會違反直覺，但邏輯是正確的。

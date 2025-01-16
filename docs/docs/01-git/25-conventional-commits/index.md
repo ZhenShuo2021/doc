@@ -1,5 +1,5 @@
 ---
-title: "[微進階] 慣例式提交"
+title: "慣例式提交"
 author: zsl0621
 description: 寫好慣例式提交，讓提交訊息一目了然
 tags:

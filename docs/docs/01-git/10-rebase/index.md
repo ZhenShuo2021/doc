@@ -15,14 +15,14 @@ first_publish:
   date: 2024-09-07T14:10:12+08:00
 ---
 
-git rebase 有點讓人感到畏懼，除了高風險的分支操作之外，網路文章讓人不好理解也是一個問題。為什麼會不好理解呢，我認為是文章沒有說明清楚**誰接上誰**。本文會用最簡短的文字簡單介紹 rebase，不會講一堆有的沒的混淆視聽。
+git rebase 有點讓人感到畏懼，除了高風險的分支操作之外，網路文章讓人不好理解也是一個問題。為什麼會不好理解呢，我認為是文章沒有說明清楚是<u>**誰接上誰**</u>。本文會用最簡短的文字簡單介紹 rebase，不會講一堆有的沒的混淆視聽。
 
 :::danger 提醒
 
 Rebase 很危險，請用範例 repo 進行測試！
 
 - [單分支範例](https://github.com/PIC16B/git-practice)  
-- [我自己做的簡易多分支範例](https://github.com/ZhenShuo2021/rebase-onto-playground)  
+- [仿照文檔的多分支範例](https://github.com/ZhenShuo2021/rebase-onto-playground)  
 :::
 
 ## 什麼是 Rebase
@@ -73,12 +73,14 @@ feature                    A1'--B1'--C1'
 1. 找到共同基礎 (B)
 2. 把原先所在分支 (feature) 其基礎之後的提交移到旁邊暫存 (A1, B1, C1)
 3. 把目標分支 (main) 移過來，再把基礎向後移動到他自己的最新提交 (基礎變成 E)
-4. 把暫存的提交連接到基礎後面[^1] (接上後成為 A1', B1', C1')
+4. 把暫存的提交重演到基礎後面[^1] (接上後成為 A1', B1', C1')
 5. 如果需要，處理合併衝突
 
-[^1]: 網路上講的「重演」只是在說不是複製而是一個一個重新接上，每個提交都會計算新的 hash，但是寫的落落長實在很模糊焦點。
+[^1]: 重演 (replay)，用於表示不只是簡單的將提交複製貼上，而是會重新生成 commit hash。
 
-第一步的「找到共同基礎」就是 re-base 的核心，`重新`加上`基底`，也就表示此指令用於幫提交修改基底。如果覺得看細節反而混淆，記住口訣也可以讓你正常使用好一段時間。
+第一步的「找到共同基礎」就是 re-base 的核心，兩個單字分別代表 `重新` 以及 `基底`，也就表示此指令用於幫提交修改基底。如果覺得看細節反而混淆，務必記住口訣，這可以讓你正常使用好一段時間[^comp]。
+
+[^comp]: 即使一個指令有五個步驟，這個解釋仍舊忽略了一些細節，所以為了初學容易理解至少把口訣記好，下一篇文章會深入解釋他的完整用法，基本上用不太到只是發現竟然沒人搞的懂他那就由我來寫。
 
 ## 互動式操作 rebase
 
@@ -118,11 +120,25 @@ s <hash> <msg>
 
 ## Rebase 兩個分支
 
-[這篇文章](https://myapollo.com.tw/blog/git-tutorial-rebase/#rebase-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95)的範例非常糟糕，原因如下：當我們想要對完成開發的分支進行合併，應該是先 checkout 進入要被合併的分支，再使用 `git rebase main`，因為 main 分支應該是最穩定的分支，在 main 分支 rebase feature 分支會造成 main 分支的提交改變，我被這篇文章誤導很久。
+[這篇文章](https://myapollo.com.tw/blog/git-tutorial-rebase/#rebase-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95)的範例非常糟糕，原因如下：當我們想要對完成開發的分支進行合併，應該是先 switch 進入要被合併的分支，再使用 `git rebase main`，因為 main 分支應該是最穩定的分支，在 main 分支 rebase feature 分支會造成 main 分支的提交改變，我被這篇文章誤導很久。
+
+正確的使用方式應該是
+
+```sh
+git switch feature-1
+git rebase main
+
+git switch feature-2
+git rebase main
+
+# 或者使用兩個參數，第二個參數代表預先 switch 到該分支，效果和上面的結果完全相同
+git rebase main feature-1
+git rebase main feature-2
+```
 
 :::danger 再提醒一次
 
-「絕對不要在 main 上 rebase 其餘分支，因為這會修改穩定的 main 的提交紀錄」
+絕對不要在 main 上 rebase 其餘分支，因為這會修改穩定的 main 的提交紀錄。
 
 :::
 
@@ -134,4 +150,4 @@ s <hash> <msg>
 
 ## 重構初始提交
 
-使用 `--root` 可以重構初始提交，但是 rebase 就已經夠危險了，重構初始提交還是別吧。
+使用 `--root` 可以重構初始提交，但是 rebase 就已經夠危險了，除非有絕對需求要重構 root 否則還是盡量避免吧。

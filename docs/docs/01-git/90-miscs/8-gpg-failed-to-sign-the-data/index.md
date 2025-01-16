@@ -31,6 +31,8 @@ TL;DR
 export GPG_TTY=$(tty)
 ```
 
+如果確認此方法可行，在 Unix 系統下你可以使用 `echo 'export GPG_TTY=$(tty)' >> ~/.zshrc` 讓這個指令自動執行，bash 用戶需改成 `.bashrc`。
+
 ## 檢查
 
 可以用以下指令檢查檢查 GPG 是否正常運作

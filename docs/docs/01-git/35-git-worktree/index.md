@@ -1,5 +1,5 @@
 ---
-title: "[進階] 比 stash 更方便的 worktree"
+title: "[微進階] 比 stash 更方便的 worktree"
 author: zsl0621
 description: Git Worktree
 tags:
@@ -35,7 +35,7 @@ first_publish:
 
 ## 觀念說明
 
-Git worktree 的實際行為是**在新的資料夾 checkout 指定分支，而且在該資料夾進行的所有操作會被原 Git 專案追蹤**。由 git worktree 管理的資料夾 *不在原專案的資料夾中，但它仍受原 Git 專案所管理*[^dir]
+Git worktree 允許你**在新資料夾中 checkout 指定分支，該資料夾中的所有操作都由原 Git 專案追蹤，即使這個新資料夾不在原專案的目錄下**[^dir]。
 
 [^dir]: 其實不強迫放在專案資料夾以外，但是這樣你的專案底下就會出現新增的 worktree，他不會自動排除。
 

@@ -39,7 +39,7 @@ first_publish:
 
 - `in:file`/`in:path`/`in:name` - 分別搜尋文件內容/路徑/儲存庫名稱
 - `extension:js` - 搜尋特定副檔名
-- ~~`filename:webpack.config.js` - 搜尋特定檔名~~ 已經失效
+- ~~`filename:webpack.config.js`~~ - 已經失效，放上來提醒大家
 - `path` - 搜尋特定路徑，也可以搜尋檔名
 
 ### 2. 儲存庫元資料

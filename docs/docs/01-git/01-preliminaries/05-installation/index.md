@@ -17,11 +17,11 @@ first_publish:
 
 ## 安裝
 
-https://git-scm.com/downloads
+命令列介面在[官網](https://git-scm.com/downloads)選擇自己的系統安裝，就算一路 next 都可以安裝完。
 
-就算一路 next 都可以安裝完。
+圖形介面筆者只用 VSCode 裡面的 [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph) 和 [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)，其餘可選項目有 [Git Blame](https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame) 可以看程式是誰寫的， [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) 功能看起來和 Git Graph 大同小異，但是太臃腫我不喜歡而且還會要你付費升級。
 
-圖形介面我個人只用 VS code 裡面的 [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)。其他可選插件還有 [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory) 用來查看檔案在哪個版本修改的， [Git Blame](https://medium.com/starbugs/git-blame-%E5%87%BA%E6%88%91%E7%9A%84%E5%90%8D%E5%AD%97-%E7%AD%89%E4%B8%80%E7%AD%89-%E6%88%91%E6%98%AF%E5%86%A4%E6%9E%89%E7%9A%84-feat-%E7%B0%A1%E4%BB%8B-git-%E7%89%88%E6%8E%A7-ec2c5b8fee69) 看程式是誰寫的， [GitLens](https://tokileecy.medium.com/%E5%B7%A5%E5%85%B7-vscode-%E5%A5%97%E4%BB%B6-gitlens-1e9807230fee) 功能看起來和 Git Graph 大同小異。
+請先學 CLI 再學 GUI，GUI 只是輔助使用。
 
 ## 設定
 
@@ -30,6 +30,10 @@ https://git-scm.com/downloads
 ```sh
 git config --global user.name "example"
 git config --global user.email example@example.com
+
+git config --global alias.ll "log --graph --all --oneline --decorate --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 ```
 
-在每個儲存庫可以新增 `.gitignore` 檔案設定忽略清單。根據你的專案項目可以到 [github/gitignore](https://github.com/github/gitignore) 直接複製模板或者網路搜尋 \<programming language\> gitignore，不要浪費時間自己寫這個。切記務必把萬惡的 .DS_Store 和 desktop.ini 加入忽略清單。
+第三項是設定別名，非必要但是是最有感的，之後就可以使用 `git ll` 指令印出漂亮且易讀的歷史紀錄。
+
+每個儲存庫可以新增 `.gitignore` 檔案設定忽略追蹤的清單。根據你的專案到 [github/gitignore](https://github.com/github/gitignore) 直接複製模板或者網路搜尋，不要浪費時間自己寫，切記務必把萬惡的 .DS_Store 和 desktop.ini 加入忽略清單。
