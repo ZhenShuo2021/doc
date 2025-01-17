@@ -24,20 +24,22 @@ first_publish:
 以下指令就是最基本的操作方式：
 
 ```sh
-git init                    # 初始化
-git add <file-name>         # 放到預存區，使用 git add . 預存所有檔案
+git init                    # 初始化，建立儲存庫 .git 資料夾
+git add <pathspec>          # 放到預存區，可使用 git add . 預存所有檔案
 git commit -m <messages>    # 提交到儲存庫
 ```
 
-這些指令完成了序章說的[檔案標記狀態](../git/preliminaries/basic-knowledge#概念)。接下來可以用這些指令查看檔案狀態和歷史：
+> 看不懂 pathspec？請見[看懂文檔](./preliminaries/read-git-docs)。
+
+這些指令完成了序章的[檔案標記狀態](../git/preliminaries/basic-knowledge#概念)。完成提交後我們試著用以下指令查看檔案狀態和提交歷史：
 
 ```sh
 git status                  # 檔案狀態（新增A、修改M、重新命名R、刪除D、未追蹤U）
-git log                     # 提交歷史
-git ll                      # 或者使用在安裝與設定章節使用的縮寫印出提交歷史
+git log                     # 顯示提交歷史
+git ll                      # 或者使用前面設定的縮寫顯示提交歷史
 ```
 
-請注意檔案狀態的縮寫，這個看不懂會對入門使用造成非常大的困擾，分別是`新增(A)ad`、`修改(M)odified`、`重新命名(R)ename`、`刪除(D)edeted`、`未追蹤(U)ntracked`。未追蹤代表還沒預存也沒被儲存庫追蹤的檔案，新增同上但是已經預存，其餘三者則是對已經被儲存庫追蹤的檔案所進行的操作。
+請注意檔案狀態的縮寫，看不懂這個會對入門使用造成非常大的困擾，分別是`新增(A)dd`、`修改(M)odified`、`重新命名(R)ename`、`刪除(D)edeted`、`未追蹤(U)ntracked`。未追蹤代表還沒預存也沒被儲存庫追蹤的檔案，新增同上，但是已經預存，其餘三者則是對已經被追蹤的檔案所進行的操作。
 
 在本文的一分鐘入門使用情境，只包含了提交新版本不會向前回溯，日常使用方式是
 

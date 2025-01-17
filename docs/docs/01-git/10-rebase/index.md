@@ -1,7 +1,7 @@
 ---
-title: "[微進階] 使用 Rebase 重構提交"
+title: "[微進階] 使用 Rebase 變基提交"
 author: zsl0621
-description: 最快最清楚的搞懂 git rebase。
+description: 最快最清楚而且最正確的搞懂變基 git rebase。
 tags:
   - Git
   - Programming
@@ -15,7 +15,9 @@ first_publish:
   date: 2024-09-07T14:10:12+08:00
 ---
 
-git rebase 有點讓人感到畏懼，除了高風險的分支操作之外，網路文章讓人不好理解也是一個問題。為什麼會不好理解呢，我認為是文章沒有說明清楚是<u>**誰接上誰**</u>。本文會用最簡短的文字簡單介紹 rebase，不會講一堆有的沒的混淆視聽。
+變基 rebase 有點讓人感到畏懼，筆者認為是因為網路文章每篇講的都不一樣眾說紛紜。為了確保本文的說法絕對正確，撰寫時同時參考 Git 官方文檔以及 Pro Git Book，比對英文繁中簡中三個版本的說法以及指令實際作用才寫成此篇文章，本系列教學其他篇筆者不敢保證 100\% 正確，唯獨 rebase 筆者能保證絕對正確。
+
+本文的目標是最快、最清楚且正確的搞懂 rebase，不會東拉西扯一堆有的沒的混淆視聽。
 
 :::danger 提醒
 
@@ -25,9 +27,9 @@ Rebase 很危險，請用範例 repo 進行測試！
 - [仿照文檔的多分支範例](https://github.com/ZhenShuo2021/rebase-onto-playground)  
 :::
 
-## 什麼是 Rebase
+## 什麼是變基 Rebase
 
-介紹 rebase 前我們要了解 merge。merge 是把兩個分支合併成一個分支，以下方原始狀態為例，使用 git merge 會產生新的提交 F 紀錄合併，並且保留分支結構
+介紹 rebase 前我們要了解 merge。merge 是把兩個分支合併成一個分支，以下方原始狀態為例，使用 git merge 會產生新的提交 F 紀錄合併，並且保留分支結構：
 
 ```sh
 # 原始狀態
@@ -47,82 +49,46 @@ main     A---B---C---D---E---F
 feature        A1---B1----C1 
 ```
 
-但如果我們想保持提交樹的乾淨，這時候我們就可以使用 `git rebase` 完成。rebase 用一句話講就是
-
-:::tip 口訣
-
-<center>**將「目前分支」移到旁邊，把「目標分支」拿過來**</center>
-<center>**再把移到旁邊的「目前分支」想辦法接到後面**</center>
-
-:::
-
-這句話是從码农高天的[影片](https://www.youtube.com/watch?v=uj8hjLyEBmU)偷來的，短短一句話我覺得比所有文章都讓人更好理解。在原始狀態使用 git rebase 效果如下：
+但如果我們想保持提交樹的乾淨，這時候我們就可以使用 `git rebase` 完成。在原始狀態使用 git rebase 效果如下：
 
 ```sh
 # 使用 git rebase
-# git checkout feature
-# git rebase main
+# git checkout feature  # 切換目前分支到 feature
+# git rebase main       # 目標分支是 main
 
 main     A---B---C---D---E
                            \
 feature                    A1'--B1'--C1'
 ```
 
-可以看到沒有紀錄合併的提交。rebase 看起來很簡單，但是細心的人可能會發現多了 prime symbol `'`，這裡我們詳細解釋 `git rebase main` 做了什麼：
+可以看到目前分支 (feature) 被接在目標分支 (main) 的後面而且沒有用於紀錄合併的提交。細心的人可能會發現多了 prime symbol `'`，這裡我們詳細解釋 `git rebase main` 做了什麼：
 
-1. 找到共同基礎 (B)
-2. 把原先所在分支 (feature) 其基礎之後的提交移到旁邊暫存 (A1, B1, C1)
-3. 把目標分支 (main) 移過來，再把基礎向後移動到他自己的最新提交 (基礎變成 E)
-4. 把暫存的提交重演到基礎後面[^1] (接上後成為 A1', B1', C1')
-5. 如果需要，處理合併衝突
+1. 找到共同祖先 (B)
+2. 找到需要被變基的提交並且暫存他們  
+  這些提交包含<u>**從共同祖先到目前分支之間的所有提交，並且剃除目標分支原本就已經有的提交**</u> (此範例沒有被剃除的提交，暫存 A1 B1 C1)
+3. 將目標分支最後一個提交作為出發點，把暫存的提交逐個重演[^1]到目標分支後面 (接上後成為 A1' B1' C1')
+4. 如果需要，處理合併衝突
 
 [^1]: 重演 (replay)，用於表示不只是簡單的將提交複製貼上，而是會重新生成 commit hash。
 
-第一步的「找到共同基礎」就是 re-base 的核心，兩個單字分別代表 `重新` 以及 `基底`，也就表示此指令用於幫提交修改基底。如果覺得看細節反而混淆，務必記住口訣，這可以讓你正常使用好一段時間[^comp]。
+re-base 的核心兩個單字分別代表 `重新` 以及 `基底`，表示此指令用於幫提交修改基底。第一次看到覺得很複雜是正常的，如果看完細節覺得頭昏腦脹，可以用簡化的口訣將 rebase 理解為
 
-[^comp]: 即使一個指令有五個步驟，這個解釋仍舊忽略了一些細節，所以為了初學容易理解至少把口訣記好，下一篇文章會深入解釋他的完整用法，基本上用不太到只是發現竟然沒人搞的懂他那就由我來寫。
+:::tip 口訣
 
-## 互動式操作 rebase
+<center>**比較「目前分支」和「目標分支」**</center>
+<center>**把「目前分支」的提交移動到「目標分支」之後**</center>
 
-使用參數 `git rebase -i` 可互動式 rebase，我使用這個的頻率比前面的合併分支高多了，到目前的使用體驗為止，我認為這是 git 最強大的指令，包含移動提交、刪除提交、修改提交內容、修改提交訊息全部都可以做到。他的原理仍舊是基於上述，但是使用時完全不會感覺到分支操作，因為用戶不需要輸入分支，但是他的實際使用仍是移動、放進來、再接上。rebase -i 後常用的選項有五個：
+:::
 
-- p, pick 預設，選擇該提交
-- r, reword 修改提交訊息
-- e, edit 修改提交內容
-- s, squash 合併到前一個提交
-- f, fixup 合併到前一個提交，不顯示被合併的提交的提交訊息
+請務必記住口訣，這可以讓你正常使用好一段時間。
 
-[下一篇文章](./edit-commits)會介紹修改各種 commit 的情況，這邊簡單示範幾個 rebase 選項，使用 [範例 repo](https://github.com/PIC16B/git-practice) 操作。
+筆者保證這段敘述的絕對正確，所有違背這段敘述的說明都是錯的。
 
-### 修改提交內容
+## 誰 Rebase 誰才對？
 
-```sh
-# 複製範例 repo
-git clone https://github.com/PIC16B/git-practice -q && cd git-practice
+[這篇文章](https://myapollo.com.tw/blog/git-tutorial-rebase/)的用法存在致命錯誤，請不要被誤導，原因是他在主分支使用 `git rebase feature`，這會造成主分支的提交改變，而主分支是最穩定的分支，<u>**絕對不可能為了合併子分支而修改主分支既存的提交歷史**</u>。
 
-# rebase 最近三個提交
-git rebase -i HEAD~3
-
-# 進入文件編輯，把三個 commit 第一個單字
-# 依序改為 r(修改提交訊息) e(編輯提交) s(合併到前一個提交)
-r <hash> <msg>
-e <hash> <msg>
-s <hash> <msg>
-# Esc後使用冒號進入指令模式，輸入wq儲存退出
-
-# 1. 進入第一個編輯視窗，修改完提交訊息後退出
-# 2. 進入編輯提交，在這裡可以對文件作任何改動，完成後 git add 不需 commit
-#    使用 git rebase --continue 繼續下一個 rebase
-# 3. 進入合併提交，這裡會出現原有的兩個提交訊息，讓你修改合併後的提交訊息
-```
-
-整體操作和上述基本一樣了，第一次操作肯定會有點抖，不過使用範例 repo 想怎麼作就怎麼作，或者可以上 YT 隨便找一個實作影片看他怎麼打指令的。
-
-## Rebase 兩個分支
-
-[這篇文章](https://myapollo.com.tw/blog/git-tutorial-rebase/#rebase-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95)的範例非常糟糕，原因如下：當我們想要對完成開發的分支進行合併，應該是先 switch 進入要被合併的分支，再使用 `git rebase main`，因為 main 分支應該是最穩定的分支，在 main 分支 rebase feature 分支會造成 main 分支的提交改變，我被這篇文章誤導很久。
-
-正確的使用方式應該是
+正確的使用方式應該是先移動到要被合併的分支，再使用 `git rebase main`：
 
 ```sh
 git switch feature-1
@@ -138,11 +104,45 @@ git rebase main feature-2
 
 :::danger 再提醒一次
 
-絕對不要在 main 上 rebase 其餘分支，因為這會修改穩定的 main 的提交紀錄。
+絕對不要在主分支上 rebase 其餘分支，因為這會修改穩定的主分支提交紀錄。
 
 :::
 
-雖然他應該是想介紹 rebase 的特性，但是例子舉的太爛混淆視聽，並且新手根本用不到，放在文章開頭只會讓人越讀越混亂。
+## 互動式變基 Interactive Rebase{#interactive}
+
+使用參數 `git rebase -i` 可進行互動式變基，筆者使用這個的頻率比前面的合併分支高多了，到目前的使用體驗為止，筆者認為這是 git 最強大的指令，包含移動提交、刪除提交、修改提交內容、修改提交訊息全部都可以做到。他的原理仍舊是基於上述，但是使用時完全不會感覺到分支操作，因為用戶不需要輸入分支，但是他的實際使用仍是移動、放進來、再接上。互動式變基常用的選項有五個：
+
+- p, pick 預設，選擇該提交
+- r, reword 修改提交訊息
+- e, edit 修改提交內容
+- s, squash 合併到前一個提交
+- f, fixup 合併到前一個提交，不顯示被合併的提交的提交訊息
+
+[下一篇文章](./edit-commits)會介紹各種修改提交的情況，這邊簡單示範幾個 rebase 選項，使用 [範例 repo](https://github.com/PIC16B/git-practice) 操作。
+
+### 修改範例
+
+```sh
+# 複製範例 repo
+git clone https://github.com/PIC16B/git-practice -q && cd git-practice
+
+# rebase 最近三個提交
+git rebase -i HEAD~3
+
+# 進入文件編輯，把三個 commit 第一個單字
+# 由上到下依序改為 r(修改提交訊息) e(編輯提交) s(合併到前一個提交)
+r <hash> <msg>
+e <hash> <msg>
+s <hash> <msg>
+# Esc後使用冒號進入指令模式，輸入wq儲存退出
+
+# 1. 進入第一個編輯視窗，這時你位於「r修改提交訊息階段」，修改完成後儲存退出
+# 2. 進入「e編輯提交階段」，在這裡可以對文件作任何改動，完成後 git add 不需 commit
+#    使用 git rebase --continue 繼續下一個 rebase
+# 3. 進入「s合併提交階段」，這裡會出現原有的兩個提交訊息，讓你修改合併後的提交訊息
+```
+
+整體操作和上述基本一樣了，第一次操作肯定會有點抖，不過使用範例 repo 想怎麼作就怎麼作，或者可以上 YT 隨便找一個實作影片看他怎麼打指令的。
 
 ## 更複雜的 `git rebase --onto`
 
@@ -151,3 +151,15 @@ git rebase main feature-2
 ## 重構初始提交
 
 使用 `--root` 可以重構初始提交，但是 rebase 就已經夠危險了，除非有絕對需求要重構 root 否則還是盡量避免吧。
+
+## 翻譯：變基和衍合
+
+為了不模糊焦點把此段落放在最後一項，中文有變基和衍合兩種翻譯，衍為散佈、滋生，合為收攏、縮窄、相符之意，我看不出來 rebase 從單字、處理方式到用途哪裡跟衍與合有關係，所以我投變基一票。
+
+## 參考
+
+- [官方英文文檔](https://git-scm.com/docs/git-rebase)
+- [官方簡中文檔](https://git-scm.com/docs/git-rebase/zh_HANS-CN)
+- [官方簡中 Pro Git](https://git-scm.com/book/zh/v2/Git-%e5%88%86%e6%94%af-%e5%8f%98%e5%9f%ba)
+- [官方英文 Pro Git](https://git-scm.com/book/en/v2/Git-Branching-Rebasing)
+- [繁體中文 Pro Git](https://iissnan.com/progit/html/zh-tw/ch3_6.html)

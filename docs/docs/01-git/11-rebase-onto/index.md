@@ -15,33 +15,34 @@ first_publish:
   date: 2025-01-13T14:40:00+08:00
 ---
 
-本文延續[上一篇](./rebase)的 `git rebase` 繼續說明 onto 用法，要搞懂他的用法之前一定要能看懂文檔，而所有教學 `git rebase --onto` 卻不講指令如何解析的文章都在亂教，連輸入的指令都不知道對應到哪個變數，我們怎麼敢用這個指令？
+本文與其說是搞懂 onto 用法倒不如說是完整解析 rebase，只是 rebase 實際行為大家本來就不熟，這些問題又常見於和 onto 合併使用。本文可以視為[[微進階] 使用 Rebase 重構提交](./rebase)的完整解析版本，把口訣擴展成一板一眼的定義，目的是讓這個解釋到哪裡都通用。
 
-我敢保證繁體中文沒有任何一篇文章正確的搞懂 onto 到底在做什麼，本文嘗試釐清各項參數，並且使用官方名稱而不是自作聰明自創名詞搞混所有人。在 rebase 真實專案前請先用這個[迷你範例](https://github.com/ZhenShuo2021/rebase-onto-playground)測試 rebase onto 結果是否符合預期。
+:::info
+
+rebase 真實專案前請先用這個[迷你範例](https://github.com/ZhenShuo2021/rebase-onto-playground)測試結果是否符合預期。
+
+:::
 
 ## TL;DR
 
 `git rebase --onto A B C` 的作用是
 
 1. 先 `git switch` 切換分支到 C
-2. 尋找 B 和 C 的共同祖先
-3. 把共同祖先到 C 的之間的提交，以 A 為基底重演在 A 之後（C 沒有的提交才會進行重演[^replay]）
+2. 解析 B 和 C 的共同祖先，找到共同祖先到 C 的之間的分歧[^exclude]提交並且暫存他們
+3. 以 A 為基底將剛才找到的提交重演[^replay]在 A 之後
 
 [^replay]: 重演 (replay)，用於表示不只是簡單的將提交複製貼上，而是會重新生成 commit hash。
+[^exclude]: 分歧提交代表在尋找路徑之間的提交時，如果這些提交也是 B 的一部分則不會進行重演。英文原文中沒有提到分歧，是簡體翻譯自己加上的，繁體則把他改為變化，我覺得講分歧或者差異會比變化更好。在 Reference 中的原文則寫: Note that any commits in HEAD which introduce the same textual changes as a commit in `HEAD..<upstream>` are omitted (i.e., a patch already accepted upstream with a different commit message or timestamp will be skipped).
 
 或是把這三個步驟用一句話記起來：
 
 :::tip 口訣
 
-比較 `B` `C` 後找到共同祖先，把共同祖先到 `C` 之間的提交重演在新基底 `A` 之後。
+比較 `B` `C` 後找到共同祖先，找出從共同祖先到 `C` 之間的分歧的提交，將其重演在新基底 `A` 之後。
 
-註：C 沒有的提交才會進行重演，或者反過來說 C 原本既有的提交會忽略重演[^exclude]。
-
-[^exclude]: 原文: Note that any commits in HEAD which introduce the same textual changes as a commit in `HEAD..<upstream>` are omitted (i.e., a patch already accepted upstream with a different commit message or timestamp will be skipped).
+**B 預設是當前分支的 remote，C 預設為 HEAD**，三個參數可以是 commit 不強迫是分支。
 
 :::
-
-B 預設是當前分支的 remote，C 預設為 HEAD，通常是當前分支。三個參數可以是 commit 不一定得是分支，分支是依照文檔用語。
 
 ## 序
 
@@ -56,13 +57,15 @@ B 預設是當前分支的 remote，C 預設為 HEAD，通常是當前分支。�
 > 5. git rebase x --onto y z
 > 6. git rebase x y --onto z
 
-這時候文章再輕輕的說一句「改接」「嫁接」「任意改接」那有講跟沒講一樣，因為所有 rebase 都是改接，讀者看完之後因為不明所以導致要嘛死記要嘛乾脆不敢用。想搞懂他的用途勢必得讀懂文檔，然而看文檔又昏了，因為這是 POSIX 用語，版本管理都還不會用，看 POSIX 我哪讀的懂[^somewhat]？
+這時候文章再輕輕的說一句「改接」「嫁接」「任意改接」那有講跟沒講一樣，因為所有 rebase 都是改接，讀者看完之後因為不明所以導致要嘛死記要嘛乾脆不敢用。本文延續上一篇[rebase 教學](./rebase)繼續說明 onto 用法，想搞懂他勢必得讀懂文檔，然而看文檔又昏了，因為這是 POSIX 用語，版本管理都還不會用，看 POSIX 我哪讀的懂[^somewhat]，而所有講解 `git rebase --onto` 卻又不講指令如何解析的文章都在亂教，連輸入的指令都不知道對應到哪個變數，我們怎麼敢用這個指令？
 
 [^somewhat]: 似懂非懂不算懂，我寫這篇文章前也是似懂非懂的看文檔。
 
+更糟糕是自創名詞的文章，該指令用法只在他說的那種情況下適用，這種文章非常糟糕。
+
 ## `git rebase --onto` 用法
 
-讀這段之前請務必看我的懂文檔，或者閱讀我寫的文章[看懂 Git 文檔](./preliminaries/read-git-docs)。
+開始閱讀前請務必確保自己有能力看的懂文檔，或者閱讀我寫的[看懂 Git 文檔](./preliminaries/read-git-docs)。
 
 ### 參數解釋
 
@@ -74,16 +77,28 @@ git rebase --onto <newbase> [<upstream> [<branch>]]
 
 - [upstream](https://git-scm.com/docs/git-rebase#Documentation/git-rebase.txt-ltupstreamgt): 要和目前分支比較，用於<u>**尋找共同祖先**</u>的分支或提交。如果沒有設定，預設為當前分支的 remote（`branch.<name>.remote` 和 `branch.<name>.merge`），因此文檔將這個變數命名為 upstream
 - [branch](https://git-scm.com/docs/git-rebase#Documentation/git-rebase.txt-ltbranchgt): 設定 branch 後，在 rebase 操作前都會提前執行 `git switch <branch>`，否則預設為 HEAD，也就是在當前分支進行 rebase
-- [newbase](https://git-scm.com/docs/git-rebase#Documentation/git-rebase.txt---ontoltnewbasegt): 使用 `--onto` 時必須設定 newbase，用來指定 rebase 時生成的 commit 起點
+- [newbase](https://git-scm.com/docs/git-rebase#Documentation/git-rebase.txt---ontoltnewbasegt): 使用 `--onto` 時必須設定 newbase，用來指定 rebase 時生成的 commit 起點，如果不指定 `--onto`，等效於將起點設定在 `<upstream>`
 
-全部加起就是開頭說的「比較 `<upstream>` 和 `<branch>` 後找到共同祖先，把共同祖先到 `<branch>` 之間的提交重演在新基底 `<newbase>` 之後，並且 `<upstream>` 沒有的提交才會進行重演」。
+全部組合起來就是開頭說的：
+
+1. 比較 `<upstream>` 和 `<branch>` 後找到共同祖先
+2. 找出從共同祖先到 `<branch>` 之間的分歧的提交並且暫存他們
+3. 將其重演在新基底 `<newbase>` 之後
+
+附帶一提，把 `<newbase>` 去掉後，這個說法完全兼容[前一篇文章](./rebase)說的：
+
+1. 找到共同祖先
+2. 找到需要被變基的提交並且暫存他們  
+3. 將目標分支最後一個提交作為出發點，把暫存的提交逐個重演到目標分支後面
+
+根據文檔就已經是最通用的解釋，而不是像某些文章的自作聰明自創名詞解釋，結果照他的說法在不同用法下每個參數的目的都不一樣。
 
 ### 用一個變數{#single_var}
 
 <details>
 <summary>這段不要看，這個指令用不到看了只會混淆自己</summary>
 
-我想不到什麼情況需要只用 `git rebase --onto <newbase>` 而不帶其他參數，這個 rebase onto 已經夠複雜了最好跳過這段，看了只會搞亂自己。因為標題有用兩個變數、三個變數卻沒寫怎麼用一個變數感覺好像是作者忘記一樣，所以用折疊形式放上來。
+我想不到什麼情況需要只用 `git rebase --onto <newbase>` 而不帶其他參數，rebase onto 已經夠複雜了最好跳過這段免得搞亂自己。放進來的原因是因為標題有用兩個變數、三個變數卻沒寫怎麼用一個變數感覺好像是作者忘記一樣，所以用折疊形式放上來。
 
 將另外兩個變數的預設值套上後，指令目的變成「把 HEAD rebase 到 `<newbase>`」，基本上不會用到這個功能，在我的 [範例 repo](https://github.com/ZhenShuo2021/rebase-onto-playground) 中可以用這個指令測試：
 
@@ -92,7 +107,7 @@ git rebase --onto feat
 git rebase --onto origin/main
 ```
 
-第一個指令的作用會是把目前分支的 HEAD 直接跳到指定位置，然而回來就不見得可以了，因為這時候等同於在別的分支進行 rebase 並且設定根基是 origin/main，如果你需要移動分支 HEAD 位置這個指令算是比刪除分支還要快一點。
+第一個指令的作用會是把目前分支的 HEAD 直接跳到指定位置，然而回來就沒辦法了，因為這時候等同於在別的分支進行 rebase 並且設定根基是 origin/main，如果你需要移動分支 HEAD 位置這個指令算是比刪除分支重建還要快一點。
 </details>
 
 ### 用兩個變數{#duo_var}
@@ -101,18 +116,18 @@ git rebase --onto origin/main
 
 ```sh
 # 兩者等效
-git rebase A --onto B
-git rebase --onto B A
+git rebase --onto A B
+git rebase B --onto A
 ```
 
-複習一下前面說的，這時候 B 代表 `newbase`，而 A 是 `upstream`，這代表將「目前分支」和「A的分支」進行比較，找到共同祖先後，以 B commit 作為新的基底，將共同祖先到目前分支的所有提交重演到 B 的後面。讀者可以 clone [我的範例 repo](https://github.com/ZhenShuo2021/rebase-onto-playground) 測試指令行為，使用以下指令：
+複習一下前面說的，這時候 A 代表 `newbase`，而 B 是 `upstream`，這代表將「目前分支」和「B的分支」進行比較，找到共同祖先後，以 A commit 作為新的基底，將共同祖先到目前分支的所有提交重演到 A 的後面。讀者可以 clone [我的範例 repo](https://github.com/ZhenShuo2021/rebase-onto-playground) 測試指令行為，使用以下指令：
 
 ```sh
 git switch fix
 git rebase --onto feat fix~2
 ```
 
-把指令翻譯成人話就是「將目前分支和 fix~2 比較，找到共同祖先後，以 feat 作為基底開始重演」。這裡不貼執行結果，因為截圖看了反而頭痛，自己真正使用過一次就很清楚他在做什麼了，會把 `fix~1` 和 `fix` 移動到 `feat` 後面。
+把指令翻譯成人話就是「將 fix 和 fix~2 比較，找到共同祖先後，以 feat 作為基底開始重演」。這裡不貼執行結果，因為截圖看了反而頭痛，自己真正使用過一次就很清楚他在做什麼了，會把 `fix~1` 和 `fix` 移動到 `feat` 後面。
 
 另外提醒多次測試時可以使用 `git reset --hard origin/<branch>` 還原變更。
 
@@ -120,15 +135,21 @@ git rebase --onto feat fix~2
 
 三個參數的用法非常簡單，因為第三個變數只是提前變換分支的縮寫，這除了讓你少打一次 switch 以外，最重要的功能是可以在任何位置執行 rebase 都有同樣效果，否則 rebase 會因為目前所在位置不同而有不同結果。由於一個參數的指令沒機會用、三個參數的指令只是提前切換，所以可以整理出 onto 其實只有兩個變數這種用法。看似簡單，但是如果沒真正研究你永遠搞不清楚 `--onto` 究竟在做什麼。
 
-有一點需要注意，網路文章說 `git rebase --onto A B C` 這個指令的用途是*將 B\~C 之間的 commit 重演在 A 之上*，這個說法對也不對，可以在範例 repo 執行 `git rebase --onto main~3 feat fix` 進一步驗證，這個指令 B, C 是不同分支，很明顯的就不符合上述說明（跨分支是要怎麼複製 B\~C 之間），可以自己念過一次口訣就會知道他的行為符合我的說明，並且不符合網路上所有繁體中文說明。
+有一點需要注意，網路文章說 `git rebase --onto A B C` 這個指令的用途是*將 B\~C 之間的 commit 重演在 A 之上*，這個說法對也不對，可以在範例 repo 執行 `git rebase --onto main~3 feat fix` 進一步驗證，這個指令 B, C 是不同分支，很明顯的就不符合上述說明，依照[文檔](https://git-scm.com/docs/git-rebase)比較類似的說法，之間應該改成 `git log <upstream>..HEAD` 的提交。
 
 :::tip
-筆者建議只要使用 `--onto` 選項，無論何時都使用三個變數的語法。
+筆者建議只要使用 `--onto` 選項，無論何時都使用三個變數的語法避免混亂。
 :::
 
 ### 提醒
 
-為了避免有人搞混，特地強調一下這篇是在講 onto，如果不使用 onto 又只用兩個參數，這兩個參數會變成 upstream 和 branch。
+為了避免有人搞混，特地強調一下這篇是在講 onto，如果不使用 onto 又只用兩個參數，這兩個參數會變成 upstream 和 branch。關於變數順序的問題也請注意：
+
+:::danger
+
+我不確定像[序](#序)裡面說的這樣排列組合修改變數順序是官方的 feature 還是僅僅只是 behavior，我找不到相關討論，建議照順序打比較穩妥。
+
+:::
 
 ## 實用指令整理
 
@@ -139,7 +160,7 @@ git rebase --onto feat fix~2
 `git rebase --onto main~5 main~1 main`
 
 如果要刪除提交應該使用 `git rebase -i` 更方便，但是這是一個理解 onto 用法的好例子
-> 比較 `main~1` `main` 後找到共同祖先 (`main~1`)，把共同祖先到 `main` 之間的提交重演在新基底 `main~5` 之後（之間的提交不包含共同祖先本身，包含 `main` 本身）。
+> 比較 `main~1` `main` 後找到共同祖先 (`main~1`)，把共同祖先到 `main` 之間的提交重演在新基底 `main~5` 之後。
 
 ```sh
     E---F---G---H---I---J  main
@@ -201,11 +222,16 @@ git rebase --onto feat fix~2
 
 ### 進階題
 
-這兩個指令留給讀者猜是什麼用途，可以自行 clone 驗證和想的一不一樣。
+這幾個指令留給讀者猜是什麼用途，可以自行 clone 範例 repo 驗證和想的一不一樣。
 
 ```sh
 git rebase --onto main main fix
 git rebase --onto main fix main
+
+# 猜猜看為何這個指令沒有任何修改
+git rebase --onto feat~2 main fix
+# 提示是這個指令，想懂他就知道原因了
+git rebase --onto main~4 main fix
 ```
 
 ## 參考
@@ -214,10 +240,8 @@ git rebase --onto main fix main
 
 ## 結語
 
-為了寫這篇文章想老半天終於幫 `git rebase --onto` 想出一套能兼容上一篇基礎文章口訣的說法，而不是像其他文章亂造詞造成大家困擾，變成每種用法都要一套名詞才能解釋。
-
 這個文檔從我根本就還不熟 Git 的時候開始寫，開宗明義就說<u>**使用官方翻譯而不是自己造詞**</u>，現在回頭看我最初講的話是對的。在蒐集 rebase onto 資料時發現很多文章寫了「onto 之後的參數是 `<new base-commit> <current base-commit>`」，這就是明顯的亂造詞問題，後來發現所有的錯誤用法都來自於同一篇文章，也可以算是一種 error propagation 吧。
 
 我就問寫第一篇文章的人，如果 onto 使用三個參數，你這參數說明是不是要改成 `<new base-commit> <start-commit> <end-commit>`？還沒完，再照他文章中自己的範例指令 `git rebase 分支 --onto 哈希值` 用法，是不是又要多一種解釋？官方這樣設定參數名稱自然有他的道理，沒想清楚就自己亂改又放在網路上，結果就是讓所有讀過文章的人都搞混。
 
-最扯的是竟然把 rebase onto 排版在 rebase interactive 前面。
+最扯的是竟然把 rebase onto 排版在 rebase interactive 前面，把難理解使用頻率又低的指令放在前面到底什麼意思。

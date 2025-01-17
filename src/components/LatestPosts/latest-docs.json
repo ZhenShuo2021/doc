@@ -80,9 +80,9 @@
     "day": "14"
   },
   {
-    "title": "[微進階] 使用 Rebase 重構提交",
+    "title": "[微進階] 使用 Rebase 變基提交",
     "permalink": "/docs/git/rebase/",
-    "description": "最快最清楚的搞懂 git rebase。",
+    "description": "最快最清楚而且最正確的搞懂變基 git rebase。",
     "tags": [
       {
         "inline": true,
