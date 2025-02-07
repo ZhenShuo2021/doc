@@ -91,7 +91,7 @@ module.exports = {
           type: 'docSidebar',
           position: 'left',
           sidebarId: 'docsSidebar',
-          label: "文件庫📚",
+          label: "文檔庫",
         },
         {
           type: 'doc',
@@ -99,7 +99,7 @@ module.exports = {
           docsPluginId: 'pluginForMemo',
           docId: 'about/memo',
           sidebarId: 'memoSidebar',
-          label: "備忘錄📝",
+          label: "備忘錄",
         },
         {
           href: 'https://github.com/ZhenShuo2021',

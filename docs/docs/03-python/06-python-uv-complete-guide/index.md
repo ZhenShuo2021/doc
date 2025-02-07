@@ -11,7 +11,7 @@ keywords:
   - Python
   - 虛擬環境
 last_update:
-  date: 2025-01-05T09:00:00+08:00
+  date: 2025-02-07T16:52:00+08:00
   author: zsl0621
 first_publish:
   date: 2024-11-19T14:22:30+08:00
@@ -20,7 +20,7 @@ first_publish:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# UV 教學，最佳 Python 虛擬環境管理工具
+# Python UV 教學，最佳虛擬環境管理工具
 
 本篇文章介紹 **[uv](https://github.com/astral-sh/uv)** 的日常操作指令，從安裝到發布套件都包含在內，還有抄作業環節，直接複製貼上就能用，適合沒寫過 pyproject.toml 的人快速上手。如果不清楚自己是否該選擇 uv 請看[上一篇文章](./virtual-environment-management-comparison)。
 
@@ -315,7 +315,7 @@ https://docs.astral.sh/uv/guides/integration/jupyter/
 
 ### 設定預設群組
 
-使用 `uv sync` 和 `uv run` 時預設會同步生產套件和 dev 套件，修改 pyproject.toml 中的 default-groups 則可以設定同步的目標。如果臨時不想包含這些套件可以使用 `--no-group` 參數。
+使用 `uv sync` 預設同步生產套件和 dev 套件這兩類套件，預設同步的套件可以在 pyproject.toml 設定 default-groups 修改同步的目標。
 
 ```toml
 # 設定 uv sync 同步時除了 dev 也同步 foo 群組
@@ -385,6 +385,7 @@ network = [
 # packages = ["src/foo"]   # 佔位符
 
 # 幫 cli 套件設定入口點
+# 請注意，除了 `project.scripts` 外 `build-system` 和 `tool.hatch.build.targets.wheel` 都要一起設定才能啟用
 # https://docs.astral.sh/uv/concepts/projects/config/#entry-points
 # [project.scripts]
 # hello = "my_package:main_function"

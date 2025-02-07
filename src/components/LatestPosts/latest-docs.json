@@ -1,5 +1,30 @@
 [
   {
+    "title": "UV Python 教學，最佳虛擬環境管理工具",
+    "permalink": "/docs/python/python-uv-complete-guide/",
+    "description": "UV Python 教學，最佳虛擬環境管理工具",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      },
+      {
+        "inline": true,
+        "label": "Python",
+        "permalink": "/docs/tags/python"
+      },
+      {
+        "inline": true,
+        "label": "虛擬環境",
+        "permalink": "/docs/tags/虛擬環境"
+      }
+    ],
+    "date": 1738918320000,
+    "yearMonth": "2025 年 02 月",
+    "day": "07"
+  },
+  {
     "title": "看懂 Git 文檔",
     "permalink": "/docs/git/preliminaries/read-git-docs/",
     "description": "教你看懂 Git 文檔",
@@ -158,31 +183,6 @@
     "date": 1736238060000,
     "yearMonth": "2025 年 01 月",
     "day": "07"
-  },
-  {
-    "title": "UV Python 教學，最佳虛擬環境管理工具",
-    "permalink": "/docs/python/python-uv-complete-guide/",
-    "description": "UV Python 教學，最佳虛擬環境管理工具",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      },
-      {
-        "inline": true,
-        "label": "Python",
-        "permalink": "/docs/tags/python"
-      },
-      {
-        "inline": true,
-        "label": "虛擬環境",
-        "permalink": "/docs/tags/虛擬環境"
-      }
-    ],
-    "date": 1736038800000,
-    "yearMonth": "2025 年 01 月",
-    "day": "05"
   },
   {
     "title": "在本地執行 Github Actions",
