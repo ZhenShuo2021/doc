@@ -16,7 +16,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "ZSL的文檔庫",
-  tagline: "只講重點不講廢話",
+  // tagline: "只講重點不廢話",
   url: "https://docs.zsl0621.cc", //process.env.URL,
   baseUrl: "/", //process.env.BASE_URL,
   onBrokenLinks: "warn",
@@ -43,7 +43,7 @@ module.exports = {
     [
       "@docusaurus/preset-classic",
       {
-        googleAnalytics: {
+        gtag: {
           trackingID: 'G-QB2VKFSQ0J',
           anonymizeIP: true,
         },
