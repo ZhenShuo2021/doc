@@ -25,7 +25,7 @@ first_publish:
 4. git switch \<original-branch\>
 5. git stash pop
 
-每切換一次就要浪費四步指令只是為了切換分支，於是我們可以使用 worktree 功能解決這個問題。git worktree 總解決了以下問題：
+每切換一次就要浪費四步指令只是為了切換分支，於是我們可以使用 worktree 功能解決這個問題。git worktree 解決了以下問題：
 
 1. 每次都要 stash 步驟太多
 2. 工作時間拉長也記不起來 stash 了什麼
@@ -35,9 +35,9 @@ first_publish:
 
 ## 觀念說明
 
-Git worktree 允許你**在新資料夾中 checkout 指定分支，該資料夾中的所有操作都由原 Git 專案追蹤，即使這個新資料夾不在原專案的目錄下**[^dir]。
+Git worktree 允許你<u>**在新資料夾中 checkout 指定分支，該資料夾中的所有操作都由原 Git 專案追蹤，即使這個新資料夾不在原專案的目錄下**</u>[^dir]。
 
-[^dir]: 其實不強迫放在專案資料夾以外，但是這樣你的專案底下就會出現新增的 worktree，他不會自動排除。
+[^dir]: 其實不強迫放在專案資料夾以外，但是這樣你的專案底下就會出現新增的 worktree，而且他不會像 gitignore 設定的目錄一樣被排除。
 
 ## 使用說明
 

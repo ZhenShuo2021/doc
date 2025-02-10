@@ -41,9 +41,9 @@ git remote set-url origin git@github.com:ZhenShuo2021/ZhenShuo2021.github.io.git
 git push -u origin main
 ```
 
-## 設定 GPG 簽名
+## 可選：設定 GPG 簽名
 
-(選用) 請直接看 [利用 GPG 簽署 git commit](https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/) 的教學。  
+請直接看 [利用 GPG 簽署 git commit](https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/) 的教學，圖文並茂且完整，並且包含偵錯方式。  
 如果要隱藏信箱在 GPG 設定時需使用剛剛設定的 noreply 信箱。  
 如果已經有 GPG key，可以用以下指令刪除：
 

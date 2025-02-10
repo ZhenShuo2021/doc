@@ -19,11 +19,11 @@ first_publish:
 
 # Github 搜尋技巧
 
-本文不廢話、僅列出重點、超快速的說明如何在 Github 進行條件搜尋。
+本文快速精練的說明如何在 Github 進行條件搜尋，一般大概也只會用本文列出的這些，而且 Github 搜尋功能不是非常完美，光是這些常用的選項有時候就會搜尋不到了。
 
 ## 語法
 
-詳情請參考[官方文檔](https://docs.github.com/en/search-github)，這甚至多達二十篇文章。
+詳情請參考[官方文檔](https://docs.github.com/en/search-github)，這甚至多達二十篇文章，本文會摘要文檔中的常用語法。
 
 ### 基本語法
 

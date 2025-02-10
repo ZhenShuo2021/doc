@@ -19,7 +19,8 @@ first_publish:
 提交時遇到問題，出現以下錯誤
 
 ```sh
-Rewrite COMMIT_ID (1/179) (0 seconds passed, remaining 0 predicted)    error: gpg failed to sign the data
+Rewrite COMMIT_ID (1/179) (0 seconds passed, remaining 0 predicted)
+error: gpg failed to sign the data
 could not write rewritten commit
 ```
 
@@ -31,7 +32,7 @@ TL;DR
 export GPG_TTY=$(tty)
 ```
 
-如果確認此方法可行，在 Unix 系統下你可以使用 `echo 'export GPG_TTY=$(tty)' >> ~/.zshrc` 讓這個指令自動執行，bash 用戶需改成 `.bashrc`。
+如果確認此方法可行，在 Unix 系統下你可以使用 `echo 'export GPG_TTY=$(tty)' >> ~/.zshrc` 讓這個指令在每次終端開啟時自動執行，bash 用戶需改成 `.bashrc`。
 
 ## 檢查
 

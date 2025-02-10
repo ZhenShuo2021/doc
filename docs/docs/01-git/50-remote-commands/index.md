@@ -69,34 +69,3 @@ git config --global push.default simple
 git branch -av                    # 列出所有+遠端
 git checkout -b dev origin/dev    # 創建並切換到dev
 ```
-
-## 子模塊
-
-將P5D新增為 `batch-processing/P5D` 子模塊
-
-```sh
-git submodule add https://github.com/ZhenShuo2021/P5D batch-processing/P5D
-```
-
-更新
-
-```sh
-git submodule update
-```
-
-查看所有子模塊
-
-```sh
-git submodule status
-```
-
-移除
-
-```sh
-# 編輯 .gitmodules 移除相關模塊
-git config -f .git/config --remove-section submodule.batch-processing/pixiv
-git rm --cached batch-processing/pixiv
-rm -rf .git/modules/batch-processing/pixiv
-rm -rf batch-processing/pixiv
-git commit -m "Removed submodule batch-processing/pixiv"
-```

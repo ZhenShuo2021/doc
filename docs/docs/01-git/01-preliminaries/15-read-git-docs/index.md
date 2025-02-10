@@ -16,11 +16,11 @@ first_publish:
   date: 2025-01-13T14:40:00+08:00
 ---
 
-你真的看得懂 Git 文檔嗎？似懂非懂不算懂喔。本文教你如何閱讀 Git 文檔，本文保證是第一篇教你看懂文檔的中文教學，初學者可以放心的跳過這個章節，因為我發現很多教學文章自己也看不懂文檔，就算讀不懂你還是可以用很久。本文的目標是解析最難懂的指令：`git rebase --onto`。
+你真的看得懂 Git 文檔嗎？似懂非懂不算懂喔。別擔心，本文教你如何閱讀 Git 文檔，保證是第一篇教你看懂文檔的中文教學，初學者可以放心的跳過這個章節，因為很多教學文章的作者本身也看不懂文檔，所以就算讀不懂你還是可以用很久。本文的目標是解析最難懂的指令：`git rebase --onto`。
 
 ## 讀懂文檔
 
-我們一步一步解析文檔，首先 git 會把指令分成大項目，不同項目代表行為模式不同，以 git rebase 為例，他有三種不同行為模式[^guideline]。
+當 Git 越用越深入後在網路上搜尋資訊發現怪怪的，對照文檔就會發現文章作者根本沒看過或看不懂文檔。本段落一步一步解析如何閱讀文檔，首先 git 會把指令分成大項目，不同項目代表行為模式不同，以 git rebase 為例，他有三種不同行為模式[^guideline]。
 
 [^guideline]: 分成大項目是 git 自己的規則不是 [POSIX 規範](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html)，Git 官方的 [CodingGuidelines](https://github.com/git/git/blob/master/Documentation/CodingGuidelines) 第一句話說明不是所有語法都遵循 POSIX 建議。
 
@@ -102,7 +102,7 @@ git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [<commit>]
 - 第三類換成圓括弧，代表你要使用 `--patch | -p` 其中一個才能對應此類用法，也就是作者特地把方括弧換成圓括弧，告訴你使用 `--patch` 才能啟用這類用法
 - 第四類表示在這些 `|` 隔開的類型只能選一個，使用 `--mixed` 選項可以額外再啟用 `-N` 可選項
 
-## 正式解讀 `git rebase --onto`
+## 解讀 `git rebase --onto`
 
 完整[文檔](https://git-scm.com/docs/git-rebase)如下所示：
 

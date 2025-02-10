@@ -17,7 +17,7 @@ first_publish:
 
 # Git 在團隊中操作分支的最佳實踐
 
-本文介紹多人協作中推送和合併分支的最佳實踐，整理自[码农高天的影片](https://www.youtube.com/watch?v=uj8hjLyEBmU)，人家是微軟工程師，CPython core dev，不是營銷號。
+本文介紹多人協作中推送和合併分支的最佳實踐，整理自[码农高天的影片](https://www.youtube.com/watch?v=uj8hjLyEBmU)，人家是微軟工程師，CPython core dev，不是網路上的半桶水。
 
 ## 開始
 
@@ -36,8 +36,7 @@ git commit -m <comments>
 ```sh
 git checkout main                # 回到 main 分支
 git pull origin main             # 從遠端倉庫更新到main分支到本地
-git checkout <my-feature>        # 回到 feature 分支
-git rebase main                  # 把 feature 分支的更新接到 main
+git rebase main <my-feature>     # 把 feature 分支的更新接到 main 的後面
 git push origin <my-feature>     # 再推送到遠端
 ```
 
@@ -54,6 +53,8 @@ git checkout main                 # 回到 main 分支
 git pull origin main              # 推送 main
 git branch -D <my-feature>        # 刪除完成的 my-feature
 ```
+
+有些專案是不喜歡你直接修改 main 分支的（例如 [Blowfish](https://github.com/nunocoracao/blowfish/blob/main/CONTRIBUTING.md#have-a-patch-that-fixes-an-issue)）那就不需要自行 rebase。
 
 ## 示意圖
 
@@ -99,10 +100,17 @@ git branch -D <my-feature>        # 刪除完成的 my-feature
 
 經過這段操作就成功提交並且分支和遠端完全相同。因為很重要所以再講一次，rebase 的意思是
 
-<center><h5>將「目前分支」移到旁邊，放進「目標分支」，再想辦法把移到旁邊的「目前分支」接上去。</h5></center>
+:::tip 口訣
+
+<center>**比較「目前分支」和「目標分支」**</center>
+<center>**把「目前分支」的提交移動到「目標分支」之後**</center>
+
+:::
 
 ## 別用 git pull?
 
 By [Philomatics](https://www.youtube.com/watch?v=xN1-2p06Urc)
 
 码农高天的教學沒有涵蓋到多人共同修改同一分支，這裡描述這個情況，原理是使用 `git pull --rebase` 避免一般的 `git pull` 產生無用的 merge。如果沒衝突那很好，有衝突則 git rebase --abort 回復再做一般的 git pull。
+
+如果要預設使用 `git pull --rebase` 請設定 `git config --global pull.rebase true`。

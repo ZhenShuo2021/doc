@@ -17,11 +17,7 @@ first_publish:
 
 用標籤標示重要版本，分為 lightweight 和 annotated 兩種，官方建議使用 annotated。
 
-## 快速清單
-
-非常直觀，直接上指令。
-
-### 常用
+## 常用指令
 
 | 功能 | 本地指令 | 遠端指令 |
 |---|---|---|
@@ -31,10 +27,10 @@ first_publish:
 | 推送 | `git push origin v1.0.0` |  |  
 
 ```bash
-# 懶人複製：上標籤並且簽名、加上訊息、指定 hash
+# 上標籤並且簽名、加上訊息、指定 hash
 git tag -s -a v1.0.0 -m "msg" <hash>
 
-# 懶人複製：推送標籤
+# 推送標籤
 git push origin v1.0.0
 
 # 列出標籤，使用 `-n9` 可以同時印出訊息
@@ -50,7 +46,15 @@ git tag -l --format='%(contents)' <tag name>
 git tag <tag name> <tag name>^{} -f -m "<new message>"
 ```
 
-### 第二常用
+列出標籤的指令雜亂且複雜保證記不起來，建議直接用 alias 完成。僅適用 ZSH，Bash 改一下應該能用，Windows 搞了半小時還是失敗我放棄。在 .zshrc 加入這行：
+
+```sh
+alias 'gtl'='gtl(){ git tag --sort=-v:refname -n999 --format="[%(objectname:short) %(refname:short)] %(contents:lines=999)%0a" --list "${1}*" }; noglob gtl'
+```
+
+之後就可以使用 gtl 指令列出所有標籤，並且支援使用 gtl v0.2 列出所有 v0.2 開頭的標籤。如果想用更多這種奇特簡寫歡迎使用[我的 dotfile](https://github.com/ZhenShuo2021/dotfiles)。
+
+## 第二常用指令
 
 | 功能 | 本地指令 | 遠端指令 |
 |---|---|---|

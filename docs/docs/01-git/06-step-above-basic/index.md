@@ -75,9 +75,16 @@ git reset *.py                       # 移除 py 檔案，或者 **/*.py 遞迴�
 ## 提交檔案 git commit
 
 - `git commit -am <message>`: 懶人指令，略過 `git add .`。
+- `git commit -m "<Title><按兩下Enter>`: 提交有標題的 commit message 的方式，打好標題後按兩次 enter，到第三行繼續寫內容。
+
+### 情境：修改上一次提交
+
+常常會提交完成後馬上發現訊息寫錯、程式 typo，要怎麼修改？
+
+直接修改現在的檔案內容並且使用下列指令可以完成，amend 的意思是修復（複寫）最近一次的提交
+
 - `git commit --amend`: 修改上次的提交訊息和檔案。
 - `git commit --amend --no-edit`: 修改上次的提交檔案，訊息不變。
-- `git commit -m "<Title><按兩下Enter>`: 提交有標題的 commit message 的方式，打好標題後按兩次 enter，到第三行繼續寫內容。
 
 ---
 
@@ -135,13 +142,21 @@ git reset [<mode>] [<commit>] [<pathspec>]
 
 接下來提供幾個使用情境方便記憶。
 
+### 情境：程式改壞了想回復到遠端版本
+
+```sh
+git reset --hard origin/main
+```
+
+稍微簡單介紹一下 origin 代表遠端別名，main 是遠端分支名稱，這是 reset 最常用的情境，下方幾個都不常用。
+
 ### 情境：不小心提交，想繼續編輯
 
 ```sh
 git reset --soft HEAD^
 ```
 
-這個指令會取消最新的提交，但保留所有程式碼修改。
+這個指令會取消最新的提交，但保留所有程式碼修改，使用 `git commit --amend` 也可達成相同效果（但是 amend 僅限最近一次提交）。
 
 ### 情境：放棄未提交的修改
 
@@ -160,6 +175,10 @@ git reset HEAD~3
 
 這會移除包含現在的三個提交。
 
+### 情境：補充說明
+
+reset 不常用的原因是這些情境都能被互動式變基 (interactive rebase) 替代掉而且更方便，最常用的應該只有從遠端還原，如果你想彎道超車直接學互動式變基可以閱讀我寫的文章：[[微進階] 使用 Rebase 變基提交](./rebase#interactive)。
+
 :::info
 
 1. HEAD 代表目前工作的 commit 位置
@@ -177,7 +196,7 @@ git reset HEAD~3
 
 ## 任意修改 git rebase
 
-git rebase 實際上是對分支進行操作，原本應該放在後續文章，但是單純進行這裡要講的互動式變基 (interactive rebase) 時你完全感受不到分支操作，而他的功能之強大值得放在這裡，請見 [rebase 文章的這個段落](./rebase#interactive)，看完整的 rebase 文章看完應該會懵。
+git rebase 實際上是對分支進行操作，原本應該放在後續文章，但是單純進行這裡要講的互動式變基 (interactive rebase) 時你完全感受不到分支操作，而他的功能之強大值得放在這裡，請見 [rebase 文章的這個段落](./rebase#interactive)，請先只看這個段落，真的看完整篇文章看完應該會懵。
 
 注意 rebase 本質也是在修改提交歷史，永遠只該用於個人分支。
 
@@ -202,4 +221,4 @@ $ git reset --hard HEAD@{4}
 
 ## 結語
 
-到這邊就結束單一分支的基本操作，你已經可以基本的操作 Git 了，在[下一篇文章](./branch)中我們會介紹多分支操作。在初學階段個人使用時不太會用到分支功能，根據需求可以快轉到[遠端儲存庫設定](./remote-setup)。
+到這邊就結束單一分支的操作，你已經可以基本的操作 Git 了，在[下一篇文章](./branch)中我們會介紹多分支操作。在初學階段個人使用時不太會用到分支功能，根據需求可以快轉到[遠端儲存庫設定](./remote-setup)。

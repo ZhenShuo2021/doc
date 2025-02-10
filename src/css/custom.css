@@ -42,7 +42,15 @@ html[data-theme="dark"] :not(pre)>code {
 u {
   text-decoration-thickness: 1.8px;
   text-decoration-color: var(--ifm-color-primary-lightest);
-  text-underline-offset: 2.75px;
+  text-underline-offset: 4.5px;
+}
+
+.docusaurus-theme-github-codeblock div {
+  text-decoration: none !important;
+}
+
+.docusaurus-theme-github-codeblock a.githubLink {
+  cursor: pointer;
 }
 
 html[data-theme="dark"] u {

@@ -54,7 +54,7 @@ first_publish:
 3. 修改文件後加入追蹤 `git add <file name>`，注意不需提交[^rebase-commit]
 4. 完成 rebase `git rebase --continue`
 
-[^rebase-commit]: 提交的話會直接在編輯中的 commit 新增一個提交紀錄。
+[^rebase-commit]: 提交的話會提交歷史會新增一個額外的提交紀錄。
 
 ## 情況四：合併 commit
 
@@ -66,7 +66,7 @@ first_publish:
 
 ## 情況五：修改 commit 的順序
 
-完成多項功能開發，突然發現提交順序錯誤，關係順序很怪：
+完成多項功能開發，想要整理，例如把 fix 和 feat 開頭的分類排放：
 
 1. `git rebase -i hash^`
 2. 直接調整 commit 順序並儲存
@@ -84,4 +84,4 @@ first_publish:
 
 ## 結語
 
-每個情境了不起就五句話，某賣課網站可以把每個情境都寫成一篇文章，還被 Google SEO 洗到很前面，佩服佩服= =
+每個情境了不起就五句話，某賣課網站可以把每個情境都寫成一篇文章還被 Google SEO 排到很前面，佩服佩服= =

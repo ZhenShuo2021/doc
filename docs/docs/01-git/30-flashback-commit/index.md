@@ -1,5 +1,5 @@
 ---
-title: "[微進階] 從過去提交修改程式碼"
+title: "從過去提交修改程式碼"
 description: 回到過去 commit 修改程式碼。
 tags:
   - Git
@@ -20,22 +20,19 @@ first_publish:
 
 當你需要
 
-1. 舊版本的一些功能
-2. 需要在舊版的基礎上添加新功能時
-3. 又或者 de 某些只出現在舊版本的 bug 時
-
-需要這個功能。
+1. 需要在舊版的基礎上添加新功能時
+2. 或者 de 某些只出現在舊版本的 bug 時
+3. 又或者 bug 從特定版本才開始出現，回到那裡進行測試
 
 ## 回到過去
 
 如果我想回到某個 commit，從該 commit 開始修改：
 
 ```sh
-git log
-git switch -d <hash>
+git checkout -b fix/old <hash>
 ```
 
-只是要修改單一提交的話請使用 `git rebase -i` 的 edit 功能。
+`-b` 代表新建一個名為 `fix/old` 的分支。
 
 ## 新增 feature
 
@@ -47,4 +44,4 @@ git switch -d <hash>
 - 需要延伸修改:  
 新建分支: 用新的 branch 儲存，`git switch -c <new-branch>`，接下來依照[前一篇教學](/docs/docs/01-git/60-remote-best-practice/index.md)完成合併。
 
-當你改到昏頭可以用 `git diff branch1..branch2` 查看兩個分支的差異。
+很久後回來校稿發現以前的自己問題真可愛（但還是對的，網路上一堆錯到底是怎樣傻眼欸= =）

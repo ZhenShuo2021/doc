@@ -65,7 +65,7 @@ jobs:
           echo "Runs with workflow_dispatch inputs: ${{ inputs.perform_deploy }}"
 ```
 
-:::tip "重要文檔位置"
+:::tip 重要文檔位置
 
 - [查看所有的 Workflow 語法](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
 - [觸發方式列表](https://docs.github.com/zh/actions/writing-workflows/choosing-when-your-workflow-runs/triggering-a-workflow)
@@ -124,6 +124,8 @@ Github Actions 由以下幾個項目組成：
   - `continue-on-error`: 布林值，失敗時是否繼續。  
   - `working-directory`: 指定步驟執行目錄。
 
+介紹就這樣短短的結束了！網路文章的大大們為什麼都要寫這麼冗長啊！現在才不到兩成，接下來七成是直接告訴你哪裡有常見問題和直接給你照抄的 workflow 檔案，別浪費時間從頭寫起。
+
 ## 踩坑紀錄
 
 因為官方文檔實在太長了應該沒多少人有耐心看完，所以這邊紀錄我自己踩過的坑讓讀者能快速解決問題。
@@ -162,7 +164,7 @@ echo "${{ github.workspace }}\.github\workflows\rsync\bin" | Out-File -FilePath 
 
 ### Github 環境變數
 
-需要保存敏感資料例如帳號密碼時可以使用 `Actions secrets and variables` 設定環境變數，兩者的差異是儲存時會不會加密。secrets 本身分為三種，優先順序是 Environment > Repository > Organization，第一次嘗試可以用 repository secrets，environment secrets 會限制使用範圍，需要在 workflow 中指定 environment 名稱才能存取該 secrets。
+需要保存敏感資料例如帳號密碼時可以使用 `Actions secrets and variables` 設定環境變數，兩者的差異是儲存時會不會加密。secrets 本身又再細分為三種，優先順序是 Environment > Repository > Organization，第一次嘗試可以用 repository secrets，environment secrets 會限制使用範圍，需要在 workflow 中指定 environment 名稱才能存取該 secrets。
 
 圖案教學請見[文檔](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)，大致位置是在 repo 中的 Settings > 左側欄位 Secrets and variables > Actions。在 workflow 存取環境變數的語法是
 
@@ -174,16 +176,14 @@ on:
     branches:
       - main
 
-# 也可以把 env 放在這裡，作用範圍變成整個 workflow 而不是特定 step
-
 jobs:
   access-env-and-secrets:
-    # Optional: 如果使用 environment 必須在 settings 設定環境相同的環境名稱 production 才能調用
-    # environment: "production"
+    # 如果使用 environment variable/secrets，必須在 settings 設定環境相同的環境名稱 production 才能調用
+    environment: "production"
     runs-on: ubuntu-latest
     steps:
       - name: Access Environment Variable
-        env:
+        env:  # 記得設定 env 才能存取
           # 存取 Repository variables/Secrets
           MY_ENV_VAR: ${{ vars.MY_ENV_VAR }}
           MY_SECRET: ${{ secrets.MY_SECRET }}
@@ -242,15 +242,17 @@ choco install act-cli
 brew install act
 ```
 
+act 的使用教學請見[下一篇文章](./run-github-actions-locally)。
+
 ## 實際範例
 
 第一次看保證不會設定，那不如照範例複製貼上對吧。
 
 ### 多系統自動執行 unittest
 
-該腳本使用 rsync，所以設定包含安裝 rsync。
+該腳本使用 rsync，所以設定包含安裝 rsync。在 Github 上執行 Invoke-WebRequest 會因為網路問題偶發失敗，此方式把整個 cwrsync 丟到 repo 中。
 
-```yaml
+```yaml title="unittest.yml"
 name: Python Test
 on:
   push:
@@ -304,7 +306,7 @@ jobs:
 
 ### Docker 上執行 unittest
 
-```yaml
+```yaml title="docker-unittest.yml"
 name: Docker Test
 
 on:
@@ -356,150 +358,18 @@ jobs:
 
 這個範例使用 uv 完成，你可以自行換成 Python + pip。
 
-```yaml
-name: PyPI Publish
-
-on:
-  push:
-    tags:
-      - 'v*.*.*.*'
-      - 'v*.*.*'
-
-jobs:
-  publish:
-    name: Build and Publish to PyPI
-    environment: publish_pypi
-    runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write
-      contents: read
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-          cache-dependency-glob: uv.lock
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Build package
-        run: uv build
-
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        # for test.pypi
-        # with:
-        #   repository-url: https://test.pypi.org/legacy/
+```yaml reference title="python-publish.yml"
+https://github.com/ZhenShuo2021/V2PH-Downloader/blob/main/.github/workflows/python-publish.yml
 ```
 
 ### 自動執行 cron 任務和提交
 
-```yaml
-name: update-blacklist
-
-on:
-  schedule:
-    - cron: '0 0 * * 0'
-  workflow_dispatch:
-
-jobs:
-  update-blacklist:
-    runs-on: ubuntu-latest
-    environment: update-blacklist
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-          cache-dependency-glob: uv.lock
-          python-version: 3.13
-
-      - name: Run Python script
-        env:
-          COOKIES_BASE64: ${{ secrets.COOKIES_BASE64 }}
-          BAHA_USERNAME: ${{ secrets.BAHA_USERNAME }}
-        run: uv run -m baha_blacklist.actions
-
-      - name: Commit and push changes
-        run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add .
-            git ls-files | grep -i 'cookie' | xargs git reset  # 排除 cookie (不知為何 .gitignore 沒用)
-            git commit -m "automated update blacklist" --no-verify
-            git push
-          else
-            echo "No changes to commit"
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```yaml reference title="update-blacklist.yml"
+https://github.com/ZhenShuo2021/baha-blacklist/blob/main/.github/workflows/update-blacklist.yml
 ```
 
 ### 使用 Hugo 建立 Github Pages
 
-```yaml
-name: GitHub Pages
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build-deploy:
-    runs-on: ubuntu-20.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.139.3"
-          extended: true
-
-      - name: Build
-        run: hugo --gc --minify
-
-      - name: Setup Node LTS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-
-      - name: Install npm dependencies
-        run: |
-          npm install shiki @shikijs/rehype rehype-cli
-
-      - name: Run rehype-cli
-        run: |
-          npx rehype-cli public -o --silent || true
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./public
-          commit_message: ${{ github.event.head_commit.message }}
+```yaml reference title="gh-pages.yml"
+https://github.com/ZhenShuo2021/ZhenShuo2021.github.io/blob/main/.github/workflows/gh-pages.yml
 ```
