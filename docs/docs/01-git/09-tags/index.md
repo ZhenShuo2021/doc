@@ -1,5 +1,5 @@
 ---
-title: 幫提交上標籤
+title: 幫重要版本打上標籤
 author: zsl0621
 description: 幫提交上標籤
 tags:
@@ -16,6 +16,8 @@ first_publish:
 ---
 
 用標籤標示重要版本，分為 lightweight 和 annotated 兩種，官方建議使用 annotated。
+
+lightweight 直接在 commit 上增加標記，annotated 是獨立的 refs。
 
 ## 常用指令
 
