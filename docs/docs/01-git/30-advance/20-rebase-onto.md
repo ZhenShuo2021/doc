@@ -1,6 +1,6 @@
 ---
-title: "[進階] git rebase onto 全中文圈最完整教學"
-sidebar_label: "[進階] 搞懂 git rebase onto"
+title: "Git Rebase Onto 全中文圈最完整教學"
+sidebar_label: "搞懂 Rebase Onto"
 author: zsl0621
 description: 不要再亂教 rebase onto 了
 tags:
@@ -16,9 +16,7 @@ first_publish:
   date: 2025-01-13T14:40:00+08:00
 ---
 
-這篇非常細節，新手請跳過。
-
-本文延續上一篇教學 [[微進階] 使用 Rebase 重構提交](./rebase) 繼續說明 onto 用法，與其說是搞懂 onto 用法倒不如說是完整解析 rebase，只是 rebase 實際行為大家本來就不熟，這些問題又常見於和 onto 參數同時使用。本文可以視為上一篇教學的完整解析版本，把口訣擴展成一板一眼的定義，目的是讓這個解釋到哪裡都通用。
+本文延續 [[微進階] 使用 Rebase 重構提交](../beginner/rebase) 繼續說明 onto 用法，與其說是搞懂 onto 用法倒不如說是完整解析 rebase，只是 rebase 實際行為大家本來就不熟，這些問題又常見於和 onto 參數同時使用。本文可以視為上一篇教學的完整解析版本，把口訣擴展成一板一眼的定義，目的是讓這個解釋到哪裡都通用。
 
 和上一篇相同，筆者保證本文絕對正確，所有和本文矛盾的說法都是錯的。
 
@@ -66,7 +64,7 @@ rebase 真實專案前請先用這個[迷你範例](https://github.com/ZhenShuo2
 > 5. git rebase x --onto y z
 > 6. git rebase x y --onto z
 
-想搞懂他勢必得讀懂文檔，然而看文檔又昏了，因為這是 POSIX 用語，版本管理都還不會用看 POSIX 我哪讀的懂（似懂非懂不算懂），開始閱讀前請務必確保自己有能力看的懂文檔，或者閱讀我寫的[看懂 Git 文檔](./preliminaries/read-git-docs)。
+想搞懂他勢必得讀懂文檔，然而看文檔又昏了，因為這是 POSIX 用語，版本管理都還不會用看 POSIX 我哪讀的懂（似懂非懂不算懂），開始閱讀前請務必確保自己有能力看的懂文檔，或者閱讀我寫的[看懂 Git 文檔](../preliminaries/read-git-docs)。
 
 ## git rebase --onto 用法
 
@@ -88,13 +86,13 @@ git rebase --onto <newbase> [<upstream> [<branch>]]
 2. 找出從共同祖先到 `<branch>` 之間的分歧的提交並且暫存他們
 3. 將其重演在新基底 `<newbase>` 之後
 
-附帶一提，把 `<newbase>` 去掉後，這個說法完全兼容[前一篇文章](./rebase)說的：
+附帶一提，把 `<newbase>` 去掉後，這個說法完全兼容[前一篇文章](../beginner/rebase)說的：
 
 1. 找到共同祖先
 2. 找到需要被變基的提交並且暫存他們  
 3. 將目標分支最後一個提交作為出發點，把暫存的提交逐個重演到目標分支後面
 
-可以發現這個解釋是[原有解釋](./rebase)的超集 (superset) 而不是推翻原有解釋，僅是根據文檔就已經是最通用的解釋。某些文章自作聰明自創名詞解釋，結果照他的說法不同用法不同分支結構下每個參數的目的都不一樣。
+可以發現這個解釋是[原有解釋](../beginner/rebase)的超集 (superset) 而不是推翻原有解釋，僅是根據文檔就已經是最通用的解釋。某些文章自作聰明自創名詞解釋，結果照他的說法不同用法不同分支結構下每個參數的目的都不一樣。
 
 ### 用一個變數{#single_var}
 

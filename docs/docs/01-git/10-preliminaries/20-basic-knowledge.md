@@ -45,10 +45,10 @@ gitGraph
   commit id: "OTP A"
 
   checkout login
-  commit id: "fix login bugs"
+  commit id: "login C - fix bugs"
 
   checkout OTP
-  cherry-pick id: "fix login bugs"
+  cherry-pick id: "login C - fix bugs"
   commit id: "OTP B"
 
   checkout main

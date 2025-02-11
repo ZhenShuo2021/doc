@@ -1,5 +1,5 @@
 ---
-title: "[微進階] 比 stash 更方便的 worktree"
+title: "比 Stash 更方便的 Worktree"
 author: zsl0621
 description: Git Worktree
 tags:

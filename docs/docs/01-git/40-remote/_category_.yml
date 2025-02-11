@@ -1,8 +1,8 @@
-position: 90 # float position is supported
-label: 各種奇怪問題
+position: 40
+label: 四、遠端操作
 collapsible: true # make the category collapsible
 collapsed: true # keep the category open by default
 className: red
 link:
   type: generated-index
-  title: Git 教學 - 各種奇怪問題
+  title: Git 教學 - 序章

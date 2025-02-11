@@ -150,7 +150,7 @@ s <hash> <msg>
 
 ## 更複雜的 `git rebase --onto`
 
-過於複雜，他可以直接寫成一篇文章，請看 [[進階] 看懂 git 文檔和 rebase onto](./rebase-onto)。
+過於複雜，他可以直接寫成一篇文章，請看 [[進階] 看懂 git 文檔和 rebase onto](../advance/rebase-onto)。
 
 ## 重構初始提交
 

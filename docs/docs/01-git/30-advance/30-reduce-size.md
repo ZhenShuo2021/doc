@@ -1,7 +1,7 @@
 ---
-title: 使用 git sparse-checkout 只下載部分專案以加速 clone 速度
-description: 介紹操作大型儲存庫時如何減少容量加速 clone
-sidebar_label: git clone 減少容量
+title: 使用 Git Sparse Checkout 只下載部分專案以加速 Clone 速度
+description: 介紹操作大型儲存庫時如何減少容量加速 Clone
+sidebar_label: 加速 Clone
 tags:
   - Git
   - Programming

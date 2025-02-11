@@ -1,5 +1,5 @@
-position: 1 # float position is supported
-label: 序章
+position: 20
+label: 二、入門
 collapsible: true # make the category collapsible
 collapsed: true # keep the category open by default
 className: red

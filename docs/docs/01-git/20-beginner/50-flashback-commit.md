@@ -42,6 +42,6 @@ git checkout -b fix/old <hash>
 使用cherry-pick: 修改完成 add commit 之後，直接回到 main branch `git switch main`，並且撿回剛剛的 commit `git cherry-pick <new-hash>`
 
 - 需要延伸修改:  
-新建分支: 用新的 branch 儲存，`git switch -c <new-branch>`，接下來依照[前一篇教學](./remote-best-practice)完成合併。
+新建分支: 用新的 branch 儲存，`git switch -c <new-branch>`，接下來依照[前一篇教學](../remote/collaboration-best-practice)完成合併。
 
 很久後回來校稿發現以前的自己問題真可愛（但還是對的，網路上一堆錯到底是怎樣傻眼欸= =）

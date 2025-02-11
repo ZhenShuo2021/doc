@@ -1,0 +1,8 @@
+position: 30
+label: 三、進階
+collapsible: true # make the category collapsible
+collapsed: true # keep the category open by default
+className: red
+link:
+  type: generated-index
+  title: Git 進階教學

@@ -14,10 +14,6 @@ first_publish:
   date: 2024-09-13T10:55:07+08:00
 ---
 
-# 有關修改的動詞
-
-## 起因
-
 寫 commit message 發現自己永遠只會 edit/change/adjust/tune，這邊請 GPT 補一下英文，而且有些單字會腦袋抽風突然想不起來，這篇當作 cheatsheet 使用。
 
 下面的表格都依據修改的嚴重程度依序排列。
