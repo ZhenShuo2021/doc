@@ -1,7 +1,7 @@
 [
   {
     "title": "使用 git sparse-checkout 只下載部分專案以加速 clone 速度",
-    "permalink": "/docs/git/miscs/reduce-size/",
+    "permalink": "/docs/git/miscs/reduce-size",
     "description": "介紹操作大型儲存庫時如何減少容量加速 clone",
     "tags": [
       {
@@ -21,7 +21,7 @@
   },
   {
     "title": "[進階] git rebase onto 全中文圈最完整教學",
-    "permalink": "/docs/git/rebase-onto/",
+    "permalink": "/docs/git/rebase-onto",
     "description": "不要再亂教 rebase onto 了",
     "tags": [
       {
@@ -41,7 +41,7 @@
   },
   {
     "title": "UV Python 教學，最佳虛擬環境管理工具",
-    "permalink": "/docs/python/python-uv-complete-guide/",
+    "permalink": "/docs/python/python-uv-complete-guide",
     "description": "UV Python 教學，最佳虛擬環境管理工具",
     "tags": [
       {
@@ -66,7 +66,7 @@
   },
   {
     "title": "看懂 Git 文檔",
-    "permalink": "/docs/git/preliminaries/read-git-docs/",
+    "permalink": "/docs/git/preliminaries/read-git-docs",
     "description": "教你看懂 Git 文檔",
     "tags": [
       {
@@ -86,7 +86,7 @@
   },
   {
     "title": "分支操作",
-    "permalink": "/docs/git/branch/",
+    "permalink": "/docs/git/branch",
     "description": "基礎分支操作，讓你用最快速度上手 Git。",
     "tags": [
       {
@@ -106,7 +106,7 @@
   },
   {
     "title": "[微進階] 比 stash 更方便的 worktree",
-    "permalink": "/docs/git/git-worktree/",
+    "permalink": "/docs/git/git-worktree",
     "description": "Git Worktree",
     "tags": [
       {
@@ -126,7 +126,7 @@
   },
   {
     "title": "[微進階] 使用 Rebase 變基提交",
-    "permalink": "/docs/git/rebase/",
+    "permalink": "/docs/git/rebase",
     "description": "最快最清楚而且最正確的搞懂變基 git rebase。",
     "tags": [
       {
@@ -146,7 +146,7 @@
   },
   {
     "title": "關於修改的動詞小抄",
-    "permalink": "/docs/git/miscs/verb-cheatsheet/",
+    "permalink": "/docs/git/miscs/verb-cheatsheet",
     "description": "這是一堂英文課",
     "tags": [
       {
@@ -166,7 +166,7 @@
   },
   {
     "title": "Github Actions 自動化 CI/CD",
-    "permalink": "/docs/git/github/github-actions/",
+    "permalink": "/docs/git/github/github-actions",
     "description": "Github Actions 自動化 CI/CD",
     "tags": [
       {
@@ -191,7 +191,7 @@
   },
   {
     "title": "實用工具選輯",
-    "permalink": "/docs/useful-tools/awesome-collections/",
+    "permalink": "/docs/useful-tools/awesome-collections",
     "description": "選輯",
     "tags": [
       {
