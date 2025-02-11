@@ -29,7 +29,7 @@ git rebase                           # 任意修改提交歷史
 git revert                           # 恢復提交
 ```
 
-### 分支 git branch
+## 分支 git branch
 
 分支用於開發新功能、問題修復、或者是準備發佈新版本。
 
@@ -42,7 +42,7 @@ git branch -D <name>                 # 刪除
 git branch -m <old> <new>            # 改名
 ```
 
-### 切換 git switch
+## 切換 git switch
 
 `git switch` 是專門用來切換分支的新版指令，比傳統的 `git checkout` 更簡單明確。
 
@@ -55,7 +55,7 @@ git switch -c <new-name> <hash>      # 從指定的提交建立並切換
 
 使用 checkout 來切換分支也是沒問題的，完全沒有任何差別，指令也大同小異不重複介紹。
 
-### 暫存 git stash
+## 暫存 git stash
 
 這是一個特別的指令，會把目前所有尚未提交的檔案放進獨立的暫存空間中，使用情境主要有以下幾個：
 
@@ -63,7 +63,7 @@ git switch -c <new-name> <hash>      # 從指定的提交建立並切換
 2. 改到一半需要改一個更重要的東西
 3. 改到一半需要跳到別的分支
 
-可以看出都是暫時的擋刀用指令。
+可以看出都是暫時，是擋刀用的指令。
 
 基本選項：
 
@@ -81,11 +81,13 @@ git stash drop stash@{0}             # 刪除第一個暫存
 git stash clear                      # 清除所有暫存
 ```
 
+> 看不懂 pathspec？請見[看懂文檔](../preliminaries/read-git-docs)。
+
 <br/>
 
-### 合併 git merge
+## 合併 git merge
 
-有了分支下一步就是要合併，使用 `git merge` 是最淺顯易懂的合併方式，一般來說我們都會先進入主分支合併子分支：
+分久必合，有了分支下一步就是合併，`git merge` 是最淺顯易懂的合併方式。使用時我們一般來說都會先進入主分支以合併子分支：
 
 ```sh
 git switch main
@@ -120,14 +122,13 @@ git merge 有預設模式是 fast-forward，用於在兩者的提交完全相同
 
 兩者的選擇端看是否需要保存分支結構。合併時可能會遇到衝突，這需要手動解決，解決完成衝突部分後需要 add 和 commit，或者使用 --abort 中斷合併。
 
-### 任意修改 git rebase
+> [如何解決合併衝突？](../preliminaries/keyword#進階)
 
-在這裡我們不講不代參數的 rebase 用法，而是要介紹互動式變基 (interactive rebase)，請見我寫的文章：[[微進階] 使用 Rebase 變基提交](./rebase#interactive)，其餘用法很複雜用不到可以先跳過。
+<br/>
 
-<details>
-<summary>有點複雜謹慎閱讀</summary>
+## 變基 git rebase
 
-這是一個功能非常強大的指令，這個指令可用於取代 `git merge`，因為我們不想讓提交歷史到處都是合併的結構導致閱讀和管理困難。由於比較複雜，本文只講解他的基本邏輯：
+先解釋名詞變基，意思是「變換」目前分支的「基底」，用於取代 `git merge`，因為我們不想讓提交歷史到處都是合併的結構導致閱讀和管理困難。由於比較複雜只講解他的基本邏輯：
 
 :::tip 口訣
 
@@ -136,17 +137,25 @@ git merge 有預設模式是 fast-forward，用於在兩者的提交完全相同
 
 :::
 
-為了搞懂 rebase 看了很多文章，最後濃縮成這兩句話（而且是正確的，網路上很多文章講的又臭又長而且還是講錯），真的不需要了解工具怎麼實現的，只要會用工具就好了。用都不會用就講原理的結果就是不會用也不懂原理，要用到的人可以查看本系列文章的 [[微進階] 使用 Rebase 重構提交](./rebase)。
+為了搞懂 rebase 看了很多文章，最後濃縮成這兩句話[^compress]，使用教學請見本教學的 [[微進階] 使用 Rebase 重構提交](./rebase)。
+
+[^compress]: 附帶一提，濃縮後還是正確的，網路上很多文章講的又臭又長結果還是講錯真的是來搞笑的，而且 git rebase 如果使用方式正確就不會修改到主分支的提交歷史和 hash，如果改變就代表用錯了，網路上就有滿山滿谷的錯誤教學，這些人不知道是有沒有發現自己錯，總之是沒幾個人回去修正自己的文章。
+
+> [如何解決合併衝突？](../preliminaries/keyword#進階)
+
+## 任意修改提交歷史 git rebase -i
+
+互動式變基 (interactive rebase) 使用變基的原理實現對提交歷史進行任意修改，同時<u>**使用方式非常簡單**</u>，請見我寫的文章：[[微進階] 使用 Rebase 變基提交](./interactive-rebase)。
 
 :::danger
 
-git rebase 會修改歷史，再次強調修改提交歷史 **永遠只該用於個人分支**！
+git rebase -i 會修改歷史，再次強調修改提交歷史 **永遠只該用於個人分支**！
 
 :::
 
-</details>
+> [如何解決合併衝突？](../preliminaries/keyword#進階)
 
-### 恢復 git revert
+## 恢復 git revert
 
 用實際案例講解比較簡單。假設現在想撤銷提交 A，但是由於團隊合作最好別修改提交歷史，我們可以用 git revert 提交一個 negative A，這樣會產生一個新的提交把提交 A 抵銷，也不用修改歷史。
 

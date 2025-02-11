@@ -25,7 +25,7 @@ first_publish:
 
 ## 設定
 
-安裝後先完成基礎設定。開啟終端機設定使用者名稱和 email:
+安裝後先完成基礎設定。首先開啟終端機設定使用者名稱和 email，macOS 就叫做終端機，Windows 是 Powershell 或 CMD
 
 ```sh
 # 基礎必要設定

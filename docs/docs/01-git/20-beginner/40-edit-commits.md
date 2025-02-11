@@ -1,5 +1,6 @@
 ---
-title: "修改已提交的內容"
+title: 各種修改提交歷史的情境和解法
+sidebar_label: 各種修改提交歷史的情境
 author: zsl0621
 description: 各種修改 commit 的情況和對應的解決方式。
 tags:
@@ -15,13 +16,14 @@ first_publish:
   date: 2024-09-07T14:10:12+08:00
 ---
 
-# Git 修改已提交的內容
+# Git 各種修改提交歷史的情境和解法
 
-## 預備知識
+預備知識
 
 - `hash^` 的 `^` 代表該 hash 的前一個提交，`~n` 代表前 n 個提交。
 - `--amend` 可以加上 `--no-edit` 表示不修改 commit 訊息。
 - rebase 如果是需要跳到以前進行修改的，git 都會自動幫你 checkout ，這時候查看 `git status` 會顯示「互動式重定基底動作正在進行中」，使用 `git branch` 查看則會顯示目前分支為「無分支，重定 main 的基底」 (no branch, rebasing main)。
+- [如何解決合併衝突？](../preliminaries/keyword#進階)
 
 ## 情況一：修改 commit message
 

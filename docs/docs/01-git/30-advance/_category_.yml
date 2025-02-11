@@ -6,3 +6,4 @@ className: red
 link:
   type: generated-index
   title: Git 進階教學
+  description: 進階章節是比較少用到的指令，不看這個段落人生也可以活的很好，如果要用到每篇文章也都給你 tl;dr 讓你複製完馬上走不用再看落落長的解釋。

@@ -39,7 +39,7 @@ Git worktree 允許你<u>**在新資料夾中 checkout 指定分支，該資料�
 
 [^dir]: 其實不強迫放在專案資料夾以外，但是這樣你的專案底下就會出現新增的 worktree，而且他不會像 gitignore 設定的目錄一樣被排除。
 
-## 使用說明
+## TL;DR
 
 worktree 指令就是幫分支直接建立一個獨立資料夾，對該分支進行任何操作就到該資料夾操作動作完全一樣，所以要對他進行任何新增移除提交、rebase/push/pull 都隨你高興，只是清除要回到主專案使用 `git worktree remove` 而已。小提醒，我們無法切換到正在使用 worktree 的分支。
 

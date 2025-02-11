@@ -1,1 +1,207 @@
-[]
+[
+  {
+    "title": "使用 Git Sparse Checkout 只下載部分專案以加速 Clone 速度",
+    "permalink": "/docs/git/advance/reduce-size",
+    "description": "介紹操作大型儲存庫時如何減少容量加速 Clone",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1739230705000,
+    "yearMonth": "2025 年 02 月",
+    "day": "11"
+  },
+  {
+    "title": "Git Rebase Onto 全中文圈最完整教學",
+    "permalink": "/docs/git/advance/rebase-onto",
+    "description": "不要再亂教 rebase onto 了",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1739116680000,
+    "yearMonth": "2025 年 02 月",
+    "day": "09"
+  },
+  {
+    "title": "UV Python 教學，最佳虛擬環境管理工具",
+    "permalink": "/docs/python/python-uv-complete-guide",
+    "description": "UV Python 教學，最佳虛擬環境管理工具",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      },
+      {
+        "inline": true,
+        "label": "Python",
+        "permalink": "/docs/tags/python"
+      },
+      {
+        "inline": true,
+        "label": "虛擬環境",
+        "permalink": "/docs/tags/虛擬環境"
+      }
+    ],
+    "date": 1738918320000,
+    "yearMonth": "2025 年 02 月",
+    "day": "07"
+  },
+  {
+    "title": "看懂 Git 文檔",
+    "permalink": "/docs/git/preliminaries/read-git-docs",
+    "description": "教你看懂 Git 文檔",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1737012600000,
+    "yearMonth": "2025 年 01 月",
+    "day": "16"
+  },
+  {
+    "title": "分支操作",
+    "permalink": "/docs/git/beginner/branch",
+    "description": "基礎分支操作，讓你用最快速度上手 Git。",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1737009513000,
+    "yearMonth": "2025 年 01 月",
+    "day": "16"
+  },
+  {
+    "title": "比 Stash 更方便的 Worktree",
+    "permalink": "/docs/git/advance/git-worktree",
+    "description": "Git Worktree",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1736858493000,
+    "yearMonth": "2025 年 01 月",
+    "day": "14"
+  },
+  {
+    "title": "使用變基 Rebase 合併分支",
+    "permalink": "/docs/git/beginner/rebase",
+    "description": "最快最清楚而且最正確的搞懂變基 git rebase。",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1736696400000,
+    "yearMonth": "2025 年 01 月",
+    "day": "12"
+  },
+  {
+    "title": "關於修改的動詞小抄",
+    "permalink": "/docs/git/troubleshooting/verb-cheatsheet",
+    "description": "這是一堂英文課",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1736596207000,
+    "yearMonth": "2025 年 01 月",
+    "day": "11"
+  },
+  {
+    "title": "Github Actions 自動化 CI/CD",
+    "permalink": "/docs/git/github/github-actions",
+    "description": "Github Actions 自動化 CI/CD",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Github",
+        "permalink": "/docs/tags/github"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1736595570000,
+    "yearMonth": "2025 年 01 月",
+    "day": "11"
+  },
+  {
+    "title": "實用工具選輯",
+    "permalink": "/docs/useful-tools/awesome-collections",
+    "description": "選輯",
+    "tags": [
+      {
+        "inline": true,
+        "label": "實用工具",
+        "permalink": "/docs/tags/實用工具"
+      }
+    ],
+    "date": 1736238060000,
+    "yearMonth": "2025 年 01 月",
+    "day": "07"
+  }
+]

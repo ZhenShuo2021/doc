@@ -15,7 +15,7 @@ first_publish:
   date: 2024-09-10T17:51:07+08:00
 ---
 
-本章節初學者可以直接跳過之後再回來查看，快點學會實際指令才是真的。
+本章節初學者請直接跳過以後再回來看，快點學會實際指令才是真的。
 
 ### 基本
 
@@ -99,17 +99,22 @@ Git 是分散式系統，所以你的 reflog 紀錄不會被推送到遠端，�
 
 合併衝突的區域在 git rebase 中會有點反直覺。舉例來說，當我們位於 feat 分支使用 `git rebase main` 的衝突中，上面是 main，下面才是 feat，原因是 rebase 的 main 是原有的 base，feat 才是要被放進來的提交，所以才會違反直覺，但邏輯是正確的。
 
-這邊順帶講解如何 rebase 讓你有個印象，因為網路上的中文文章錯的一塌糊塗。在 feat 分支 rebase 等同於在任何地方使用 `git rebase main feat`，git 會先幫我們切換到 feat 分支然後進行 rebase，用途是把 feat 的歷史放在 main 後面，反之亦同。main 是穩定分支，絕對不可能為了合併去修改他，而當你查 rebase 時你就會看到一篇被 SEO 洗到前面教你用 `git rebase feat` 的文章，那個人就是標準的文檔都看不懂就開始寫了，包含他的 rebase onto 教學[問題也很大](../advance/rebase-onto#結語)。
+解決合併衝突的方式就是把 `<<<<<`, `=====`, `>>>>>` 清除掉就好了，看你要留下哪邊或是兩者都要，完整流程是當你在 merge/rebase/cherry-pick 等操作遇到衝突時，先使用
 
-## 更進階：blob, tree, refs, tag{#basics}
+1. `git status` 找到 Unmerged paths (未合併的路徑)
+2. 編輯該文件選擇你要哪個版本
+3. `git add` 預存後使用 git merge/rebase/cherry-pick --continue，再進行下一個合併衝突解析
+4. 使用 --abort 還原成 merge/rebase/cherry-pick 之前的狀態，使用 --quit 不還原強制退出，請謹慎使用 --quit
 
-這些是 Git 的基本結構單位，不重要，對你的人生沒有任何幫助。
+順便講解如何 rebase 讓你有個印象，因為網路上的中文文章錯的一塌糊塗。在 feat 分支 rebase 等同於在任何地方使用 `git rebase main feat`，git 會先幫我們切換到 feat 分支然後進行 rebase，用途是把 feat 的歷史放在 main 後面，反之亦然。現在問題來了，main 是穩定分支，絕對不可能為了合併去修改他，而當你查 rebase 時你就會看到一篇被 SEO 洗到前面教你用 `git rebase feat` 的文章，那個人就是標準的文檔都看不懂就開始寫了，包含他的 rebase onto 教學[問題也很大](../advance/rebase-onto#結語)。
 
-每個檔案在 Git 中都是由 blob 物件，blob 物件僅包含檔案的內容，不包含檔案名稱或任何其他元數據；tree 紀錄檔案位置和目錄結構，紀錄 blob 和其他子 tree；refs 用來指向特定 hash 的人類可讀名稱，如 `refs/heads/main` 指向 main 分支的最新提交，或者標籤，或者遠端分支；tag 物件用於標記特定的 commit。把所有單位串連起來，commit 指向 tree，tree 指向 sub-tree 和 blob。
+## 更進階：blob, tree, refs, tag, commit{#basics}
 
-這樣短短幾行已經是網路上的一整篇文章了，到底為什麼要寫那麼長，我看了很久才理解，理解完感受到這個知識一點也不重要。如果還是看不懂可以看看相關文章：[加速几十倍 git clone 速度的 --depth 1，它的后遗症怎么解决？](https://blog.csdn.net/qiwoo_weekly/article/details/128710769)雖然不是專門在講 Git 結構但是比網路上那些文筆糟糕的文章清楚多了，或者是像進階章節講的一樣，那些人根本也還沒搞懂。
+扣掉 refs，這些是 Git 的基本結構單位，超級不重要，對你的人生沒有任何幫助。
 
-<br/>
+檔案在 Git 中是一個 blob 物件，blob 物件僅包含檔案的內容，不包含檔案名稱或任何其他元數據；tree 紀錄檔案位置和目錄結構，紀錄 blob 和其他子 tree；refs 用來指向特定 hash 的人類可讀名稱，如 `refs/heads/main` 指向 main 分支的最新提交，或者標籤，或者遠端分支；tag 物件用於標記特定的 commit，commit 物件主要功能是紀錄元資料，例如作者、編碼、tree、hash、前一個 commit 的 hash、提交訊息等等。把所有單位串連起來，commit 指向 tree，tree 指向 sub-tree 和 blob。
+
+這樣短短幾行已經是網路上的一整篇文章了，到底為什麼要寫那麼長，我看了很久才理解，理解完感受到這個知識一點也不重要。如果還是看不懂可以閱讀[加速几十倍 git clone 速度的 --depth 1，它的后遗症怎么解决？](https://blog.csdn.net/qiwoo_weekly/article/details/128710769)，雖然不是專門在講 Git 結構但是比網路上那些文筆糟糕的文章清楚多了。
 
 如果你喜歡語言模型列表式的說明，會變成這樣：
 
@@ -126,18 +131,18 @@ Git 是分散式系統，所以你的 reflog 紀錄不會被推送到遠端，�
 
 3. Refs (參照)
 
-- 提供人類可讀的名稱來指向特定的 commit hash
+- 唯一用途就是提供人類可讀的名稱，並指向 commit hash
 - 常見的例子:
   - `refs/heads/main` 指向 main 分支最新的 commit
   - 標籤名稱指向特定的標籤物件
   - 遠端分支的參照
 
-4. Tag (標籤)
+4. Tag Object (標籤物件)
 
 - 用來標記特定的 commit
 - 通常用於版本發布
 
-5. Commit (提交)
+5. Commit Object (提交物件)
 
 - 指向一個 tree 物件，這個 tree 物件再指向其他 sub-tree 和 blob，最終形成一個完整的版本快照
 

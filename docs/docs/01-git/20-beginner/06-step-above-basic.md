@@ -1,5 +1,5 @@
 ---
-title: 基礎指令
+title: 基礎操作
 author: zsl0621
 description: 挑選日常常用指令集合，囊括 99% 的日常使用問題。
 tags:
@@ -15,11 +15,11 @@ first_publish:
   date: 2024-09-10T16:15:33+08:00
 ---
 
-# Git 基礎指令
+# Git 基礎操作
 
-一分鐘入門只說明提交檔案往後更新版本，但是在版本之間切換才是版本管理工具的精華。接下來的兩篇文章結構是
+一分鐘入門只說明如何提交檔案，但是在版本之間切換才是版本管理工具的精華，接下來的兩篇文章會這樣進行說明：
 
-1. 基礎操作（單一分支）和分支操作（多分支）
+1. 兩篇文章分別為基礎操作（單一分支）和分支操作（多分支）
 2. 每個操作會先列出該操作的常用命令，並說明每個命令的目的
 3. 最後提供情境範例
 
@@ -48,7 +48,7 @@ git add **/*.py                      # 追蹤所有 py 檔
 git add src/**/*.py                  # 追蹤 src 資料夾中的所有 py 檔
 ```
 
-除了此之外還有一些實用模式可以更方便使用：
+除了此之外兩個方便的指令：
 
 - `-u`: 只預存已追蹤的檔案。
 - `-p`: 補丁模式，互動式加入預存，常用選項為
@@ -56,6 +56,7 @@ git add src/**/*.py                  # 追蹤 src 資料夾中的所有 py 檔
   - n, no
   - d, 該檔案之後都不要加入
   - s, 切成更小的區塊 (hunk)
+  - 不太需要用補丁模式，改用 [lazygit](https://github.com/jesseduffield/lazygit) 完成相同功能方便一百倍
 
 > 看不懂 pathspec？請見[看懂文檔](../preliminaries/read-git-docs)。
 
@@ -122,8 +123,6 @@ git restore -SW <pathspec>
 
 ```sh
 git restore --source=<hash> <pathspec>
-# 接著再使用 `git restore -SW .` 還原到最新提交版本
-# 或者使用 git stash pop 功能還原暫存檔案
 ```
 
 ---
@@ -148,7 +147,7 @@ git reset [<mode>] [<commit>] [<pathspec>]
 git reset --hard origin/main
 ```
 
-稍微簡單介紹一下 origin 代表遠端別名，main 是遠端分支名稱，這是 reset 最常用的情境，下方幾個都不常用。
+origin 代表遠端別名，main 是遠端分支名稱，這是 reset 最常用的情境，下方幾個都不常用。
 
 ### 情境：不小心提交，想繼續編輯
 
@@ -177,7 +176,7 @@ git reset HEAD~3
 
 ### 情境：補充說明
 
-reset 不常用的原因是這些情境都能被互動式變基 (interactive rebase) 替代掉而且更方便，最常用的應該只有從遠端還原，如果你想彎道超車直接學互動式變基可以閱讀我寫的文章：[[微進階] 使用 Rebase 變基提交](./rebase#interactive)。
+reset 不常用的原因是這些情境都能被更方便的互動式變基 (interactive rebase) 取代，最常用的應該只有從遠端還原，如果你想彎道超車直接學互動式變基可以閱讀我寫的文章：[[微進階] 使用 Rebase 變基提交](./interactive-rebase)。
 
 :::info
 
@@ -196,9 +195,9 @@ reset 不常用的原因是這些情境都能被互動式變基 (interactive reb
 
 ## 任意修改 git rebase
 
-git rebase 實際上是對分支進行操作，原本應該放在後續文章，但是單純進行這裡要講的互動式變基 (interactive rebase) 時你完全感受不到分支操作，而他的功能之強大值得放在這裡，請見 [rebase 文章的這個段落](./rebase#interactive)，請先只看這個段落，真的看完整篇文章看完應該會懵。
+git rebase 實際上是對分支進行操作，原本應該放在後續文章，但是單純進行這裡要講的互動式變基 (interactive rebase) 時你完全感受不到分支操作，而他的功能之強大值得放在這裡，請見我寫的教學 [互動式變基 Interactive Rebase](./interactive-rebase)，請先只看這個段落，初學者看完整篇文章應該會懵。
 
-注意 rebase 本質也是在修改提交歷史，永遠只該用於個人分支。
+注意 rebase 本質也是在修改提交歷史，而修改提交歷史永遠只該用於個人分支。
 
 ---
 
@@ -217,7 +216,7 @@ $ git reflog
 $ git reset --hard HEAD@{4}
 ```
 
-這樣會回到 rebase 前的狀態。reflog 只會紀錄本地操作，推送到遠端再 clone 下來後不會有 reflog 紀錄。
+這樣會回到 rebase 前的狀態。reflog 只會紀錄本地操作，推送到遠端再 clone 下來後不會有 reflog 紀錄，所以為你自己學 Git 的[這篇文章](https://gitbook.tw/chapters/faq/remove-files-from-git)寫錯了。
 
 ## 結語
 

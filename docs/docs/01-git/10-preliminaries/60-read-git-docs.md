@@ -16,11 +16,15 @@ first_publish:
   date: 2025-01-13T14:40:00+08:00
 ---
 
-你真的看得懂 Git 文檔嗎？似懂非懂不算懂喔。別擔心，本文教你如何閱讀 Git 文檔，保證是第一篇教你看懂文檔的中文教學，初學者可以放心的跳過這個章節，因為很多教學文章，甚至都已經出書了的作者本身也看不懂文檔，所以就算讀不懂還是可以快樂的使用 Git。本文的目標是解析最難懂的指令：`git rebase --onto`。
+你真的看得懂 Git 文檔嗎？似懂非懂不算懂喔。別擔心，本文教你如何閱讀 Git 文檔，保證是第一篇教你看懂文檔的中文教學，初學者可以放心的跳過這個章節，因為很多教學文章甚至到已經出書了的作者本身也看不懂文檔，所以就算讀不懂還是可以快樂的使用 Git。本文的目標是解析最難懂的指令：`git rebase --onto`。
+
+你說我怎麼知道他們看不懂文檔，因為他們給的範例指令是錯的，如果看過文檔就不會那樣用，而且還不是一兩篇，是八成以上文章都是這樣，google rebase 就知道了錯的一塌糊塗[^error]。
+
+[^error]: 深入使用 Git 後在網路上搜尋資訊就會發現這些資訊怪怪的，我就是越看越怪，親自對照文檔後就發現這些文章的作者全都沒看過或看不懂文檔，否則是不可能寫出這種指令的。由於我是自學所以多方參考並且有任何問題就是拿文檔對照實際行為，最後才確定是他們錯，並且所有錯誤都從某幾篇文章開始的，因為用語和結尾的參考資訊可以追溯到那幾篇文章，包含已經出書的那位先生寫的也有好幾個錯誤。
 
 ## 讀懂文檔
 
-當 Git 越用越深入後在網路上搜尋資訊發現怪怪的，對照文檔就會發現文章作者根本沒看過或看不懂文檔。本段落一步一步解析如何閱讀文檔，首先 git 會把指令分成大項目，不同項目代表行為模式不同，以 git rebase 為例，他有三種不同行為模式[^guideline]。
+本段落一步一步解析如何閱讀文檔，首先 git 會把指令分成大項目，不同項目代表行為模式不同，以 git rebase 為例，他有三種不同行為模式[^guideline]。
 
 [^guideline]: 分成大項目是 git 自己的規則不是 [POSIX 規範](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html)，Git 官方的 [CodingGuidelines](https://github.com/git/git/blob/master/Documentation/CodingGuidelines) 第一句話說明不是所有語法都遵循 POSIX 建議。
 
@@ -39,7 +43,7 @@ first_publish:
 [^foolish]: 網路上說他是 positional arguments 的在亂講。
 [^grouping]: 語言模型會告訴你圓括弧是必填，這是錯的，請見 [What's the meaning of `()` in git command SYNOPSIS?](https://stackoverflow.com/questions/32085652/whats-the-meaning-of-in-git-command-synopsis)。
 
-## pathspec 是什麼
+## pathspec 是什麼{#pathspec}
 
 開始解析之前先解釋這個名詞，`<pathspec>` 是指定檔案路徑的表達式系統，讓使用者能精準選擇要操作的檔案與目錄，支援的表達式如下：
 
