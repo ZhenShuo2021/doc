@@ -1,7 +1,6 @@
 ---
 title: 遠端指令
 description: 操作遠端儲存庫的指令都在這。
-slug: "/my/path/to/操作遠端儲存庫的指令都在這。"
 tags:
   - Git
   - Programming
@@ -9,64 +8,84 @@ keywords:
   - Git
   - Programming
 last_update:
-  date: 2024-08-25T22:24:42+08:00
+  date: 2025-02-12T01:45:42+08:00
   author: zsl0621
 first_publish:
   date: 2024-08-25T22:24:42+08:00
 ---
 
-# Git 遠端指令
+## TL;DR
 
-這篇介紹遠端工作時常用的指令，這邊實在沒什麼好介紹的，只好列出所有選項。  
+Git 遠端的邏輯是使用 remote 設定遠端的「別名」，然後每個分支可以根據使用這個別名設定對應的「遠端分支」，下方是第一次要設定遠端時的指令，如果在遠端設定遇到任何問題也可以使用這個流程
 
-## 基本遠端指令
-
-設定遠程倉庫地址，clone 下來後可用
+1. 列出和新增遠端
 
 ```sh
-git clone [remote.git] [dir]                  # 克隆遠端倉庫，dir為可選
-git push [remote-name] [local-branch-name]    # 推送到遠端，後兩項可選
-git pull [remote-name] [local-branch-name]    # 拉取並合併，後兩項可選
-git fetch [remote-name]                       # 拉取但不合併
-git remote -v                                 # 顯示遠端倉庫
-git remote add [remote-name] [remote.git]     # 增加遠端倉庫並指定名稱
-git remote remove [name]                      # 刪除遠端倉庫
-git remote rename [old-name] [new]            # 重命名遠端倉庫
-git remote set-url [name] [url]               # 更改遠端倉庫的 URL
+git remote -vv
+git remote add <name> <url>
 ```
 
-> [問題] 修改本地提交後歷史記錄不同無法提交
+2. 假設我們剛剛設定的名稱是預設的 `origin`，現在我們有兩種選項
+   1. 指定分支要追蹤的遠端，其中本地分支是可選參數，預設為目前分支
+
+    ```sh
+    git branch -u origin/<remote-branch> [<local-branch>]
+    git branch -vv   # 檢查設定是否成功
+    ```
+
+    2. 獲取遠端的版本歷史  
+    如果顯示沒有設定上游，使用上面的 branch -u 指令設定
+
+    ```sh
+    git pull
+    ```
+
+3. 之後我們就可以推送了  
+如果顯示沒有設定上游分支的話，使用此 -u 選項
+
+    ```sh
+    git push
+    git push --set-upstream <遠端名稱> <分支名稱>
+    ```
+
+    這樣以後就可以正常推送了。
+
+## 常用遠端指令列表
+
+設定遠端名稱和地址的相關指令
 
 ```sh
-git push -f
-git push --force-with-lease
+git remote -vv                                # 顯示遠端倉庫
+git remote add [<name>] [<url>]               # 增加遠端倉庫並指定名稱
+git remote remove <name>                      # 刪除遠端倉庫
+
+git remote rename <old-name> <new>            # 重命名遠端倉庫
+git remote set-url <name> <new-url>           # 修改遠端倉庫的 URL
 ```
 
--f 參數強制修改遠端為本地提交，--force-with-lease也是，但是不會修改到別人的提交，是較為安全的方式。
-
-> [問題] 找不到遠端可以用以下指令
+設定分支對應的遠端指令
 
 ```sh
-git remote -v
-git remote add
-git remote set-url
+# 列出分支遠端資訊
+git branch -vv
+
+# 列出本地和遠端的所有分支
+git branch -av
+
+# 只列出遠端分支
+git branch -r
+
+# 指定分支要追蹤的遠端，其中本地分支是可選參數，預設為目前分支
+# 例如 git branch -u origin/dev-remote dev-local
+# 這個範例只是展示名稱可以不同，特殊情況才會用到
+git branch -u <remote-name>/<remote-branch> [<branchname>]
 ```
 
-> [問題] 第一次推送分支時使用此命令，將本地 main 分支與遠程 main 分支關聯起來。
+推拉相關指令
 
 ```sh
-git push --set-upstream origin [branch]
-```
-
-> [問題] 預防推錯分支，確保推送到遠端同名分支
-
-```sh
-git config --global push.default simple
-```
-
-> [問題] 第一次 clone 完後進入 main 以外的分支
-
-```sh
-git branch -av                    # 列出所有+遠端
-git checkout -b dev origin/dev    # 創建並切換到dev
+git clone <repo> [<dir>]                        # 克隆遠端倉庫，dir為可選
+git push [<remote-name>] [<local-branch-name>]  # 推送到遠端，後兩項可選
+git pull [<remote-name>] [<local-branch-name>]  # 拉取並合併，後兩項可選
+git fetch [remote-name]                         # 拉取但不合併
 ```
