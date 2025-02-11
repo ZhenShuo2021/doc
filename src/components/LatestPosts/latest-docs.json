@@ -1,5 +1,45 @@
 [
   {
+    "title": "使用 Force if Includes 安全的強制推送",
+    "permalink": "/docs/git/remote/force-if-includes-safely-push",
+    "description": "使用 force-if-includes 安全的進行強制推送",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1739298522000,
+    "yearMonth": "2025 年 02 月",
+    "day": "12"
+  },
+  {
+    "title": "遠端指令",
+    "permalink": "/docs/git/remote/remote-commands",
+    "description": "操作遠端儲存庫的指令都在這。",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1739295942000,
+    "yearMonth": "2025 年 02 月",
+    "day": "12"
+  },
+  {
     "title": "使用 Git Sparse Checkout 只下載部分專案以加速 Clone 速度",
     "permalink": "/docs/git/advance/reduce-size",
     "description": "介紹操作大型儲存庫時如何減少容量加速 Clone",
@@ -163,45 +203,5 @@
     "date": 1736596207000,
     "yearMonth": "2025 年 01 月",
     "day": "11"
-  },
-  {
-    "title": "Github Actions 自動化 CI/CD",
-    "permalink": "/docs/git/github/github-actions",
-    "description": "Github Actions 自動化 CI/CD",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Github",
-        "permalink": "/docs/tags/github"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1736595570000,
-    "yearMonth": "2025 年 01 月",
-    "day": "11"
-  },
-  {
-    "title": "實用工具選輯",
-    "permalink": "/docs/useful-tools/awesome-collections",
-    "description": "選輯",
-    "tags": [
-      {
-        "inline": true,
-        "label": "實用工具",
-        "permalink": "/docs/tags/實用工具"
-      }
-    ],
-    "date": 1736238060000,
-    "yearMonth": "2025 年 01 月",
-    "day": "07"
   }
 ]
