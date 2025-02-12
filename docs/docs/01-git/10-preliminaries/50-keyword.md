@@ -110,7 +110,7 @@ Git 是分散式系統，所以你的 reflog 紀錄不會被推送到遠端，�
 
 ## 更進階：blob, tree, refs, tag, commit{#basics}
 
-扣掉 refs，這些是 Git 的基本結構單位，超級不重要，對你的人生沒有任何幫助。
+這些扣掉 refs 以外都是 Git 的基本結構單位，超級不重要，對你的人生沒有任何幫助。
 
 檔案在 Git 中是一個 blob 物件，blob 物件僅包含檔案的內容，不包含檔案名稱或任何其他元數據；tree 紀錄檔案位置和目錄結構，紀錄 blob 和其他子 tree；refs 用來指向特定 hash 的人類可讀名稱，如 `refs/heads/main` 指向 main 分支的最新提交，或者標籤，或者遠端分支；tag 物件用於標記特定的 commit，commit 物件主要功能是紀錄元資料，例如作者、編碼、tree、hash、前一個 commit 的 hash、提交訊息等等。把所有單位串連起來，commit 指向 tree，tree 指向 sub-tree 和 blob。
 
@@ -129,22 +129,22 @@ Git 是分散式系統，所以你的 reflog 紀錄不會被推送到遠端，�
 - 指向所屬的 blob 物件和指向其他子目錄的 tree 物件
 - 類似檔案系統的目錄結構
 
-3. Refs (參照)
-
-- 唯一用途就是提供人類可讀的名稱，並指向 commit hash
-- 常見的例子:
-  - `refs/heads/main` 指向 main 分支最新的 commit
-  - 標籤名稱指向特定的標籤物件
-  - 遠端分支的參照
-
-4. Tag Object (標籤物件)
+3. Tag Object (標籤物件)
 
 - 用來標記特定的 commit
 - 通常用於版本發布
 
-5. Commit Object (提交物件)
+4. Commit Object (提交物件)
 
 - 指向一個 tree 物件，這個 tree 物件再指向其他 sub-tree 和 blob，最終形成一個完整的版本快照
+
+5. Refs (參照)
+
+- 唯一用途就是提供人類可讀的名稱，並指向 commit hash，不是必要組成結構
+- 常見的例子:
+  - `refs/heads/main` 指向 main 分支最新的 commit
+  - 標籤名稱指向特定的標籤物件
+  - 遠端分支的參照
 
 物件之間的關係是：  
 commit → tree → (sub-trees + blobs)  

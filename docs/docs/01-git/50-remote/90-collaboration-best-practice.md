@@ -31,7 +31,7 @@ git commit -m <comments>
 # git push origin <my-feature>   # 如果是單人作業會執行這個步驟，但是因為多人協作所以不能直接推送
 ```
 
-因為遠端已經有其他更新，所以回到 main branch 同步遠端的新 commit，之後 [rebase](../beginner/interactive-rebase) main branch，這樣就可以push。
+因為遠端已經有其他更新，所以回到 main branch 同步遠端的新 commit，之後 [rebase](../history-manipulation/interactive-rebase) main branch，這樣就可以push。
 
 ```sh
 git checkout main                # 回到 main 分支

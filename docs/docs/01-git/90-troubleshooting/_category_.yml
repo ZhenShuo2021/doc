@@ -1,9 +1,9 @@
-position: 60
-label: 六、疑難雜症
+position: 70
+label: 七、疑難雜症
 collapsible: true
 collapsed: true
 className: red
 link:
   type: generated-index
-  title: 疑難雜症
+  title: Git 教學 - 疑難雜症
   description: 這個部分包含各種 Git 常見問題與解決方案。

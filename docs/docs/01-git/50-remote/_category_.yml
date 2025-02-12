@@ -1,8 +1,8 @@
-position: 20
-label: 二、基礎指令
+position: 50
+label: 五、遠端操作
 collapsible: true # make the category collapsible
 collapsed: true # keep the category open by default
 className: red
 link:
   type: generated-index
-  title: Git 教學 - 基礎指令
+  title: Git 教學 - 遠端操作

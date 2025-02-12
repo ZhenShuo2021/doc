@@ -1,8 +1,8 @@
-position: 50
-label: 五、Github 相關
+position: 60
+label: 六、Github 相關
 collapsible: true
 collapsed: true
 className: red
 link:
   type: generated-index
-  title: Github 相關
+  title: Git 教學 - Github 相關

@@ -166,7 +166,7 @@
   },
   {
     "title": "使用變基 Rebase 合併分支",
-    "permalink": "/docs/git/beginner/rebase",
+    "permalink": "/docs/git/history-manipulation/rebase",
     "description": "最快最清楚而且最正確的搞懂變基 git rebase。",
     "tags": [
       {

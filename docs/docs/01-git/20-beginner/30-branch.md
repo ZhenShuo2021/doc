@@ -137,7 +137,7 @@ git merge 有預設模式是 fast-forward，用於在兩者的提交完全相同
 
 :::
 
-為了搞懂 rebase 看了很多文章，最後濃縮成這兩句話[^compress]，使用教學請見本教學的 [[微進階] 使用 Rebase 重構提交](./rebase)。
+為了搞懂 rebase 看了很多文章，最後濃縮成這兩句話[^compress]，使用教學請見本教學的 [[微進階] 使用 Rebase 重構提交](../history-manipulation/rebase)。
 
 [^compress]: 附帶一提，濃縮後還是正確的，網路上很多文章講的又臭又長結果還是講錯真的是來搞笑的，而且 git rebase 如果使用方式正確就不會修改到主分支的提交歷史和 hash，如果改變就代表用錯了，網路上就有滿山滿谷的錯誤教學，這些人不知道是有沒有發現自己錯，總之是沒幾個人回去修正自己的文章。
 
@@ -145,7 +145,7 @@ git merge 有預設模式是 fast-forward，用於在兩者的提交完全相同
 
 ## 任意修改提交歷史 git rebase -i
 
-互動式變基 (interactive rebase) 使用變基的原理實現對提交歷史進行任意修改，同時<u>**使用方式非常簡單**</u>，請見我寫的文章：[[微進階] 使用 Rebase 變基提交](./interactive-rebase)。
+互動式變基 (interactive rebase) 使用變基的原理實現對提交歷史進行任意修改，同時<u>**使用方式非常簡單**</u>，請見我寫的文章：[[微進階] 使用 Rebase 變基提交](../history-manipulation/interactive-rebase)。
 
 :::danger
 

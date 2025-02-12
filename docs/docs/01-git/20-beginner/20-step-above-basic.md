@@ -176,7 +176,7 @@ git reset HEAD~3
 
 ### 情境：補充說明
 
-reset 不常用的原因是這些情境都能被更方便的互動式變基 (interactive rebase) 取代，最常用的應該只有從遠端還原，如果你想彎道超車直接學互動式變基可以閱讀我寫的文章：[[微進階] 使用 Rebase 變基提交](./interactive-rebase)。
+reset 不常用的原因是這些情境都能被更方便的互動式變基 (interactive rebase) 取代，最常用的應該只有從遠端還原，如果你想彎道超車直接學互動式變基可以閱讀我寫的文章：[[微進階] 使用 Rebase 變基提交](../history-manipulation/interactive-rebase)。
 
 :::info
 
@@ -195,7 +195,7 @@ reset 不常用的原因是這些情境都能被更方便的互動式變基 (int
 
 ## 任意修改 git rebase
 
-git rebase 實際上是對分支進行操作，原本應該放在後續文章，但是單純進行這裡要講的互動式變基 (interactive rebase) 時你完全感受不到分支操作，而他的功能之強大值得放在這裡，請見我寫的教學 [互動式變基 Interactive Rebase](./interactive-rebase)，請先只看這個段落，初學者看完整篇文章應該會懵。
+git rebase 實際上是對分支進行操作，原本應該放在後續文章，但是單純進行這裡要講的互動式變基 (interactive rebase) 時你完全感受不到分支操作，而他的功能之強大值得放在這裡，請見我寫的教學 [互動式變基 Interactive Rebase](../history-manipulation/interactive-rebase)，請先只看這個段落，初學者看完整篇文章應該會懵。
 
 注意 rebase 本質也是在修改提交歷史，而修改提交歷史永遠只該用於個人分支。
 
