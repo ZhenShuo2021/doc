@@ -23,7 +23,7 @@ first_publish:
 2. `^`：前一個提交，
 3. `~n`：前 n 個提交
 4. `--`：檔案與函式選項的分界線
-5. blob, tree, refs, tag：[Git 的基本單位](#basics)
+5. blob, tree, commit, tag, refs：[Git 的基本單位](#basics)
 
 範例：
 
@@ -81,9 +81,9 @@ index 58e6b10..4fab7e0 100644
 
 Git 是快照系統不是差異系統，只是可以顯示差異並且作為壓縮的手段。
 
-Git 是分散式系統，每個人都有一份完全相同的鏡象，遠端儲存庫只是同步手段而不是集中管理版本。
+Git 是分散式系統，每個人都有一份完全相同的鏡像，遠端儲存庫只是同步手段而不是集中管理版本。
 
-Git 是分散式系統，所以你的 reflog 紀錄不會被推送到遠端，不然每個人的 reflog 都不一樣怎麼搞？所以[這篇文章錯了](https://gitbook.tw/chapters/faq/remove-files-from-git)。
+Git 是分散式鏡像系統，所以你的 reflog 紀錄不會被推送到遠端，不然每個人的 reflog 都不一樣怎麼搞？所以[這篇文章錯了](https://gitbook.tw/chapters/faq/remove-files-from-git)。
 
 ### 進階
 
@@ -99,18 +99,16 @@ Git 是分散式系統，所以你的 reflog 紀錄不會被推送到遠端，�
 
 合併衝突的區域在 git rebase 中會有點反直覺。舉例來說，當我們位於 feat 分支使用 `git rebase main` 的衝突中，上面是 main，下面才是 feat，原因是 rebase 的 main 是原有的 base，feat 才是要被放進來的提交，所以才會違反直覺，但邏輯是正確的。
 
-解決合併衝突的方式就是把 `<<<<<`, `=====`, `>>>>>` 清除掉就好了，看你要留下哪邊或是兩者都要，完整流程是當你在 merge/rebase/cherry-pick 等操作遇到衝突時，先使用
+解決合併衝突的方式就是把 `<<<<<`, `=====`, `>>>>>` 清除掉就好了，看你要留下哪邊或是兩者都要，完整流程是當你使用 `<指令>`（如 merge/rebase/cherry-pick）遇到衝突時，先使用
 
-1. `git status` 找到 Unmerged paths (未合併的路徑)
+1. `git status` 找到未合併的路徑 Unmerged paths
 2. 編輯該文件選擇你要哪個版本
-3. `git add` 預存後使用 git merge/rebase/cherry-pick --continue，再進行下一個合併衝突解析
-4. 使用 --abort 還原成 merge/rebase/cherry-pick 之前的狀態，使用 --quit 不還原強制退出，請謹慎使用 --quit
+3. `git add` 預存後使用 `<指令>` --continue，再進行下一個合併衝突解析
+4. 使用 --abort 還原成使用 `<指令>` 之前的狀態，使用 --quit 不還原強制退出，請謹慎使用 --quit
 
-順便講解如何 rebase 讓你有個印象，因為網路上的中文文章錯的一塌糊塗。在 feat 分支 rebase 等同於在任何地方使用 `git rebase main feat`，git 會先幫我們切換到 feat 分支然後進行 rebase，用途是把 feat 的歷史放在 main 後面，反之亦然。現在問題來了，main 是穩定分支，絕對不可能為了合併去修改他，而當你查 rebase 時你就會看到一篇被 SEO 洗到前面教你用 `git rebase feat` 的文章，那個人就是標準的文檔都看不懂就開始寫了，包含他的 rebase onto 教學[問題也很大](../advance/rebase-onto#結語)。
+## 更進階：blob, tree, tag, commit, refs{#basics}
 
-## 更進階：blob, tree, refs, tag, commit{#basics}
-
-這些扣掉 refs 以外都是 Git 的基本結構單位，超級不重要，對你的人生沒有任何幫助。
+這些扣掉 refs 以外其他四個是 Git 的基本構成，超級不重要，對你的人生沒有任何幫助。
 
 檔案在 Git 中是一個 blob 物件，blob 物件僅包含檔案的內容，不包含檔案名稱或任何其他元數據；tree 紀錄檔案位置和目錄結構，紀錄 blob 和其他子 tree；refs 用來指向特定 hash 的人類可讀名稱，如 `refs/heads/main` 指向 main 分支的最新提交，或者標籤，或者遠端分支；tag 物件用於標記特定的 commit，commit 物件主要功能是紀錄元資料，例如作者、編碼、tree、hash、前一個 commit 的 hash、提交訊息等等。把所有單位串連起來，commit 指向 tree，tree 指向 sub-tree 和 blob。
 

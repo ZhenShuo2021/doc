@@ -1,5 +1,25 @@
 [
   {
+    "title": "各種日常問題",
+    "permalink": "/docs/git/troubleshooting/daily-issues",
+    "description": "介紹 Git 常見的本地和遠端問題，包含清除reflog記錄、正確使用rebase、git mv、以及如何加速clone等進階技巧。還解釋了常見錯誤誤導，並提供正確的 Git 操作方法。",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1739338500000,
+    "yearMonth": "2025 年 02 月",
+    "day": "12"
+  },
+  {
     "title": "使用 Force if Includes 安全的強制推送",
     "permalink": "/docs/git/remote/force-if-includes-safely-push",
     "description": "使用 force-if-includes 安全的進行強制推送",
@@ -183,25 +203,5 @@
     "date": 1736696400000,
     "yearMonth": "2025 年 01 月",
     "day": "12"
-  },
-  {
-    "title": "關於修改的動詞小抄",
-    "permalink": "/docs/git/troubleshooting/verb-cheatsheet",
-    "description": "這是一堂英文課",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1736596207000,
-    "yearMonth": "2025 年 01 月",
-    "day": "11"
   }
 ]
