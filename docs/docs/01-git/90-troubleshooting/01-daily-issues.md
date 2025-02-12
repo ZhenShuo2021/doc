@@ -17,7 +17,7 @@ first_publish:
 
 都是簡單的日常問題但是要花一點時間搜尋，所以這篇文章集中列出方便查詢。
 
-本文會有很多抱怨因為真的太荒謬，筆者已經很克制了，還好有 uBlacklist 可以直接封鎖網域眼不見為淨不然還會更不滿。
+本文有很多抱怨因為真的錯的太荒謬，還好有 uBlacklist 可以直接封鎖錯誤來源眼不見為淨，不然還會更不滿。寫圖文並茂的教學還提供所有人免費閱讀我覺得很好，但是真的錯太多了，甚至有些錯誤只要看過文檔就不會犯，也就是說連文檔都沒看過就開始寫教學文章、上網賣課，結果所有讀者都被帶歪，我在做功課時就發現所有錯誤都是前面的人錯後面就跟著全錯。
 
 ---
 
@@ -25,15 +25,15 @@ first_publish:
 
 #### 正確 rebase
 
-應該在子分支使用 `git rebase main` 或者直接使用 `git rebase main <sub-branch>` 才對，原因請見[使用變基 Rebase 合併分支](../history-manipulation/rebase)。
+正確使用方式是移動到子分支後再使用 `git rebase main`，或者直接使用 `git rebase main <sub-branch>` 才對，原因請見[使用變基 Rebase 合併分支](../history-manipulation/rebase)。
 
-這最誇張，連[為你自己學 Git](https://gitbook.tw/chapters/branch/merge-with-rebase)和 [Git 版本控制教學 - 用範例學 rebase](https://myapollo.com.tw/blog/git-tutorial-rebase/) 都寫錯，但凡看過一次文檔都不可能 rebase 子分支，錯的這麼離譜=看不懂文檔=沒看。
+[為你自己學 Git](https://gitbook.tw/chapters/branch/merge-with-rebase)和 [Git 版本控制教學 - 用範例學 rebase](https://myapollo.com.tw/blog/git-tutorial-rebase/) 都寫錯了，這最誇張，但凡看過一次文檔都不可能 rebase 子分支，能錯的這麼離譜=看不懂文檔=沒看。
 
 #### rebase onto 指定新基底
 
 此用法相對來說比較複雜，但是複雜的原因不是指令本身而是網路上沒有正確的教學，請見[搞懂 Rebase Onto](../advance/rebase-onto)。
 
-筆者沒有說大話嚇唬人，真的所有中文文章的解釋都是錯的，撰文時唯一能找到的正確文章是在搜尋結果第五頁 [介绍Rebase的基本概念，各种玩法，以及什么时候用到它](https://morningspace.github.io/tech/git-merge-stories-6/)，前面四頁的文章都沒講到或是錯的，如果不是因為要寫「正確的」教學我才沒耐心每篇都點進去看，還要在一堆錯誤裡面找出怎麼用才正確。
+筆者沒有說大話嚇唬人，真的所有中文文章的解釋都是錯的，撰文時唯一能找到的正確文章是在搜尋結果第五頁 [介绍Rebase的基本概念，各种玩法，以及什么时候用到它](https://morningspace.github.io/tech/git-merge-stories-6/)，前面四頁的文章都沒講到或是錯的，如果不是因為要寫「正確的」教學筆者才沒耐心每篇都點進去看，還要在一堆錯誤裡面找出怎麼用才正確。
 
 #### blob, tree, tag, commit, refs 是什麼？
 
@@ -47,21 +47,21 @@ refs 只是幫助人類記憶的名稱，只紀錄提交 hash 讓你直接用 re
 
 #### 為何要用 git mv
 
-`git mv` 和一般的 `mv` 差異是他會讓 Git 直接索引檔案，真正需要用這個指令的原因是 Git 是推測你要作什麼，當操作複雜他就猜不出來你只是重命名，而 `git mv` 就告訴 Git「我正在重新命名這個檔案」。
+`git mv` 和一般的 `mv` 差異是可以讓 Git 直接索引檔案，需要這個指令的原因是 Git 會推測你要作什麼，但是操作複雜時他就猜不出來你正在重新命名，`git mv` 就是告訴 Git「我正在重新命名這個檔案」。
 
 有三種情況會用到
 
-1. 操作複雜時，避免 Git 視為兩個不同的檔案，例如大規模變更名稱
+1. 操作複雜時，避免 Git 視為兩個不同的檔案，例如大規模變更檔案名稱
 2. 在不區分大小寫的檔案系統上更改檔案名稱的大小寫
 3. 移動 submodule 時
 
-賣課網寫了[這麼長一篇文章](https://gitbook.tw/chapters/using-git/rename-and-delete-file)整篇都在說用途是讓我們少打一個指令？別搞笑了大哥。
+賣課網寫了[這麼長一篇文章](https://gitbook.tw/chapters/using-git/rename-and-delete-file)整篇都在說用途是讓我們少打一個指令，別搞笑了大哥。
 
 #### git reset 誤導
 
 reset 實際在做的就是清除提交，最荒謬的是賣課網說[不要被名詞誤導](https://gitbook.tw/chapters/using-git/reset-commit)結果他的說法才是在誤導別人。
 
-他所有文章都只介紹表面這我沒意見，結果偏偏這裡從底層說明這個指令在移動 HEAD，講的沒錯但是這樣說反而更讓讀者搞不懂，所以他又補充說明 git reset 比較像 goto，問題就出在這個自創名詞，請問 goto 到過往的提交能 goto 回到原本的提交嗎？不能嘛，那這個解釋不就有漏洞了嗎？reset 實際在做的就是清除提交，搞自創名詞拜託先想清楚能不能被合理解釋。
+他的文章都只介紹表面這我沒意見，本來就簡易介紹課才賣的多，結果偏偏這裡說明這個指令底層實際上在移動 HEAD，講的沒錯但是這樣說反而更讓讀者搞不懂，所以他又補充說明 git reset 比較像 goto，問題就出在這個自創名詞，請問 goto 到過往的提交能 goto 回到原本的提交嗎？不能嘛，那這個解釋不就有漏洞了嗎？reset 實際在做的就是清除提交，搞自創名詞拜託先想清楚能不能被合理解釋。
 
 #### 移除已經提交的檔案但不刪除
 
@@ -93,9 +93,9 @@ git gc --aggressive --prune=now
 
 #### 清除隱私資料
 
-任意使用哪種方式把該次提交從提交歷史中移除就可以了，完全不需擔心 reflog 因為他不會被推送到遠端，如果要徹底清除本地紀錄可以使用 filter-repo，內建的 filter-branch 已經不被建議使用。
+任意使用哪種方式把目標從提交歷史中移除就可以了，不用擔心 reflog 紀錄，因為 reflog 紀錄壓根就不會被推送到遠端，如果要徹底清除本地紀錄可以使用 filter-repo，內建的 filter-branch 已經不被建議使用。
 
-想想每個人的 reflog 紀錄都不一樣，那怎麼可能被推送？賣課網[又寫錯了](https://gitbook.tw/chapters/faq/remove-files-from-git)，作者書都寫完了結果還是不知道 Git 是「分散式」的「鏡像系統」，有搞清楚分散鏡像系統就不可能說出 reflog 紀錄被推送這句話。
+賣課網[又寫錯了](https://gitbook.tw/chapters/faq/remove-files-from-git)，想想每個人的 reflog 紀錄都不一樣，那怎麼可能被推送？作者書都寫完了結果還是不知道 Git 是「分散式」的「鏡像系統」，有搞清楚分散鏡像系統就不可能說出 reflog 紀錄被推送這句話。
 
 你可能會覺得我很嚴格，可能作者就是剛好沒想到啊，你說的沒錯，那退一步來說，要寫書教別人之前至少要測試正確性吧，看起來是沒有。
 
@@ -107,7 +107,7 @@ git push <遠端名稱> <指定提交>:<遠端分支名稱>
 
 又是賣課網，10 秒能講完的事情他拍了[七分鐘的影片](https://www.youtube.com/watch?v=VShhhq_5sMc)。
 
-#### 加速 clone
+#### 加速 Clone
 
 請見我的文章[使用 Git Sparse Checkout 只下載部分專案以加速 Clone 速度](../advance/reduce-size)。
 
