@@ -10,10 +10,10 @@ keywords:
   - Git
   - Programming
 last_update:
-  date: 2024-09-07T14:10:12+08:00
+  date: 2025-02-12T00:44:00+08:00
   author: zsl0621
 first_publish:
-  date: 2024-09-07T14:10:12+08:00
+  date: 2025-02-12T00:44:00+08:00
 ---
 
 Cherry-Pick 的意思是把指定提交像是摘櫻桃一樣取過來，開發社群通常不鼓勵使用此指令，詳情請見 [Git Cherry Pick 的後遺症](https://blog.darkthread.net/blog/git-cherry-pick-cons/)，我們先不管這個問題只學如何使用。

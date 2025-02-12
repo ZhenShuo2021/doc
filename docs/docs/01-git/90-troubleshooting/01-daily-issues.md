@@ -1,5 +1,6 @@
 ---
-title: 各種日常問題
+title: Git 各種日常問題集合
+sidebar_label: 各種日常問題
 description: 介紹 Git 常見的本地和遠端問題，包含清除reflog記錄、正確使用rebase、git mv、以及如何加速clone等進階技巧。還解釋了常見錯誤誤導，並提供正確的 Git 操作方法。
 tags:
   - Git

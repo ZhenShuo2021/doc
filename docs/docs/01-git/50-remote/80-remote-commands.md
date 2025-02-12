@@ -1,5 +1,6 @@
 ---
-title: 遠端指令
+title: Git 遠端指令
+sidebar_label: 遠端指令
 description: 操作遠端儲存庫的指令都在這。
 tags:
   - Git

@@ -1,6 +1,6 @@
 [
   {
-    "title": "各種日常問題",
+    "title": "Git 各種日常問題集合",
     "permalink": "/docs/git/troubleshooting/daily-issues",
     "description": "介紹 Git 常見的本地和遠端問題，包含清除reflog記錄、正確使用rebase、git mv、以及如何加速clone等進階技巧。還解釋了常見錯誤誤導，並提供正確的 Git 操作方法。",
     "tags": [
@@ -16,26 +16,6 @@
       }
     ],
     "date": 1739338500000,
-    "yearMonth": "2025 年 02 月",
-    "day": "12"
-  },
-  {
-    "title": "使用 Force if Includes 安全的強制推送",
-    "permalink": "/docs/git/remote/force-if-includes-safely-push",
-    "description": "使用 force-if-includes 安全的進行強制推送",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1739298522000,
     "yearMonth": "2025 年 02 月",
     "day": "12"
   },
@@ -56,6 +36,46 @@
       }
     ],
     "date": 1739295942000,
+    "yearMonth": "2025 年 02 月",
+    "day": "12"
+  },
+  {
+    "title": "如何回到過去進行修正與新增功能",
+    "permalink": "/docs/git/history-manipulation/flashback-commit",
+    "description": "如何在 Git 中回到過去進行修正與新增功能",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1739295207000,
+    "yearMonth": "2025 年 02 月",
+    "day": "12"
+  },
+  {
+    "title": "使用 cherry-pick 揀選指定提交",
+    "permalink": "/docs/git/history-manipulation/cherry-pick",
+    "description": "使用 cherry-pick 揀選指定提交",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Git",
+        "permalink": "/docs/tags/git"
+      },
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      }
+    ],
+    "date": 1739292240000,
     "yearMonth": "2025 年 02 月",
     "day": "12"
   },
@@ -183,25 +203,5 @@
     "date": 1736858493000,
     "yearMonth": "2025 年 01 月",
     "day": "14"
-  },
-  {
-    "title": "使用變基 Rebase 合併分支",
-    "permalink": "/docs/git/history-manipulation/rebase",
-    "description": "最快最清楚而且最正確的搞懂變基 git rebase。",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1736696400000,
-    "yearMonth": "2025 年 01 月",
-    "day": "12"
   }
 ]

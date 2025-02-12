@@ -8,10 +8,10 @@ keywords:
   - Git
   - Programming
 last_update:
-  date: 2025-02-12T02:28:42+08:00
+  date: 2025-02-12T00:44:00+08:00
   author: zsl0621
 first_publish:
-  date: 2024-08-25T22:24:42+08:00
+  date: 2025-02-12T00:44:00+08:00
 ---
 
 使用以下指令進行安全的強制推送
