@@ -15,12 +15,12 @@
         "permalink": "/docs/tags/programming"
       }
     ],
-    "date": 1739338500000,
+    "date": 1739373540000,
     "yearMonth": "2025 年 02 月",
     "day": "12"
   },
   {
-    "title": "遠端指令",
+    "title": "Git 遠端指令",
     "permalink": "/docs/git/remote/remote-commands",
     "description": "操作遠端儲存庫的指令都在這。",
     "tags": [

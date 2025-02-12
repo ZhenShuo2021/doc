@@ -42,6 +42,7 @@ git checkout -b fix/old <hash>
 
 那如果我想在過去提交中插入一個提交呢？請用 rebase 功能，你有兩種選項：
 
-1. 用上面的方式然後進行分支 rebase
+1. 用新的 branch 儲存後進行分支 rebase，也就是上面的方法二
 2. 用互動式 rebase 選擇 edit 進入要插入的前一個提交，修改完成後除了 add 預存以外，這裡多一個步驟是直接使用 `git commit` 才會多一個新的提交
-3. 你甚至可以在互動式提交中進行 cherry-pick
+
+你甚至可以在互動式提交中進行 cherry-pick。

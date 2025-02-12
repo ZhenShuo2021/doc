@@ -9,7 +9,7 @@ keywords:
   - Git
   - Programming
 last_update:
-  date: 2025-02-12T13:35:00+08:00
+  date: 2025-02-12T23:19:00+08:00
   author: zsl0621
 first_publish:
   date: 2025-02-12T13:35:00+08:00
@@ -86,6 +86,45 @@ git gc --aggressive --prune=now
 ---
 
 ## 遠端問題
+
+#### 無法推送
+
+有兩種可能，遠端分支設定錯誤或者遠端提交歷史比本地還要新。
+
+比本地還新的話就使用 `git pull --rebase`，如果設定跑掉就用[設定遠端分支](#設定遠端分支)，如果想要覆蓋就使用[安全的強制推送](#安全的強制推送)。ㄋ
+
+#### 設定遠端分支
+
+請見 Git 遠端指令的 [TL;DR](../remote/remote-commands#tldr) 段落。
+
+> 還是無法設定遠端分支
+
+一般來說上面的方式就可以了，但是如果還是不給你設定，例如這個情況：
+
+```sh
+git branch -u origin/custom
+致命錯誤: 請求的上游分支「origin/custom」不存在
+```
+
+請先檢查遠端相關設定
+
+```sh
+# 檢查
+git remote -vv
+git ls-remote
+
+# 更新遠端資訊
+git fetch --all
+
+# 重新完成一次 TL;DR 的操作
+```
+
+如果還是不行就代表 remote 抽風了，使用以下指令重新設定遠端：
+
+```sh
+git remote remove origin
+git remote add <url>
+```
 
 #### 安全的強制推送
 
