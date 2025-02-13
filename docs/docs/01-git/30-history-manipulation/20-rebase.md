@@ -10,7 +10,7 @@ keywords:
   - Git
   - Programming
 last_update:
-  date: 2025-01-12T23:40:00+08:00
+  date: 2025-02-13T23:59:25+08:00
   author: zsl0621
 first_publish:
   date: 2024-09-07T14:10:12+08:00
@@ -86,7 +86,9 @@ re-base 的核心兩個單字分別代表 `重新` 以及 `基底`，表示此�
 
 :::
 
-請務必記住口訣，這可以讓你正常使用好一段時間，筆者保證這段敘述的絕對正確，所有違背這段敘述的說明都是錯的。
+請務必記住口訣，這可以讓你正常使用好一段時間，筆者保證這段敘述的絕對正確，所有違背這段敘述的說明都是錯的[^simplify]。
+
+[^simplify]: 這是簡化版本，完整版本請見[搞懂 Rebase Onto](../advance/rebase-onto)，資訊量很大不建議閱讀。
 
 ## 誰 Rebase 誰才對？{#correctly-rebase}
 
