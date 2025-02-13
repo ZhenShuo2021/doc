@@ -17,7 +17,7 @@ first_publish:
 
 # Git 遠端儲存庫設定
 
-介紹 Git 如何上傳到遠端儲存庫，常用的有 Github 和 Gitlab，這裡以 Github 為例。
+本文只講操作不講原理，介紹 Git 如何上傳到遠端儲存庫，常用的有 Github 和 Gitlab，這裡以 Github 為例。
 
 ## 設定 SSH
 
@@ -32,18 +32,17 @@ git config --global user.name "NAME"
 git config --global user.email "{ID}+{username}@users.noreply.github.com"
 ```
 
-4. 測試 `ssh -T git@github.com`，出現 successfully authenticated 即成功，GitHub does not provide shell access 不用管。
+4. 測試 `ssh -T git@github.com`，出現 successfully authenticated 即成功，不用管 GitHub does not provide shell access 這句話。
 5. (選用) 連接並且上傳既有的 github repo
 
 ```sh
 git remote add origin git@github.com:your-username/your-repo.git
-git remote set-url origin git@github.com:ZhenShuo2021/ZhenShuo2021.github.io.git
 git push -u origin main
 ```
 
 ## 可選：設定 GPG 簽名
 
-請直接看 [利用 GPG 簽署 git commit](https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/) 的教學，圖文並茂且完整，並且包含偵錯方式。  
+請直接看 [利用 GPG 簽署 git commit](https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/) 的教學，圖文並茂且完整，並且包含常見錯誤的解決方法。  
 如果要隱藏信箱在 GPG 設定時需使用剛剛設定的 noreply 信箱。  
 如果已經有 GPG key，可以用以下指令刪除：
 

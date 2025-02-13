@@ -1,7 +1,7 @@
 ---
-title: "比 Stash 更方便的 Worktree"
+title: 使用 Git Worktree 簡化分支切換
 author: zsl0621
-description: Git Worktree
+description: 使用 Git Worktree 簡化分支切換步驟以提升工作效率
 tags:
   - Git
   - Programming
@@ -14,8 +14,6 @@ last_update:
 first_publish:
   date: 2024-09-10T16:15:33+08:00
 ---
-
-# 使用 Git Worktree 同時管理多個分支
 
 有時我們會需要在多個分支間來回切換，以往我們的指令流程是
 

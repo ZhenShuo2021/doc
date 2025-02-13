@@ -123,14 +123,14 @@ git rebase (--continue|--skip|--abort|--quit|--edit-todo|--show-current-patch)
 git rebase [--onto <newbase>] [<upstream> [<branch>]]
 ```
 
-經過上述的範例應該自信滿滿，但深入一點會發現其實還是不懂要怎麼用。你會想說簡單啊，不就是 `git rebase --onto A B C` 時，A/B/C分別代表 newbase/upstream/branch 嗎？你想的沒錯，但是他也可以這樣用：
+經過上述的範例應該自信滿滿，但深入一點會發現其實還是不懂要怎麼用。你會想說簡單啊，不就是 `git rebase --onto A B C` 時，A/B/C分別代表 newbase/upstream/branch，三者都可選，並且 `<branch>` 是可選的可選嗎？你想的沒錯，但是他也可以這樣用：
 
 ```sh
 git rebase B --onto A C
 git rebase B C --onto A
 ```
 
-在這種用法之下，B 會被解析為 upstream，C 則是 branch，因為一開始就給他佔位符參數，git 就會往後尋找可解析的參數，直到遇到 `--onto` 後， `--onto` 的下一個佔位符必須是 `<newbase>`，最後 B/C 就分別對應了剩下的佔位符。所以這兩個指令等效一開始的 `git rebase --onto A B C`，現在你知道為什麼要讀懂文檔了。
+在這種用法之下，B 會被解析為 upstream，C 則是 branch，因為一開始就給他佔位符參數，Git 就會往後尋找可解析的參數，直到遇到 `--onto` 後， `--onto` 的下一個佔位符必須是 `<newbase>`，最後 B/C 就分別對應了剩下的佔位符。所以這兩個指令等效一開始的 `git rebase --onto A B C`，現在你知道為什麼要讀懂文檔了。
 
 :::danger
 

@@ -1,7 +1,7 @@
 ---
 title: 使用 Git Sparse Checkout 只下載部分專案以加速 Clone 速度
 description: 介紹操作大型儲存庫時如何減少容量加速 Clone
-sidebar_label: 加速 Clone
+sidebar_label: 使用 Sparse Checkout 加速 Clone
 tags:
   - Git
   - Programming
@@ -19,7 +19,7 @@ first_publish:
 
 Clone 大型儲存庫又不需要全部檔案時可以使用 sparse-checkout 功能排除指定的檔案避免全部下載。
 
-這個指令可以用於解決兩種儲存庫過大的原因，分別是 <u>**儲存庫包含大檔案或單純的文件數量過多**</u>，本教學會搭配其他指令同時使用，可以完整解決大型儲存庫下載的問題，並且最後包含實際使用範例，包含如何在十秒內克隆完樹梅派原始碼高達一百二十萬次提交的儲存庫。
+這個指令可以用於解決兩種儲存庫過大的原因，分別是 <u>**儲存庫包含大檔案或單純的文件數量過多**</u>，本教學會搭配其他指令同時使用，可以完整解決大型儲存庫下載的問題，並且最後包含實際使用範例，包含如何在十秒內克隆完樹梅派高達一百二十萬次提交的儲存庫。
 
 <br />
 <br />
@@ -42,7 +42,7 @@ git sparse-checkout set src/java.base src/java.desktop
 git checkout
 ```
 
-現在我們處於 sparse checkout 的 cone 模式，此模式不支援排除目錄，只支援加入目錄，`git sparse-checkout set` 則是將規則寫入 `.git/info/sparse-checkout`。
+現在我們處於 sparse checkout 的 cone 模式，此模式只支援加入目錄不支援排除目錄，`git sparse-checkout set` 則是將要加入的目錄寫入 `.git/info/sparse-checkout`，最後在 checkout 時根據此規則取出目錄。
 
 <br />
 
