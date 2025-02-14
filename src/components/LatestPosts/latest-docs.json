@@ -1,5 +1,25 @@
 [
   {
+    "title": "一鍵安裝功能齊全而且快速的 macOS/Linux dotfiles",
+    "permalink": "/docs/linux/fastest-dotfile",
+    "description": "一鍵安裝功能齊全而且快速的 macOS/Linux dotfiles",
+    "tags": [
+      {
+        "inline": true,
+        "label": "實用工具",
+        "permalink": "/docs/tags/實用工具"
+      },
+      {
+        "inline": true,
+        "label": "Performance",
+        "permalink": "/docs/tags/performance"
+      }
+    ],
+    "date": 1739507760000,
+    "yearMonth": "2025 年 02 月",
+    "day": "14"
+  },
+  {
     "title": "使用變基 Rebase 合併分支",
     "permalink": "/docs/git/history-manipulation/rebase",
     "description": "最快最清楚而且最正確的搞懂變基 git rebase。",
@@ -183,25 +203,5 @@
     "date": 1738918320000,
     "yearMonth": "2025 年 02 月",
     "day": "07"
-  },
-  {
-    "title": "看懂 Git 文檔",
-    "permalink": "/docs/git/preliminaries/read-git-docs",
-    "description": "教你看懂 Git 文檔",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1737012600000,
-    "yearMonth": "2025 年 01 月",
-    "day": "16"
   }
 ]
