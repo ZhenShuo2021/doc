@@ -1,8 +1,33 @@
 [
   {
-    "title": "一鍵安裝功能齊全而且快速的 macOS/Linux dotfiles",
+    "title": "UV Python 教學，最佳虛擬環境管理工具",
+    "permalink": "/docs/python/python-uv-complete-guide",
+    "description": "UV Python 教學，最佳虛擬環境管理工具",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Programming",
+        "permalink": "/docs/tags/programming"
+      },
+      {
+        "inline": true,
+        "label": "Python",
+        "permalink": "/docs/tags/python"
+      },
+      {
+        "inline": true,
+        "label": "虛擬環境",
+        "permalink": "/docs/tags/虛擬環境"
+      }
+    ],
+    "date": 1739585040000,
+    "yearMonth": "2025 年 02 月",
+    "day": "15"
+  },
+  {
+    "title": "一鍵美化 MacOS Terminal | 功能齊全而且快速的 dotfiles | macOS | Linux",
     "permalink": "/docs/linux/fastest-dotfile",
-    "description": "一鍵安裝功能齊全而且快速的 macOS/Linux dotfiles",
+    "description": "一鍵美化 MacOS Terminal | 功能齊全而且快速的 dotfiles | macOS | Linux",
     "tags": [
       {
         "inline": true,
@@ -13,6 +38,11 @@
         "inline": true,
         "label": "Performance",
         "permalink": "/docs/tags/performance"
+      },
+      {
+        "inline": true,
+        "label": "Font",
+        "permalink": "/docs/tags/font"
       }
     ],
     "date": 1739507760000,
@@ -178,30 +208,5 @@
     "date": 1739230705000,
     "yearMonth": "2025 年 02 月",
     "day": "11"
-  },
-  {
-    "title": "UV Python 教學，最佳虛擬環境管理工具",
-    "permalink": "/docs/python/python-uv-complete-guide",
-    "description": "UV Python 教學，最佳虛擬環境管理工具",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      },
-      {
-        "inline": true,
-        "label": "Python",
-        "permalink": "/docs/tags/python"
-      },
-      {
-        "inline": true,
-        "label": "虛擬環境",
-        "permalink": "/docs/tags/虛擬環境"
-      }
-    ],
-    "date": 1738918320000,
-    "yearMonth": "2025 年 02 月",
-    "day": "07"
   }
 ]

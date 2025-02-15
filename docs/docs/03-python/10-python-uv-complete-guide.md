@@ -11,7 +11,7 @@ keywords:
   - Python
   - 虛擬環境
 last_update:
-  date: 2025-02-07T16:52:00+08:00
+  date: 2025-02-15T10:04:00+08:00
   author: zsl0621
 first_publish:
   date: 2024-11-19T14:22:30+08:00
@@ -43,14 +43,14 @@ import TabItem from '@theme/TabItem';
 
 > 更新：發展不只是快而是超快，才一個禮拜過去他又多了一千個星星，筆者文章都還沒校完稿，放上圖片讓大家看到底有多粗暴，有人直接飛天了
 
-> 再度更新：2024/12/12 星星數成功超越 Poetry，確實能說是最受歡迎的管理套件了
+> 再度更新：2024/12/12 星星數成功超越 Poetry，確實是最受歡迎的環境管理套件了
 
 ![Star History Chart](https://api.star-history.com/svg?repos=python-poetry/poetry,astral-sh/uv,pypa/pipenv,pypa/hatch,pdm-project/pdm,conda/conda,pyenv/pyenv-virtualenv&type=Date)
 
 <br/>
 <br/>
 
-[^global]: 只剩下等效於 `pyenv global` 的設定全局 Python 功能~~還不支援但[已經在規劃中](https://github.com/astral-sh/uv/issues/6265)~~已經放進 [preview 版本](https://github.com/astral-sh/uv/releases/tag/0.5.6)中，加上 `--preview --default` 參數即可使用，目前實測還很早期，連 venv 都不能跑。
+[^global]: 只剩下等效於 `pyenv global` 的設定全局 Python 功能<s>還不支援但[已經在規劃中](https://github.com/astral-sh/uv/issues/6265)</s>已經放進 [preview 版本](https://github.com/astral-sh/uv/releases/tag/0.5.6)中，加上 `--preview --default` 參數即可使用，目前實測還很早期實測完全不能用。
 
 ## TL;DR
 
@@ -73,15 +73,15 @@ uv remove <pkg>
 # 檢查套件
 uv pip list
 
-# 更新指定套件或全部套件
-uv sync -P <pkg>
-uv sync -U
+# 更新 lock 檔案的套件版本，更新指定套件或全部套件
+uv lock -P <pkg>
+uv lock -U
 
 # 根據 uv.lock 同步虛擬環境的套件
 uv sync
 
 # 執行程式
-uv run hello.py
+uv run main.py
 ```
 
 <details>
@@ -128,6 +128,35 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
+然後幫終端機加上指令自動補全
+
+```sh
+# Unix 用戶檢查自己是哪個 shell 
+ps -p $$
+
+# 根據對應 shell 選擇指令
+echo 'eval "$(uv generate-shell-completion bash)"' >> ~/.bashrc
+echo 'eval "$(uv generate-shell-completion zsh)"' >> ~/.zshrc
+
+# Windows 只有 PowerShell 支援補全，CMD 不行
+if (!(Test-Path -Path $PROFILE)) {
+  New-Item -ItemType File -Path $PROFILE -Force
+}
+Add-Content -Path $PROFILE -Value '(& uv generate-shell-completion powershell) | Out-String | Invoke-Expression'
+```
+
+使用方式是指令打到一半按下 <kbd>Tab</kbd> 即可自動補全。
+
+<details>
+
+<summary>廣告時間</summary>
+
+如果這是你第一次使用 shell 相關設定，可以參考[我的 shell 設定](https://github.com/ZhenShuo2021/dotfiles)，支援 macOS 和 Ubuntu，特色是極簡外觀、功能齊全而且啟動速度超快，基本上已經到速度極限不會有人的啟動速度比我的快。
+
+</details>
+
+想要移除 uv 請見[官方文檔](https://docs.astral.sh/uv/getting-started/installation/#uninstallation)的指令教學。
+
 ### 設定 Python 版本
 
 https://docs.astral.sh/uv/concepts/python-versions/  
@@ -160,8 +189,12 @@ https://docs.astral.sh/uv/concepts/projects/init/
 設定好 Python 版本後就是初始化專案，使用 `app` 參數設定專案名稱，使用 `build-backend` 參數設定專案的構建後端，也可以不輸入任何參數使用預設值初始化專案[^init]。
 
 ```sh
-uv init --app test --build-backend hatch --python 3.12
+uv init project-name
 ```
+
+這會建立一個最簡單的專案。如果要建立一個 CLI APP，那麼 `--package` 是你的好幫手，只需要在加上他就會建立一個 src layout 的 CLI 專案並且包含構建後端 (build backend)、函式入口點都幫你填寫完成。
+
+預設選項可加上此參數修改 `--build-backend <name> --python <version>`，後端預設 hatch，setuptools, flit, scikit, maturin 等選項。
 
 [^init]: 其實還有 `--package`/`--lib` 選項可以建立預設專案架構，看是套件還是函式庫，不過會用到的人都有能力獨立閱讀文檔了。另外，如果你的專案需要使用 rust/C/C++ 等外部函式庫，請參照[官方文檔](https://docs.astral.sh/uv/concepts/projects/init/#projects-with-extension-modules)說明。
 
@@ -173,8 +206,19 @@ https://docs.astral.sh/uv/pip/environments/
 
 ```sh
 uv venv <name> <--python 3.11>
-source .venv/bin/activate
 ```
+
+<details>
+
+<summary>虛擬環境</summary>
+
+`source .venv/bin/activate` 這個指令代表進入虛擬環境，之前有在官方 repo 看到有人問到底該不該進入虛擬環境，我現在找不到這個 issue 但是記得答案是 no，理由是 `uv run` 就可以直接使用，你也免去在虛擬環境中切換的麻煩。
+
+我的看法是進入了也不影響，實測設定 `[project.scripts]` 作為腳本入口，差別在於需不需要在 `my-cli-command` 前面加上 `uv run`。
+
+本文有提供[範例](#pyproject-toml-example)介紹如何設定腳本入口。
+
+</details>
 
 ## 套件管理
 
@@ -323,7 +367,7 @@ https://docs.astral.sh/uv/guides/integration/jupyter/
 default-groups = ["dev", "foo"]
 ```
 
-## 🔥 pyproject.toml 範例 🔥
+## 🔥 pyproject.toml 範例 🔥{#pyproject-toml-example}
 
 既然 uv 的一站式體驗這麼好，那本文也提供一站式體驗，連 `pyproject.toml` 基礎範例都放上來提供參考，貼上後只需要使用 `uv sync` 就完成了，超級快。
 
@@ -371,9 +415,12 @@ dev = [
 ]
 
 # 可選群組
+# 使用 uv build 構建完自己的包後使用這個指令安裝
+# uv pip install "dist/your_project_name-0.1.0-py3-none-any.whl[bs4-sucks]"
+# 再使用 uv pip list 就可以看到 lxml 被成功安裝
 [project.optional-dependencies]
-network = [
-    "httpx[http2]>=0.27.2",
+bs4-sucks = [
+    "lxml",
 ]
 
 # 如果需要打包套件就使用這些
@@ -382,13 +429,13 @@ network = [
 # build-backend = "hatchling.build"
 
 # [tool.hatch.build.targets.wheel]
-# packages = ["src/foo"]   # 佔位符
+# packages = ["src/foo"]
 
 # 幫 cli 套件設定入口點
 # 請注意，除了 `project.scripts` 外 `build-system` 和 `tool.hatch.build.targets.wheel` 都要一起設定才能啟用
 # https://docs.astral.sh/uv/concepts/projects/config/#entry-points
 # [project.scripts]
-# hello = "my_package:main_function"
+# my-cli-command = "my_package:main_function"
 ```
 
 假設我們要處理一個新專案，這個專案使用 uv 設定 pyproject.toml，我們只要一行就可以完成 Python 版本下載和設定 + 虛擬環境建立 + 套件安裝：
@@ -401,7 +448,7 @@ uv sync
 uv pip list
 
 # 甚至可以連安裝都不要，clone 專案下來直接跑也會自動安裝
-uv run <任意檔案>
+uv run <專案入口指令>
 ```
 
 但是如果專案使用 Poetry，我們會需要使用 pyenv + Poetry 組合，需要使用如下方所示這麼繁瑣的指令才能完成一樣的任務，而且 Poetry 的 "etry" 有夠難打每次敲快一點就打錯。
@@ -457,7 +504,7 @@ jobs:
       #     python-version: ${{ matrix.python-version }}
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
@@ -562,7 +609,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
@@ -582,6 +629,12 @@ jobs:
         # with:
         #   repository-url: https://test.pypi.org/legacy/
 ```
+
+### Github Dependabot
+
+開發中，尚未支援。
+
+更新進度請查看 [dependabot/dependabot-core#10478](https://github.com/dependabot/dependabot-core/issues/10478)，uv 建議的替代方案是使用 [Renovate](https://docs.astral.sh/uv/guides/integration/dependency-bots/)，或者也有用戶自己做的[簡易 Actions](https://github.com/EdmundGoodman/update-bot)。
 
 ## 使用 `uv tool` 取代 `pipx`
 
@@ -608,6 +661,41 @@ uv tool upgrade
 # 指定相依套件版本
 uv tool install --with <extra-package> <tool-package>
 ```
+
+## 建立符合 PEP 723 的腳本
+
+PEP 723 規範 Python 腳本的開頭設定以支援辨識該腳本需要哪些套件才能運行，否則像是以往需要多一個 requirements.txt 紀錄套件才能執行腳本。他的格式如下：
+
+```py
+# /// script
+# # 支援寫註解，要多加上一個 #
+# requires-python = ">=3.8"
+# dependencies = [
+#     "requests<3",
+#     "beautifulsoup4",
+# ]
+# ///
+```
+
+設定需要的套件和 Python 版本，現在 uv 可以直接幫你寫：
+
+```sh
+uv init --script example.py --python 3.12
+uv add --script example.py 'requests<3' 'beautifulsoup4'
+```
+
+第一行是建立文件，已經有的話可以跳過該行。
+
+## 從 .env 檔案讀取環境變數
+
+UV 甚至支援讀取 .env 檔，讓你在本地測試時可以隨意的切換各種不同 env 參數，使用範例如下：
+
+```sh
+echo "MY_VAR='Hello, world!'" > .env
+uv run --env-file .env -- python -c 'import os; print(os.getenv("MY_VAR"))'
+```
+
+如此一來你就可以使用多個不同的 .env 檔輕鬆的切換設定而不需要修改文件。
 
 ## 結束
 
