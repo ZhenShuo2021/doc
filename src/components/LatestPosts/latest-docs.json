@@ -1,5 +1,25 @@
 [
   {
+    "title": "0.04 秒極速啟動 Zsh 終端 | macOS | Linux | zcomet | dotfiles",
+    "permalink": "/docs/linux/fastest-zsh-dotfile",
+    "description": "0.04 秒極速啟動 Zsh 終端 | macOS | Linux | zcomet | dotfiles",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Zsh",
+        "permalink": "/docs/tags/zsh"
+      },
+      {
+        "inline": true,
+        "label": "Performance",
+        "permalink": "/docs/tags/performance"
+      }
+    ],
+    "date": 1740519780000,
+    "yearMonth": "2025 年 02 月",
+    "day": "26"
+  },
+  {
     "title": "UV Python 教學，最佳虛擬環境管理工具",
     "permalink": "/docs/python/python-uv-complete-guide",
     "description": "UV Python 教學，最佳虛擬環境管理工具",
@@ -23,31 +43,6 @@
     "date": 1739585040000,
     "yearMonth": "2025 年 02 月",
     "day": "15"
-  },
-  {
-    "title": "一鍵美化 MacOS Terminal | 功能齊全而且快速的 dotfiles | macOS | Linux",
-    "permalink": "/docs/linux/fastest-dotfile",
-    "description": "一鍵美化 MacOS Terminal | 功能齊全而且快速的 dotfiles | macOS | Linux",
-    "tags": [
-      {
-        "inline": true,
-        "label": "實用工具",
-        "permalink": "/docs/tags/實用工具"
-      },
-      {
-        "inline": true,
-        "label": "Performance",
-        "permalink": "/docs/tags/performance"
-      },
-      {
-        "inline": true,
-        "label": "Font",
-        "permalink": "/docs/tags/font"
-      }
-    ],
-    "date": 1739507760000,
-    "yearMonth": "2025 年 02 月",
-    "day": "14"
   },
   {
     "title": "使用變基 Rebase 合併分支",
