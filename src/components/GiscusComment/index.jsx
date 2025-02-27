@@ -7,11 +7,11 @@ export default function GiscusComment() {
 
     return (
         <Giscus
-            repo="ZhenShuo2021/docs"
-            repoId="R_kgDOMuZlHQ"
+            repo="ZhenShuo2021/giscus"
+            repoId="R_kgDOOARatw"
             category="Announcements"
-            categoryId="DIC_kwDOMuZlHc4CiStx"
-            mapping="url"
+            categoryId="DIC_kwDOOARat84CnYlH"
+            mapping="title"
             strict="0"
             reactionsEnabled="1"
             emitMetadata="0"
