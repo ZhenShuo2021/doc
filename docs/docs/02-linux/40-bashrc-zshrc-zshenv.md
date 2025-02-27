@@ -48,4 +48,4 @@ Shell 是和作業系統互動的介面，所以人如其名，他是使用者�
 
 在 Unix 系統中大部分的設定檔都以 `.` 開頭，所以稱作 dotfiles。管理 dotfiles 可以讓你同步和備份各種設定，都不用特別說什麼，光是回想每個語言、套件、IDE、工具函式花了多少時間安裝和設定就知道他有多重要。Github 上有一堆 dotfiles 可以參考，經過簡易研究後暫時選擇 [holman/dotfiles](https://github.com/holman/dotfiles)，包含各種 out-of-the-box 設定以及 brew 安裝。
 
-想尋找更多 dotfiles 除了在 Github 上直接搜尋以外也可以找 awesome dotfiles，或者在 [Your unofficial guide to dotfiles on GitHub](https://dotfiles.github.io/inspiration/) 查看更多受歡迎的設定檔，或者使用[我的設定檔](./fastest-macos-dotfile)。
+想尋找更多 dotfiles 除了在 Github 上直接搜尋以外也可以找 awesome dotfiles，或者在 [Your unofficial guide to dotfiles on GitHub](https://dotfiles.github.io/inspiration/) 查看更多受歡迎的設定檔，或者使用[我的設定檔](./fastest-zsh-dotfile)。
