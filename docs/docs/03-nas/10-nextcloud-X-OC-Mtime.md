@@ -17,19 +17,20 @@ first_publish:
   date: 2025-02-27T16:34:00+08:00
 ---
 
-注意筆者完全不懂 php 所以修復方式是問 AI 的，這個問題的 Github issue 已經好幾年，官方看起來根本沒有要修也沒人說怎麼解決，所以只好直接問 AI，本文完成於 2025/02。
+注意筆者完全不懂 php 所以修復方式是問 AI 的，這個問題的 Github issue 已經好幾年，官方看起來根本沒有要修，也沒人說過怎麼解決這個問題，所以只好問 AI，本文完成於 2025/02。
 
 ## TL;DR
 
-1. 找到你的 config 目錄位置，假設使用 docker-compose 安裝設定如下，那就是找到 `/home/leo/docker/nextcloud/config`
+1. 找到 NextCloud `config` 目錄位置，假設使用 docker-compose 安裝設定如下
 
 ```yaml
 volumes:
   - /home/leo/docker/nextcloud/config:/config
-  - /home/leo/docker/nextcloud/data:/data
 ```
 
-2. 從這個路徑開始找 `www/nextcloud/apps/dav/lib/Connector/Sabre/MtimeSanitizer.php`，也就是整個路徑會變成 `/home/leo/docker/nextcloud/config/www/nextcloud/apps/dav/lib/Connector/Sabre/MtimeSanitizer.php`
+那就是找到 `/home/leo/docker/nextcloud/config`
+
+2. 從這個路徑開始找 `www/nextcloud/apps/dav/lib/Connector/Sabre/MtimeSanitizer.php`，也就說完整路徑是 `/home/leo/docker/nextcloud/config/www/nextcloud/apps/dav/lib/Connector/Sabre/MtimeSanitizer.php`
 3. 應該會看到像這樣的文件
 
 ```php reference title="MtimeSanitizer.php"
@@ -111,7 +112,7 @@ class MtimeSanitizer {
 
 由於我只需要一個簡單的雲端硬碟所以選擇舊版安裝方式。
 
-舊版的安裝方式文章又分成新舊兩種 docker-compose.yml，選擇新版（設定兩個 volumes 的那個），這裡要小心他的「安全与设置警告解决方法」所有的路徑都是舊版路徑，以我遇到的「不被信任的域名访问」這個問題來說，最後我找到的 config.php 在這裡
+舊版的安裝方式文章又分成新舊兩種 docker-compose.yml，選擇新版（設定兩個 volumes 的那個）進行安裝，並且要注意到「安全与设置警告解决方法」所有路徑都是舊版路徑，以我遇到的「不被信任的域名访问」這個問題來說，最後我找到的 config.php 在這裡
 
 ```sh
 ~/docker/nextcloud/config/www/nextcloud/config/config.php
