@@ -4,9 +4,10 @@
 
 Clone 後把所有和個人訊息改成你自己的，在原作者的網站有說設定了哪些東西，例如 git repo name, baseurl, Giscus, algolia...
 
-1. 安裝: yarn install
-2. 啟用: yarn start
-3. 建立首頁文章列表: yarn start 後使用 yarn new，如果時間沒有正確顯示需要刪除 .docusaurus 資料夾刷新
+1. 啟用新版 yarn: corepack enable
+2. 安裝: yarn install
+3. 啟用: yarn start
+4. 建立首頁文章列表: yarn start 後使用 yarn new，如果時間沒有正確顯示需要刪除 .docusaurus 資料夾刷新
 
 ## 部屬到 Cloudflare Pages 方式
 
