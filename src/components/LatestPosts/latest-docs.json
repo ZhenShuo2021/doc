@@ -1,5 +1,30 @@
 [
   {
+    "title": "TrueNas SMB 簽名及加密設定",
+    "permalink": "/docs/nas/smb-signing",
+    "description": "TrueNAS 預設沒有開啟 SMB 簽名及加密，新版又取消了 auxiliary parameters 欄位，所以不要懷疑自己找不到，搞老半天就這個能用。",
+    "tags": [
+      {
+        "inline": true,
+        "label": "NAS",
+        "permalink": "/docs/tags/nas"
+      },
+      {
+        "inline": true,
+        "label": "Linux",
+        "permalink": "/docs/tags/linux"
+      },
+      {
+        "inline": true,
+        "label": "ZFS",
+        "permalink": "/docs/tags/zfs"
+      }
+    ],
+    "date": 1741070410000,
+    "yearMonth": "2025 年 03 月",
+    "day": "04"
+  },
+  {
     "title": "在 Neovim 中設定 OSC52 實現跨 ssh 複製",
     "permalink": "/docs/others/neovim-osc52-ssh-copy",
     "description": "在 Neovim 中設定 OSC52 實現跨 ssh 複製",
@@ -186,26 +211,6 @@
       }
     ],
     "date": 1739373540000,
-    "yearMonth": "2025 年 02 月",
-    "day": "12"
-  },
-  {
-    "title": "如何回到過去進行修正與新增功能",
-    "permalink": "/docs/git/history-manipulation/flashback-commit",
-    "description": "如何在 Git 中回到過去進行修正與新增功能",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1739295207000,
     "yearMonth": "2025 年 02 月",
     "day": "12"
   }
