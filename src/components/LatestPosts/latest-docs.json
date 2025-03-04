@@ -1,5 +1,20 @@
 [
   {
+    "title": "撰寫 ZSH 自定義函式以及補全函式",
+    "permalink": "/docs/linux/customize-zsh-function-and-comletion",
+    "description": "使用 _path_files 函式完成自動補全，舉例來說，將 `hugo new content` 簡寫為 `hnc` 並且支援補全，第一步先建立一個檔案名稱為 hnc 的腳本放在 fpath 裡面，不能用 alias，alias 不給補全，腳本如下：...",
+    "tags": [
+      {
+        "inline": true,
+        "label": "Linux",
+        "permalink": "/docs/tags/linux"
+      }
+    ],
+    "date": 1741098046000,
+    "yearMonth": "2025 年 03 月",
+    "day": "04"
+  },
+  {
     "title": "TrueNas SMB 簽名及加密設定",
     "permalink": "/docs/nas/smb-signing",
     "description": "TrueNAS 預設沒有開啟 SMB 簽名及加密，新版又取消了 auxiliary parameters 欄位，所以不要懷疑自己找不到，搞老半天就這個能用。",
@@ -193,25 +208,5 @@
     "date": 1739450640000,
     "yearMonth": "2025 年 02 月",
     "day": "13"
-  },
-  {
-    "title": "Git 各種日常問題集合",
-    "permalink": "/docs/git/troubleshooting/daily-issues",
-    "description": "介紹 Git 常見的本地和遠端問題，包含清除reflog記錄、正確使用rebase、git mv、以及如何加速clone等進階技巧。還解釋了常見錯誤誤導，並提供正確的 Git 操作方法。",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1739373540000,
-    "yearMonth": "2025 年 02 月",
-    "day": "12"
   }
 ]

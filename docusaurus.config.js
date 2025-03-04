@@ -143,6 +143,18 @@ module.exports = {
       theme: prismThemes.github,
       darkTheme: prismThemes.vsDark,
     },
+
+
+
+    webpack: {
+      configure: (webpackConfig) => {
+        webpackConfig.module.rules.push({
+          test: /\.(webp|png|jpe?g|gif|svg)$/i,
+          type: 'asset/resource',
+        });
+        return webpackConfig;
+      },
+    },
   },
   stylesheets: [{
     href: "https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css",
