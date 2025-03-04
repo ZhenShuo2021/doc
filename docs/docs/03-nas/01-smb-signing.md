@@ -67,7 +67,7 @@ SMBv1 有安全漏洞不建議使用，在 System > Services 修改 SMB 設定�
 
 ### 測試是否成功
 
-除了使用前面的方式在 TrueNAS 檢查之外，也可以用別台電腦使用 nmap 測試，在 macOS 使用 brew 安裝 nmap:
+設定完成後可以使用最前面的方式檢查設定，也可以用別台電腦使用 nmap 測試，在 macOS 使用 brew 安裝 nmap:
 
 ```sh
 brew install nmap
