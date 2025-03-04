@@ -1,8 +1,8 @@
-position: 1 # float position is supported
-label: NAS
+position: 10
+label: 'Git'
 collapsible: true # make the category collapsible
 collapsed: true # keep the category open by default
 className: red
 link:
   type: generated-index
-  title: Docusaurus
+  title: Git 教學

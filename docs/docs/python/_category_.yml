@@ -1,0 +1,8 @@
+position: 40
+label: Python
+collapsible: true
+collapsed: true
+className: red
+link:
+  type: generated-index
+  title: Python

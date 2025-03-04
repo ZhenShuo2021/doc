@@ -97,7 +97,7 @@ module.exports = {
           type: 'doc',
           position: 'left',
           docsPluginId: 'pluginForMemo',
-          docId: 'about/memo',
+          docId: 'memo',
           sidebarId: 'memoSidebar',
           label: "備忘錄",
         },
