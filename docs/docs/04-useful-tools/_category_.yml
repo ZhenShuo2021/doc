@@ -1,7 +1,7 @@
-position: 1 # float position is supported
+position: 50
 label: 實用工具
-collapsible: true # make the category collapsible
-collapsed: true # keep the category open by default
+collapsible: true
+collapsed: true
 className: red
 link:
   type: generated-index

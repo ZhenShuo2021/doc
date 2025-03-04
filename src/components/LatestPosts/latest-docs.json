@@ -1,5 +1,30 @@
 [
   {
+    "title": "跨平台終端機實測大對決",
+    "permalink": "/docs/useful-tools/cross-platform-terminal-comparison",
+    "description": "跨平台終端機實測大對決",
+    "tags": [
+      {
+        "inline": true,
+        "label": "實用工具",
+        "permalink": "/docs/tags/實用工具"
+      },
+      {
+        "inline": true,
+        "label": "Terminal Emulator",
+        "permalink": "/docs/tags/terminal-emulator"
+      },
+      {
+        "inline": true,
+        "label": "終端機",
+        "permalink": "/docs/tags/終端機"
+      }
+    ],
+    "date": 1741103520000,
+    "yearMonth": "2025 年 03 月",
+    "day": "04"
+  },
+  {
     "title": "撰寫 ZSH 自定義函式以及補全函式",
     "permalink": "/docs/linux/customize-zsh-function-and-comletion",
     "description": "使用 _path_files 函式完成自動補全，舉例來說，將 `hugo new content` 簡寫為 `hnc` 並且支援補全，第一步先建立一個檔案名稱為 hnc 的腳本放在 fpath 裡面，不能用 alias，alias 不給補全，腳本如下：...",
@@ -186,26 +211,6 @@
       }
     ],
     "date": 1739459022000,
-    "yearMonth": "2025 年 02 月",
-    "day": "13"
-  },
-  {
-    "title": "使用 Force if Includes 安全的強制推送",
-    "permalink": "/docs/git/advance/dive-into-force-if-includes",
-    "description": "使用 force-if-includes 安全的進行強制推送",
-    "tags": [
-      {
-        "inline": true,
-        "label": "Git",
-        "permalink": "/docs/tags/git"
-      },
-      {
-        "inline": true,
-        "label": "Programming",
-        "permalink": "/docs/tags/programming"
-      }
-    ],
-    "date": 1739450640000,
     "yearMonth": "2025 年 02 月",
     "day": "13"
   }
