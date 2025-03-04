@@ -26,7 +26,7 @@ Clone 後把所有和個人訊息改成你自己的，在原作者的網站有�
 
 ## 插入影片
 
-使用 [react-player](https://github.com/cookpete/react-player) 完成，支援的影片來源和他一樣，或者放在 /static 資料夾中的影片，其 url 不需包含 static。
+使用 [react-player](https://github.com/cookpete/react-player) 完成，支援的影片來源和他一樣，或者放在 /static 資料夾中的影片。
 
 ```md
 import ResponsivePlayer from '@site/src/components/ResponsivePlayer';
@@ -34,4 +34,20 @@ import ResponsivePlayer from '@site/src/components/ResponsivePlayer';
 <ResponsivePlayer url="https://www.youtube.com/watch?v=<VIDEO_ID>" />
 <ResponsivePlayer url="https://www.facebook.com/facebook/videos/<VIDEO_ID>/" />
 <ResponsivePlayer url="/video/<FILE_NAME>" />
+```
+
+## 插入輪播圖片
+
+使用 Embla 完成，範例如下，假設圖片放在 md 文件同層級的 data/img-n.webp 中
+
+```md
+import EmblaCarousel from '@site/src/components/EmblaCarousel';
+
+import image1 from './data/img-1.webp';
+import image2 from './data/img-2.webp';
+
+<EmblaCarousel
+  images={[image1, image2]}
+  options={{ loop: true }}
+/>
 ```
