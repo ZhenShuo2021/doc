@@ -1,10 +1,12 @@
 ---
-title: 撰寫 ZSH 自定義函式以及補全函式
+title: 撰寫 ZSH 補全函式
 description: 使用 _path_files 函式完成自動補全，舉例來說，將 `hugo new content` 簡寫為 `hnc` 並且支援補全，第一步先建立一個檔案名稱為 hnc 的腳本放在 fpath 裡面，不能用 alias，alias 不給補全，腳本如下：...
 tags:
   - Linux
+  - ZSH
 keywords:
   - Linux
+  - ZSH
 last_update:
   date: 2025-03-04T22:20:46+08:00
   author: zsl0621
@@ -12,7 +14,7 @@ first_publish:
   date: 2025-02-15T02:46:46+08:00
 ---
 
-廢話不多說直接用範例解釋
+廢話不多說直接上範例。
 
 ## 範例一：hugo new content
 
