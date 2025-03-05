@@ -1,6 +1,7 @@
 ---
 title: 關於這個區域
 id: memo
+slug: /about
 last_update:
   date: 2024-10-30T00:00:00+08:00
   author: zsl0621

@@ -26,46 +26,60 @@ module.exports = {
   organizationName: "ZhenShuo2021", // Usually your GitHub org/user name.
   projectName: "zsl0621@Docs", // Usually your repo name.
   i18n: { defaultLocale: 'zh-TW', locales: ['zh-TW'] },
-  plugins: [
-    require.resolve("docusaurus-plugin-image-zoom"),
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'pluginForMemo',                    // 用於識別這個文檔空間
-        path: 'docs/memo',            // 實際文件位置
-        routeBasePath: 'memo',        // URL 路徑
-        sidebarPath: require.resolve('./sidebars.js'),
-      },
-    ],
-  ],
   markdown: { mermaid: true },
   presets: [
     [
       "@docusaurus/preset-classic",
       {
+        docs: false,  // 禁用 preset 中的預設 docs
         gtag: {
           trackingID: 'G-QB2VKFSQ0J',
           anonymizeIP: true,
         },
-        docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/ZhenShuo2021/docs/edit/main",
-          path: 'docs/docs',
-          routeBasePath: 'docs',
-          remarkPlugins: [math],
-          rehypePlugins: [
-            // [rehypeExtendedTable, {}],
-            [katex, {
-              strict: false
-            }]
-          ],
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
-          breadcrumbs: true,
-        },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
+      },
+    ],
+  ],
+  plugins: [
+    require.resolve("docusaurus-plugin-image-zoom"),
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'default',
+        path: 'docs/docs',
+        routeBasePath: 'docs',
+        sidebarPath: require.resolve('./sidebars.js'),
+        remarkPlugins: [math],
+        rehypePlugins: [
+          [katex, {
+            strict: false
+          }]
+        ],
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+        breadcrumbs: true,
+        editUrl: "https://github.com/ZhenShuo2021/docs/edit/main",
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'pluginForMemo',
+        path: 'docs/memo',
+        routeBasePath: 'memo',
+        sidebarPath: require.resolve('./sidebars.js'),
+        remarkPlugins: [math],
+        rehypePlugins: [
+          [katex, {
+            strict: false
+          }]
+        ],
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+        breadcrumbs: true,
+        editUrl: "https://github.com/ZhenShuo2021/docs/edit/main",
       },
     ],
   ],

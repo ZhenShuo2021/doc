@@ -16,7 +16,7 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "lint:eslint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "lint:eslint:fix": "eslint . --ext .ts,.js,.tsx,.jsx --fix",
-    "new": "node ./src/bin/latestPostsListGenerator.js"
+    "new": "node ./src/components/LatestPosts/generate.js"
   },
   "dependencies": {
     "@algolia/client-search": "^5.20.3",

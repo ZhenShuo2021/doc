@@ -20,12 +20,13 @@
         "permalink": "/docs/tags/終端機"
       }
     ],
-    "date": 1741103520000,
+    "date": "2025-03-04 23:52:00",
     "yearMonth": "2025 年 03 月",
-    "day": "04"
+    "day": "04",
+    "source": "docs"
   },
   {
-    "title": "撰寫 ZSH 自定義函式以及補全函式",
+    "title": "撰寫 ZSH 補全函式",
     "permalink": "/docs/linux/customize-zsh-function-and-comletion",
     "description": "使用 _path_files 函式完成自動補全，舉例來說，將 `hugo new content` 簡寫為 `hnc` 並且支援補全，第一步先建立一個檔案名稱為 hnc 的腳本放在 fpath 裡面，不能用 alias，alias 不給補全，腳本如下：...",
     "tags": [
@@ -35,9 +36,10 @@
         "permalink": "/docs/tags/linux"
       }
     ],
-    "date": 1741098046000,
+    "date": "2025-03-04 22:20:46",
     "yearMonth": "2025 年 03 月",
-    "day": "04"
+    "day": "04",
+    "source": "docs"
   },
   {
     "title": "TrueNas SMB 簽名及加密設定",
@@ -60,9 +62,10 @@
         "permalink": "/docs/tags/zfs"
       }
     ],
-    "date": 1741070410000,
+    "date": "2025-03-04 14:40:10",
     "yearMonth": "2025 年 03 月",
-    "day": "04"
+    "day": "04",
+    "source": "docs"
   },
   {
     "title": "在 Neovim 中設定 OSC52 實現跨 ssh 複製",
@@ -80,9 +83,10 @@
         "permalink": "/docs/tags/neovim"
       }
     ],
-    "date": 1740838740000,
+    "date": "2025-03-01 22:19:00",
     "yearMonth": "2025 年 03 月",
-    "day": "01"
+    "day": "01",
+    "source": "docs"
   },
   {
     "title": "0.04 秒啟動極速 Zsh | macOS | Linux | zcomet | dotfiles",
@@ -100,9 +104,10 @@
         "permalink": "/docs/tags/performance"
       }
     ],
-    "date": 1740832984000,
+    "date": "2025-03-01 20:43:04",
     "yearMonth": "2025 年 03 月",
-    "day": "01"
+    "day": "01",
+    "source": "docs"
   },
   {
     "title": "修復 NextCloud X-OC-Mtime 錯誤",
@@ -125,9 +130,10 @@
         "permalink": "/docs/tags/x-oc-mtime"
       }
     ],
-    "date": 1740645240000,
+    "date": "2025-02-27 16:34:00",
     "yearMonth": "2025 年 02 月",
-    "day": "27"
+    "day": "27",
+    "source": "docs"
   },
   {
     "title": "UV Python 教學，最佳虛擬環境管理工具",
@@ -150,9 +156,10 @@
         "permalink": "/docs/tags/虛擬環境"
       }
     ],
-    "date": 1739585040000,
+    "date": "2025-02-15 10:04:00",
     "yearMonth": "2025 年 02 月",
-    "day": "15"
+    "day": "15",
+    "source": "docs"
   },
   {
     "title": "使用變基 Rebase 合併分支",
@@ -170,9 +177,10 @@
         "permalink": "/docs/tags/programming"
       }
     ],
-    "date": 1739462365000,
+    "date": "2025-02-13 23:59:25",
     "yearMonth": "2025 年 02 月",
-    "day": "13"
+    "day": "13",
+    "source": "docs"
   },
   {
     "title": "Git Rebase Onto 全中文圈最完整教學",
@@ -190,9 +198,10 @@
         "permalink": "/docs/tags/programming"
       }
     ],
-    "date": 1739462340000,
+    "date": "2025-02-13 23:59:00",
     "yearMonth": "2025 年 02 月",
-    "day": "13"
+    "day": "13",
+    "source": "docs"
   },
   {
     "title": "Git 遠端概念和常見錯誤",
@@ -210,8 +219,9 @@
         "permalink": "/docs/tags/programming"
       }
     ],
-    "date": 1739459022000,
+    "date": "2025-02-13 23:03:42",
     "yearMonth": "2025 年 02 月",
-    "day": "13"
+    "day": "13",
+    "source": "docs"
   }
 ]

@@ -1,9 +1,7 @@
-import clsx from "clsx";
 import Link from '@docusaurus/Link';
 import styles from "./LatestPosts.module.css";
 
-import latestBlogPostList from './latest-blog-posts.json';
-import latestDocsList from './latest-docs.json';
+import latestPostsList from './latest-posts.json';
 
 function Post({ title, permalink, tags, yearMonth, day }) {
   return (
@@ -15,7 +13,7 @@ function Post({ title, permalink, tags, yearMonth, day }) {
         </div>
       </div>
       <div className={styles.latest_post_row_item_title}>
-      <Link to={permalink}  key={permalink}>
+      <Link to={permalink} key={permalink}>
         {title}
       </Link>
       </div>
@@ -26,8 +24,7 @@ function Post({ title, permalink, tags, yearMonth, day }) {
             .map(({ label, permalink: tagPermalink }, index) => (
               <Link
                 key={tagPermalink}
-                className={`post__tags ${index < tags.length ? 'margin-right--sm' : ''
-                  }`}
+                className={`post__tags ${index < tags.length ? 'margin-right--sm' : ''}`}
                 to={tagPermalink}
                 style={{
                   fontSize: '0.75em',
@@ -44,19 +41,9 @@ function Post({ title, permalink, tags, yearMonth, day }) {
 export default function LatestPosts() {
   return (
     <section className={styles.latestPosts}>
-      {/* <h1 className={styles.title}>最新部落格文章</h1> */}
       <div className="container">
         <div className={styles.latest_post_row}>
-          {
-            latestBlogPostList.map((props, idx) => (
-              <Post key={idx} {...props} />
-            ))}
-        </div>
-      </div>
-      {/* <h1 className={styles.title}>最新文件庫文章</h1> */}
-      <div className="container">
-        <div className={styles.latest_post_row}>
-          {latestDocsList.map((props, idx) => (
+          {latestPostsList.map((props, idx) => (
             <Post key={idx} {...props} />
           ))}
         </div>
